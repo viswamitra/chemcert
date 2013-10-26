@@ -1,0 +1,195 @@
+#Todo : trainer discussion
+Trainer: skip for now TBD
+id 
+name char
+
+Locations:
+Towns; States; postal_codes
+
+-towns 
+id 
+name char
+
+-states
+id
+name char
+
+-postal_code
+id
+code char
+
+-location_relation
+id
+(town_id,state_id,postal_code_id) unique key
+course_enabled boolean
+
+Venues:
+id
+name char
+address char
+location_relation_id
+room_name char
+room_cost float
+room_setup char
+capacity int
+screen int
+whiteboard boolean
+catering char
+lunch boolean
+notes char
+
+Venue_contact:
+id
+venue_id
+name
+phone
+fax
+email
+
+RTOS-training_organizations: #TBD:
+id
+name char
+provider char
+
+Courses:
+id
+rto_id 
+is_correspondence boolean
+course_code char unique key
+course_date timestamp
+location_relation_id
+venue_id
+trainer_id
+
+course_process_details:
+id
+performa_received timestamp
+course_received timestamp
+course_finish_time char
+venue_rating char
+is_t4_received bool
+is_declaration_form_signed bool
+is_enrolment_form_signed bool
+inhouse_client char
+cash_received float
+trainer_invoice_po char
+trainer_payment_amount float
+enrolment_center_invoice char
+course_status bool
+comments char
+
+Student_courses:
+id
+type {initial,refresher,AQF II, AQF IV}
+is_weeds boolean
+
+Student:
+id
+student_id
+usi_id
+
+student_courses:
+id
+student_id
+course_id
+enrolled_at timestamp
+result -> level_of_competency
+special_modules 
+comments
+course_fee float
+payment_method {credit, cash}
+payment_date timestamp
+is_paid boolean
+is_enquiry boolean
+current_accreditation char
+current_expiry_date timestamp
+
+student_course_histories:
+id
+student_id
+course_id
+enrolled_at timestamp
+result
+comments
+course_fee float
+payment_method {credit, cash}
+payment_date timestamp
+is_paid boolean
+is_enquiry boolean
+current_accreditation char
+current_expiry_date timestamp
+
+student_biodata:
+id
+student_id
+gender {male,female}
+first_name
+middle_name
+last_name
+date_of_birth
+phone
+mobile
+email
+fax
+
+
+student_addresses:
+id
+student_id
+address
+location_relation_id
+home_address
+home_locatiion_relation_id
+
+student_demographics:
+id
+student_id
+demographics_id
+hear_about_chemcert char
+country_of_birth char
+residency_status char
+employment_status char
+highest_education_level char
+qualification_level char
+study_reason char
+notes
+
+demographics:
+id
+type {farming, IT, blah, blah}
+
+student_special_needs:
+id
+student_id
+special_need_id
+other_special_need char
+
+
+special_needs:
+id 
+type {hearing/deaf, physical, intellectual, learning, mental,
+      brain impairment, vision, medical condition}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
