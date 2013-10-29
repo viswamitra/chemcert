@@ -39,8 +39,10 @@ group :development, :test do
 end
 
 group :test do
-
+  gem 'factory_girl_rails'
 end
+
+gem 'devise'
 
 
 # Use ActiveModel has_secure_password
