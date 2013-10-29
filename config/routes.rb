@@ -1,5 +1,6 @@
 ChemcertBakshi::Application.routes.draw do
-  get "hello/hi"
+  devise_for :users
+  root "hello#hi"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
