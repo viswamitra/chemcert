@@ -12,7 +12,7 @@ class CreateVenues < ActiveRecord::Migration
       t.boolean :whiteboard_available
       t.string :catering
       t.boolean :lunch_available
-      t.notes :char
+      t.string :notes
       t.timestamps
     end
   end

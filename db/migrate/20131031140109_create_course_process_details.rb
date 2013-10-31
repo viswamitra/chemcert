@@ -14,7 +14,7 @@ class CreateCourseProcessDetails < ActiveRecord::Migration
       t.float :trainer_payment_amount
       t.string :enrolment_center_invoice
       t.boolean :course_status
-      t.string comments
+      t.string :comments
       t.timestamps
     end
   end

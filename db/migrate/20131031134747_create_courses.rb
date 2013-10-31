@@ -9,7 +9,7 @@ class CreateCourses < ActiveRecord::Migration
       t.column :venue_id, :bigint, :null => false
       t.column :trainer_id, :bigint, :null => false
       t.timestamps
-      t.index([:course_code], unique => true)
+      t.index([:course_code], unique: true)
     end
   end
 end

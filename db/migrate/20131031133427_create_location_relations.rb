@@ -4,10 +4,9 @@ class CreateLocationRelations < ActiveRecord::Migration
       t.column :town_id, :bigint, :null => false
       t.column :state_id, :bigint, :null => false
       t.column :postal_code_id, :bigint, :null => false
-      t.boolean course_enabled
+      t.boolean :course_enabled
       t.timestamps
-
-      t.index([:town_id, :state_id, :postal_code_id], unique => true)
+      t.index([:town_id, :state_id, :postal_code_id], unique: true, name: "location_relation_index")
     end
   end
 end
