@@ -1,0 +1,21 @@
+<%= nav_bar :fixed => :top, :brand => "CSES" do %>
+    <% menu_group do %>
+        <%= menu_item "Courses" %>
+        <%= menu_item "Students" %>
+        <%= menu_item "Course Processing" %>
+        <%= menu_item "Reports" %>
+        <%= drop_down "Resources" do %>
+            <%= drop_down "Trainers" do %>
+                    <%= menu_item "Add Trainer" %>
+                    <%= menu_item "View Trainers" %>
+            <% end %>
+
+            <%= drop_down "Trainers" do %>
+                <% menu_group :pull => :right do %>
+                    <%= menu_item "Add Trainer" %>
+                    <%= menu_item "View Trainers" %>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+<% end %>
