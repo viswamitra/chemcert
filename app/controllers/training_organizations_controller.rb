@@ -25,9 +25,8 @@ class TrainingOrganizationsController < ApplicationController
         format.html {redirect_to @rto, notice: "rto was succesfully created."}
         format.json {render action: 'show', status: :created, location: @rto}
       else
-
+        #TBD
       end
     end
   end
-
 end
