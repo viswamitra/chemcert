@@ -1,1 +1,27 @@
-<h1> hello there</h1>
+<div class="span5">
+    <h3> Listing RTOs</h3>
+<table class="table table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Provider</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    <% @rtos.each do |rto| %>
+        <tr>
+            <td> <%= rto.name %></td>
+            <td> <%= rto.provider %></td>
+            <td> <%= link_to "Show", rto %></td>
+            <td> <%= link_to "Edit", edit_training_organization_path(rto), :class => 'btn btn-mini' %></td>
+            <td> <%= link_to "Remove", rto,
+                             method: :delete,
+                             data: { confirm: "Are you sure?" }
+                 %></td>
+        </tr>
+    <% end %>
+</table>
+    <%= link_to "New RTO", new_training_organization_path, :class => 'btn btn-primary btn-large pull-right', :id => 'new_rto_btn'%>
+</div>
+
