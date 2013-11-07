@@ -1,9 +1,10 @@
+<%- model_class = TrainingOrganization -%>
 <div class="span5">
     <h3> Listing RTOs</h3>
 <table class="table table-striped">
     <tr>
-        <th>Name</th>
-        <th>Provider</th>
+        <th> <%= model_class.human_attribute_name(:name) %> </th>
+        <th> <%= model_class.human_attribute_name(:provider) %> </th>
         <th></th>
         <th></th>
         <th></th>
@@ -13,11 +14,13 @@
         <tr>
             <td> <%= rto.name %></td>
             <td> <%= rto.provider %></td>
-            <td> <%= link_to "Show", rto %></td>
+            <td> <%= link_to "Show", rto, :class => 'btn btn-primary btn-mini'%></td>
             <td> <%= link_to "Edit", edit_training_organization_path(rto), :class => 'btn btn-mini' %></td>
             <td> <%= link_to "Remove", rto,
                              method: :delete,
-                             data: { confirm: "Are you sure?" }
+                             data: { confirm: "Are you sure?" },
+                             :class => 'btn btn-mini btn-danger'
+
                  %></td>
         </tr>
     <% end %>

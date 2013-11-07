@@ -1,0 +1,32 @@
+<%- model_class = TrainingOrganization -%>
+<div class="span5">
+    <h3> Listing RTO</h3>
+    <table class="table table-striped">
+        <tr>
+            <th> <%= model_class.human_attribute_name(:name) %> </th>
+            <th> <%= model_class.human_attribute_name(:provider) %> </th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+            <tr>
+                <td> <%= @rto.name %></td>
+                <td> <%= @rto.provider %></td>
+                <td> <%= link_to "Back", training_organizations_path, :class => 'btn btn-mini'  %> </td>
+                <td> <%= link_to "Edit", edit_training_organization_path(@rto), :class => 'btn btn-mini' %></td>
+                <td> <%= link_to "Remove", @rto,
+                                 method: :delete,
+                                 data: { confirm: "Are you sure?" },
+                                 :class => 'btn btn-mini btn-danger'
+
+                %></td>
+            </tr>
+
+    </table>
+</div>
+
+
+
+
+
+
