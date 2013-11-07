@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131031143137) do
+ActiveRecord::Schema.define(version: 20131102193958) do
 
   create_table "course_process_details", force: true do |t|
     t.datetime "performa_received_at"
@@ -62,6 +62,11 @@ ActiveRecord::Schema.define(version: 20131031143137) do
   end
 
   add_index "location_relations", ["town_id", "state_id", "postal_code_id"], name: "location_relation_index", unique: true, using: :btree
+
+  create_table "locations", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "postal_codes", force: true do |t|
     t.string   "code"
