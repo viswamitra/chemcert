@@ -4,3 +4,4 @@ FactoryGirl.define do
     provider "sample_rto_provider"
   end
 end
+

@@ -33,4 +33,5 @@ describe TrainingOrganizationsController do
     end
   end
 
+
 end

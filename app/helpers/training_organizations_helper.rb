@@ -1,0 +1,2 @@
+module TrainingOrganizationsHelper
+end
