@@ -147,6 +147,7 @@ DEPENDENCIES
   mysql2
   protected_attributes
   rails (= 4.0.0)
+  rspec-expectations
   rspec-rails
   sass-rails (~> 4.0.0)
   sdoc
