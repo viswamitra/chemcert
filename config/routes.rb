@@ -3,6 +3,7 @@ ChemcertBakshi::Application.routes.draw do
 
   root 'training_organizations#index'
   resources :training_organizations, :path => "rtos"
+  resources :courses
 
 
   # The priority is based upon order of creation: first created -> highest priority.
