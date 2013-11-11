@@ -14,6 +14,7 @@ class CoursesController < ApplicationController
   #get /courses/new
   def new
     @course = Course.new
+    @states = State.all
   end
 
   #get /courses/1/edit

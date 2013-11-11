@@ -15,13 +15,26 @@
     </div>
 
     <div class="control-group">
+        <%= f.label :course_code, :class => 'control-label' %>
+        <div class="controls">
+            <%= f.text_field :course_code, :class => 'text_field' %>
+        </div>
+    </div>
+
+    <div class="control-group">
         <%= f.label :course_date, :class => 'control-label' %>
         <div class="controls">
             <%= f.text_field :course_date, :class => 'text_field datepicker' %>
         </div>
     </div>
 
-
+    <div class="control-group">
+        <%= f.label :state, :class => 'control-label' %>
+        <div class="controls">
+            <% state_array = @states.map {|state| [state.name, state.id]} %>
+            <%= f.collection_select(:location_relation_id,  %>
+        </div>
+    </div>
 
     <div class="form-actions">
         <%= f.submit "create course", :class => 'btn btn-primary' %>

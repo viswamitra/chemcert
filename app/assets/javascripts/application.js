@@ -17,3 +17,5 @@
 //= require courses
 //= require jquery.ui.datepicker
 //= require_tree .
+
+
