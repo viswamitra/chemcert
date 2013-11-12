@@ -3,7 +3,7 @@
         <%= f.label :rto, :class => 'control-label' %>
         <div class="controls">
             <% rto_array = TrainingOrganization.all.map {|rto| [rto.name, rto.id]} %>
-            <%= f.select :rto, options_for_select(rto_array) %>
+            <%= f.select :training_organization, options_for_select(rto_array) %>
         </div>
     </div>
 
@@ -31,10 +31,32 @@
     <div class="control-group">
         <%= f.label :state, :class => 'control-label' %>
         <div class="controls">
-            <% state_array = @states.map {|state| [state.name, state.id]} %>
-            <%= f.collection_select(:location_relation_id,  %>
+            <select id="course_state" name="course[state]">
+                <% if @states.present? %>
+                    <% @states.each do |state| %>
+                        <option value="<%=state.id %>"><%=state.try(:name) %></option>
+                    <% end %>
+                <% end %>
+            </select>
         </div>
     </div>
+
+    <!-- populate this based on the other states -->
+
+    <div class="control-group">
+        <%= f.label :town, :class => 'control-label' %>
+        <div class="controls">
+            <select id="course_town" name="course[town]">
+                <% if @states.present? %>
+                    <% @states.each do |state| %>
+                        <option value="<%=state.id %>"><%=state.try(:name) %></option>
+                    <% end %>
+                <% end %>
+            </select>
+        </div>
+    </div>
+
+    <!-- populate this based on the towns-->
 
     <div class="form-actions">
         <%= f.submit "create course", :class => 'btn btn-primary' %>

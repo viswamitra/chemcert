@@ -17,6 +17,16 @@ class CoursesController < ApplicationController
     @states = State.all
   end
 
+  def get_towns
+    if params[:state_id]
+      @towns = LocationRelation.where(:state_id => params[:state_id]).map {|k| [k.id,k.town.name] }
+      respond_to |format|
+          format.json  { render :json => @towns }
+      end
+    else
+      @towns = []
+  end
+
   #get /courses/1/edit
   def edit
     @course = Course.find(params[:id])
