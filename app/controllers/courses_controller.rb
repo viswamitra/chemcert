@@ -2,6 +2,11 @@ class CoursesController < ApplicationController
 
   #get /courses
   def index
+    @course_code = params[:course_code]
+    @town = params[:town]
+    @course_date = params[:course_date]
+
+
     @courses = Course.all
   end
 

@@ -1,0 +1,61 @@
+<%- model_class = Course -%>
+<div class="container" style="border:1px solid white;">
+    <div class="row">
+        <div class="span9">
+            <h3> Find Course </h3>
+        </div>
+    </div>
+    <div class="row">
+            <%= form_tag courses_path, :method => "get", :class => "form-inline" do %>
+                <div class="span3">
+                    <%= label_tag :course_code %>
+                    <% rto_array = TrainingOrganization.all.map {|rto| [rto.name, rto.id]} %>
+                    <%= select_tag :course_code, options_for_select(rto_array) %>
+                </div>
+
+
+                <div class="span3">
+                    <%= label_tag :town %> </br>
+                    <% rto_array = TrainingOrganization.all.map {|rto| [rto.name, rto.id]} %>
+                    <%= select_tag :training_organization, options_for_select(rto_array) %>
+                </div>
+
+                <div class="span3">
+                    <%= label_tag :course_date %>
+                    <% rto_array = TrainingOrganization.all.map {|rto| [rto.name, rto.id]} %>
+                    <%= select_tag :training_organization, options_for_select(rto_array) %>
+                </div>
+                <div class="span3">
+                    <div class="control-group">
+                        <%= label :course_date, "Find Date", :class => "invisible" %>
+                        <div class="controls">
+                            <%= submit_tag "Find course", :class => 'btn btn-primary', :name => nil %>
+                            </div>
+                        </div>
+                </div>
+
+            <% end %>
+        </div>
+    <div class="row">
+        <div class="span12">
+            <div id="global-message" class="msg info">
+                Find Courses
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="span12">
+            <div id="find_course_table">
+                <%= render 'course_table' %>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+</div>
+
+
+

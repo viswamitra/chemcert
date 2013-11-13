@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require turbolinks
-//= require courses
+//= require utils
 //= require jquery.ui.datepicker
 //= require_tree .
 
