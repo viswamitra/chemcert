@@ -6,8 +6,7 @@ class CoursesController < ApplicationController
     @town = params[:town]
     @course_date = params[:course_date]
 
-
-    @courses = Course.all
+    @courses = [1,2,3]
   end
 
   #get /course/1

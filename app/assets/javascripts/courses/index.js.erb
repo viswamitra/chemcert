@@ -1,0 +1,5 @@
+<%if @error.present? %>
+    FKART.utils.fk_message.add("Error updating: <%= @error %>", "error");
+<% else %>
+    FKART.utils.fk_message.add("Updated successfully: <%= @message%> ", "done");
+<% end %>
