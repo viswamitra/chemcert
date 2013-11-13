@@ -72,6 +72,14 @@
         </div>
     </div>
 
+    <div class="control-group">
+        <%= f.label :trainer, :class => 'control-label' %>
+        <div class="controls">
+            <% rto_array = TrainingOrganization.all.map {|rto| [rto.name, rto.id]} %>
+            <%= f.select :trainer, options_for_select(rto_array) %>
+        </div>
+    </div>
+
 
     <div class="form-actions">
         <%= f.submit "create course", :class => 'btn btn-primary' %>
