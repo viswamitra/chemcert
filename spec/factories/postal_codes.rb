@@ -2,5 +2,6 @@
 
 FactoryGirl.define do
   factory :postal_code do
+    code "560034"
   end
 end

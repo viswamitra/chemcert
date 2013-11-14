@@ -2,5 +2,6 @@
 
 FactoryGirl.define do
   factory :location_relation do
+
   end
 end

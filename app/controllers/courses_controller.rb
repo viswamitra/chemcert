@@ -2,11 +2,8 @@ class CoursesController < ApplicationController
 
   #get /courses
   def index
-    @course_code = params[:course_code]
-    @town = params[:town]
-    @course_date = params[:course_date]
-
-    @courses = [1,2,3]
+    @courses = Course.search(params[:course_code], params[:town], params[:course_date])
+    p "------> #{@courses.inspect}"
   end
 
   #get /course/1
@@ -19,16 +16,6 @@ class CoursesController < ApplicationController
   def new
     @course = Course.new
     @states = State.all
-  end
-
-  def get_towns
-    if params[:state_id]
-      @towns = LocationRelation.where(:state_id => params[:state_id]).map {|k| [k.id,k.town.name] }
-      respond_to |format|
-          format.json  { render :json => @towns }
-      end
-    else
-      @towns = []
   end
 
   #get /courses/1/edit

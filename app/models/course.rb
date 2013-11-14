@@ -5,8 +5,13 @@ class Course < ActiveRecord::Base
   belongs_to :venue
   belongs_to :trainer
 
-  accepts_nested_attributes_for :location_relation
-  accepts_nested_attributes_for :training_organization
+  def self.by_town(town)
+    Course.joins(:location_relation => :town).where('towns.id = ?',town)
+  end
+
+  def self.search(course_code, town_id, course_date)
+    by_town(town_id).where(:course_code => course_code, :course_date => course_date).to_a
+  end
 
 
 end

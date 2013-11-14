@@ -1,5 +1,5 @@
 <%- model_class = Course -%>
-<div class="container" style="border:1px solid white;">
+<div class="container">
     <div class="row">
         <div class="span9">
             <h3> Find Course </h3>
@@ -9,21 +9,20 @@
             <%= form_tag courses_path, :method => "get", :class => "form-inline" do %>
                 <div class="span3">
                     <%= label_tag :course_code %>
-                    <% rto_array = TrainingOrganization.all.map {|rto| [rto.name, rto.id]} %>
-                    <%= select_tag :course_code, options_for_select(rto_array) %>
+                    <% course_code_array = Course.all.map {|course| [course.course_code]} %>
+                    <%= select_tag :course_code, options_for_select(course_code_array) %>
                 </div>
 
 
                 <div class="span3">
                     <%= label_tag :town %> </br>
-                    <% rto_array = TrainingOrganization.all.map {|rto| [rto.name, rto.id]} %>
-                    <%= select_tag :training_organization, options_for_select(rto_array) %>
+                    <% town_array = Town.all.map {|town| [town.name, town.id]} %>
+                    <%= select_tag :town, options_for_select(town_array) %>
                 </div>
 
                 <div class="span3">
                     <%= label_tag :course_date %>
-                    <% rto_array = TrainingOrganization.all.map {|rto| [rto.name, rto.id]} %>
-                    <%= select_tag :training_organization, options_for_select(rto_array) %>
+                    <%= text_field_tag :course_date, nil, :class => 'text_field datepicker' %>
                 </div>
                 <div class="span3">
                     <div class="control-group">
