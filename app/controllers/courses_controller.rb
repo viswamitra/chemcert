@@ -23,6 +23,7 @@ class CoursesController < ApplicationController
 
   #post /courses
   def create
+    p "-----> #{course_params}"
     @course = Course.new(course_params)
     respond_to do |format|
       if @rto.save
