@@ -3,14 +3,12 @@ class CoursesController < ApplicationController
   #get /courses
   def index
     @courses = Course.search(params[:course_code], params[:town], params[:course_date])
-    p "------> #{@courses.inspect}"
   end
 
   #get /course/1
   def show
     @course = Course.find(params[:id])
   end
-
 
   #get /courses/new
   def new
