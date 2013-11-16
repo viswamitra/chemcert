@@ -1,6 +1,6 @@
 <%- model_class = @course -%>
-<div class="span5">
-    <h3> Listing @course</h3>
+<div class="span12">
+    <h3> Listing Course</h3>
     <table class="table table-striped">
         <tr>
             <th> CT Code </th>
@@ -15,6 +15,7 @@
             <th> venue </th>
             <th>  </th>
             <th>  </th>
+            <th>  </th>
         </tr>
         <tr>
             <td> <%= @course.course_code %></td>
@@ -27,6 +28,7 @@
             <td> <%= 2 %></td>
             <td> <%= 2 %></td>
             <td> <%= @course.venue.name %></td>
+            <td> <%= link_to "Back", courses_path, :class => 'btn btn-mini'  %> </td>
             <td> <%= link_to "Edit", edit_course_path(@course), :class => 'btn btn-mini' %></td>
             <td> <%= link_to "Remove", @course,
                              method: :delete,
