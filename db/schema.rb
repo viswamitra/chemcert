@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131113174735) do
+ActiveRecord::Schema.define(version: 20131116155511) do
 
   create_table "course_process_details", force: true do |t|
     t.datetime "performa_received_at"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20131113174735) do
     t.integer  "training_organization_id", limit: 8, null: false
     t.boolean  "is_correspondence"
     t.string   "course_code"
-    t.datetime "course_date"
+    t.date     "course_date"
     t.integer  "location_relation_id",     limit: 8, null: false
     t.integer  "venue_id",                 limit: 8, null: false
     t.integer  "trainer_id",               limit: 8, null: false

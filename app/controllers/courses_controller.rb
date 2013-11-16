@@ -11,27 +11,46 @@ class CoursesController < ApplicationController
   end
 
   #get /courses/new
+  # need to change this to something ajax
   def new
     @course = Course.new
     @states = State.all
+    @postals = PostalCode.all
+    @towns = Town.all
   end
 
   #get /courses/1/edit
   def edit
     @course = Course.find(params[:id])
+    @states = State.all
+    @postals = PostalCode.all
+    @towns = Town.all
+    @postal_code_selected = @course.location_relation.postal_code
+    @state_selected = @course.location_relation.state
+    @town_selected = @course.location_relation.town
   end
 
   #post /courses
   def create
-    p "-----> #{course_params}"
-    @course = Course.new(course_params)
+    state_id = params[:course][:state]
+    town_id = params[:course][:town]
+    postal_code_id = params[:course][:postal_code]
+    location_relation_id = LocationRelation.where(:state_id => state_id, :postal_code_id => postal_code_id, :town_id => town_id).first
+    @course = Course.new(:training_organization_id => params[:course][:training_organization],
+      :is_correspondence => params[:course][:is_correspondence],
+      :course_code => params[:course][:course_code],
+      :course_date => params[:course][:course_date],
+      :location_relation_id => location_relation_id.id,
+      :venue_id => params[:course][:venue],
+      :trainer_id => params[:course][:trainer]
+      )
     respond_to do |format|
-      if @rto.save
-        format.html {redirect_to @rto, notice: "rto was succesfully created."}
+      if @course.save
+        format.html {redirect_to @course, notice: "rto was succesfully created."}
         format.json {render action: 'show', status: :created, location: @rto}
       else
         format.html { render action: 'new' }
-        format.json { render json: @rto.errors, status: :unprocessable_entity }
+        format.json { render json: @course.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -68,7 +87,4 @@ class CoursesController < ApplicationController
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-  def rto_params
-    params.require(:training_organization).permit(:name, :provider)
-  end
 end

@@ -31,8 +31,17 @@
     <!-- this is the postal code, this should populate the state and town-->
     <div class="control-group">
         <%= f.label :postal_code, :class => 'control-label' %>
+        <!--<div class="controls">-->
+            <!--<input class="text_field" id="course_postal_code" name="course[postal_code]" type="text">-->
+        <!--</div>-->
         <div class="controls">
-            <input class="text_field" id="course_postal_code" name="course[postal_code]" type="text">
+            <select id="course_postal_code" name="course[postal_code]">
+                <% if @postals.present? %>
+                    <% @postals.each do |code| %>
+                        <option value="<%=code.id %>"><%=code.try(:code) %></option>
+                    <% end %>
+                <% end %>
+            </select>
         </div>
     </div>
 
@@ -55,8 +64,8 @@
         <%= f.label :town, :class => 'control-label' %>
         <div class="controls">
             <select id="course_town" name="course[town]">
-                <% if @states.present? %>
-                    <% @states.each do |state| %>
+                <% if @towns.present? %>
+                    <% @towns.each do |state| %>
                         <option value="<%=state.id %>"><%=state.try(:name) %></option>
                     <% end %>
                 <% end %>
@@ -67,7 +76,7 @@
     <div class="control-group">
         <%= f.label :venue, :class => 'control-label' %>
         <div class="controls">
-                    <% rto_array = TrainingOrganization.all.map {|rto| [rto.name, rto.id]} %>
+                    <% rto_array = Venue.all.map {|rto| [rto.name, rto.id]} %>
                     <%= f.select :venue, options_for_select(rto_array) %>
         </div>
     </div>
@@ -75,7 +84,7 @@
     <div class="control-group">
         <%= f.label :trainer, :class => 'control-label' %>
         <div class="controls">
-            <% rto_array = TrainingOrganization.all.map {|rto| [rto.name, rto.id]} %>
+            <% rto_array = Trainer.all.map {|rto| [rto.name, rto.id]} %>
             <%= f.select :trainer, options_for_select(rto_array) %>
         </div>
     </div>
@@ -88,3 +97,12 @@
     </div>
 <% end %>
 
+<script type="text/javascript">
+    <% if @postal_code_selected.present? && @town_selected.present? && @state_selected.present? %>
+    $(function(){
+       $('#course_postal_code').val('<%=@postal_code_selected.id%>');
+       $('#course_town').val('<%=@town_selected.id%>');
+       $('#course_state').val('<%=@state_selected.id%>');
+    });
+    <% end %>
+</script>

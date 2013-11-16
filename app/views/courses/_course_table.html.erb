@@ -14,7 +14,6 @@
             <th> venue </th>
             <th>  </th>
             <th>  </th>
-            <th>  </th>
         </tr>
 
         <% @courses.each do |course| %>
@@ -29,7 +28,6 @@
                 <td> <%= 2 %></td>
                 <td> <%= 2 %></td>
                 <td> <%= course.venue.name %></td>
-                <td> <%= link_to "Show", course, :class => 'btn btn-primary btn-mini'%></td>
                 <td> <%= link_to "Edit", edit_course_path(course), :class => 'btn btn-mini' %></td>
                 <td> <%= link_to "Remove", course,
                                  method: :delete,
