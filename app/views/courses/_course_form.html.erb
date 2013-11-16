@@ -105,4 +105,7 @@
        $('#course_state').val('<%=@state_selected.id%>');
     });
     <% end %>
+    $(function(){
+        $(".datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
+    });
 </script>

@@ -8,21 +8,35 @@
     <div class="row">
             <%= form_tag courses_path, :method => "get", :class => "form-inline" do %>
                 <div class="span3">
-                    <%= label_tag :course_code %>
-                    <% course_code_array = Course.all.map {|course| [course.course_code]} %>
-                    <%= select_tag :course_code, options_for_select(course_code_array) %>
+                    <%= label_tag :course_code%> </br>
+                    <% courses = Course.all %>
+                    <select id="course_code" name="course_code">
+                        <option value="" ></option>
+                        <% if courses.present? %>
+                            <% courses.each do |course| %>
+                                <option value="<%=course.course_code %>"><%=course.course_code %></option>
+                            <% end %>
+                        <% end %>
+                    </select>
                 </div>
 
 
                 <div class="span3">
                     <%= label_tag :town %> </br>
-                    <% town_array = Town.all.map {|town| [town.name, town.id]} %>
-                    <%= select_tag :town, options_for_select(town_array) %>
+                    <% towns = Town.all %>
+                    <select id="town" name="town">
+                        <option value=""></option>
+                        <% if towns.present? %>
+                            <% towns.each do |town| %>
+                                <option value="<%=town.id %>"><%=town.name %></option>
+                            <% end %>
+                        <% end %>
+                    </select>
                 </div>
 
                 <div class="span3">
                     <%= label_tag :course_date %>
-                    <%= text_field_tag :course_date, nil, :class => 'text_field datepicker' %>
+                    <%= text_field_tag :course_date, params[:course_date], :class => 'text_field datepicker' %>
                 </div>
                 <div class="span3">
                     <div class="control-group">
@@ -46,4 +60,23 @@
     <%= render 'course_table_container' %>
 </div>
 </div>
+
+
+<script type="text/javascript">
+    $(function(){
+        $(".datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
+        $('#course_code').select2(
+                {
+                    placeholder: 'Select Course code',
+                    allowClear: true
+                }
+        );
+        $('#town').select2(
+                {
+                    placeholder: 'Select Town',
+                    allowClear: true
+                }
+        );
+    });
+</script>
 

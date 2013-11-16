@@ -8,6 +8,10 @@ class CoursesController < ApplicationController
   #get /course/1
   def show
     @course = Course.find(params[:id])
+    respond_to do |format|
+      format.html {render 'show'}
+      format.json {render json: @course}
+    end
   end
 
   #get /courses/new
