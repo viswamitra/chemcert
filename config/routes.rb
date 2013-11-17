@@ -15,6 +15,18 @@ ChemcertBakshi::Application.routes.draw do
     end
   end
 
+  resources :postal_codes do
+    collection do
+      get '/code' => 'postal_codes#by_code'
+    end
+  end
+
+  resources :location_relations do
+    collection do
+      get '/postal_code' => 'location_relations#by_postal_code'
+    end
+  end
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

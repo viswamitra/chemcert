@@ -9,7 +9,7 @@
             <%= form_tag courses_path, :method => "get", :class => "form-inline" do %>
                 <div class="span3">
                     <%= label_tag :course_code%> </br>
-                    <input type="text" id="course_code" name="course_code" autocomplete="off" placeholder="Enter Course code">
+                    <input type="text" id="course_code" name="course_code" autocomplete="off" placeholder="Enter Course code" value="<%= params[:course_code] %>">
                 </div>
 
 
@@ -94,6 +94,7 @@
                     },
                     updater : function(item) {
                         $('#town_hidden').val(map[item].id);
+                        $('#town').val(map[item].name);
                         return item;
                     }
 

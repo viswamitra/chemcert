@@ -1,7 +1,5 @@
 class TownsController < ApplicationController
 
-
-
   #get /towns/name/:name.json
   def by_name
     @town = Town.by_matching_name(params[:name])

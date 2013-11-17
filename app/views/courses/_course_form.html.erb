@@ -17,7 +17,12 @@
     <div class="control-group">
         <%= f.label :course_code, :class => 'control-label' %>
         <div class="controls">
-            <%= f.text_field :course_code, :class => 'text_field' %>
+            <div class="form-inline">
+            <%= f.text_field :course_code, :class => 'input-small' %>
+                <span style="font-size: 20px; margin-left:10px">
+                    <%= Course.last.id + 1 unless @course.course_code.present? %>
+                </span>
+            </div>
         </div>
     </div>
 
@@ -31,16 +36,17 @@
     <!-- this is the postal code, this should populate the state and town-->
     <div class="control-group">
         <%= f.label :postal_code, :class => 'control-label' %>
-        <!--<div class="controls">-->
-            <!--<input class="text_field" id="course_postal_code" name="course[postal_code]" type="text">-->
-        <!--</div>-->
         <div class="controls">
-            <select id="course_postal_code" name="course[postal_code]">
-                <% if @postals.present? %>
-                    <% @postals.each do |code| %>
-                        <option value="<%=code.id %>"><%=code.try(:code) %></option>
-                    <% end %>
-                <% end %>
+            <input type="text" id="course_postal_code" autocomplete="off" placeholder="Enter Postal Code" >
+            <input type="hidden" id="course_postal_code_hidden" name="course[postal_code]" value="" />
+        </div>
+    </div>
+
+    <div class="control-group">
+        <%= f.label :town, :class => 'control-label' %>
+        <div class="controls">
+            <select id="course_town" name="course[town]">
+                <option value=""></option>
             </select>
         </div>
     </div>
@@ -49,26 +55,7 @@
         <%= f.label :state, :class => 'control-label' %>
         <div class="controls">
             <select id="course_state" name="course[state]">
-                <% if @states.present? %>
-                    <% @states.each do |state| %>
-                        <option value="<%=state.id %>"><%=state.try(:name) %></option>
-                    <% end %>
-                <% end %>
-            </select>
-        </div>
-    </div>
-
-    <!-- populate this based on the other states -->
-
-    <div class="control-group">
-        <%= f.label :town, :class => 'control-label' %>
-        <div class="controls">
-            <select id="course_town" name="course[town]">
-                <% if @towns.present? %>
-                    <% @towns.each do |state| %>
-                        <option value="<%=state.id %>"><%=state.try(:name) %></option>
-                    <% end %>
-                <% end %>
+                <option value=""></option>
             </select>
         </div>
     </div>
@@ -98,14 +85,98 @@
 <% end %>
 
 <script type="text/javascript">
-    <% if @postal_code_selected.present? && @town_selected.present? && @state_selected.present? %>
+
     $(function(){
-       $('#course_postal_code').val('<%=@postal_code_selected.id%>');
-       $('#course_town').val('<%=@town_selected.id%>');
-       $('#course_state').val('<%=@state_selected.id%>');
-    });
-    <% end %>
-    $(function(){
+
+        <% if @course.course_code.present? %>
+            console.log("<% @course.course_code %>");
+            $('#course_course_code').val('<%= @course.course_code %>');
+        <% else %>
+            $('#course_course_code').val('CT');
+        <% end %>
+
         $(".datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
+        $('#course_postal_code').typeahead(
+                {
+                    minLength: 2,
+                    source : function(query, process) {
+                        map = {};
+                        postal_codes = [];
+                        $.ajax({
+                            url : '/postal_codes/code.json',
+                            type : 'get',
+                            data : 'code='+query,
+                            dataType: 'JSON',
+                            success : function(data) {
+                                $.each(data, function(index, element) {
+                                    postal_codes.push(element.code);
+                                    map[element.code] = element;
+                                });
+                                process(postal_codes);
+                            }
+                        });
+                    },
+                    updater : function(item) {
+                        $('#course_postal_code_hidden').val(map[item].id);
+                        $('#course_postal_code').val(map[item].name);
+                        return item;
+                    }
+
+                }
+        );
+
+        $('#course_is_correspondence').change(function(){
+            if($(this).is(":checked")) {
+                $('#course_course_code').val('CTC');
+                return;
+            }
+            $('#course_course_code').val('CT');
+        });
     });
+
+    <% if @course.training_organization_id.present? %>
+        $('#course_training_organization').val("<%= @course.training_organization_id %>");
+    <% end %>
+
+    <% if @course.course_code.present? %>
+        console.log("<% @course.course_code %>");
+        $('#course_course_code').val('<%= @course.course_code %>');
+    <% end %>
+
+    $('#course_postal_code').change(function(){
+        console.log("inside postal_code changed");
+        postal_code = $(this).val();
+        console.log(postal_code);
+        $.ajax({
+            url : '/location_relations/postal_code.json',
+            type : 'get',
+            data : 'postal_code='+postal_code,
+            dataType: 'JSON',
+            success : function(data) {
+                $('#course_town').empty();
+                $('#course_state').empty();
+                $('#course_town').append("<option value="+data[0].town_id+" selected=selected>"+data[0].town+"</option>");
+                $('#course_state').append("<option value="+data[0].state_id+" selected=selected>"+data[0].state+"</option>");
+                data.shift();
+                $.each(data, function(index, element) {
+                    $('#course_town').append("<option value="+element.town_id+">"+element.town+"</option>");
+                    $('#course_state').append("<option value="+element.state_id+">"+element.state+"</option>");
+                });
+
+            }
+        });
+    });
+
+
+    <% if @postal_code_selected.present? && @town_selected.present? && @state_selected.present? %>
+
+        $('#course_postal_code').val('<%=@postal_code_selected.code%>');
+        $('#course_town').append("<option value="+"<%= @town_selected.id %>"+" selected=selected>"+ "<%= @town_selected.name %>"+"</option>");
+        $('#course_state').append("<option value="+"<%= @state_selected.id %>"+" selected=selected>"+ "<%= @state_selected.name %>"+"</option>");
+
+    <% end %>
+
+
+
+
 </script>

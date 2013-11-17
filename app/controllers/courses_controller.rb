@@ -35,12 +35,10 @@ class CoursesController < ApplicationController
   #get /courses/1/edit
   def edit
     @course = Course.find(params[:id])
-    @states = State.all
-    @postals = PostalCode.all
-    @towns = Town.all
     @postal_code_selected = @course.location_relation.postal_code
     @state_selected = @course.location_relation.state
     @town_selected = @course.location_relation.town
+    @course_code = @course.course_code
   end
 
   #post /courses
@@ -49,9 +47,10 @@ class CoursesController < ApplicationController
     town_id = params[:course][:town]
     postal_code_id = params[:course][:postal_code]
     location_relation_id = LocationRelation.where(:state_id => state_id, :postal_code_id => postal_code_id, :town_id => town_id).first
+    course_code = params[:course][:course_code]+(Course.last.id+1).to_s
     @course = Course.new(:training_organization_id => params[:course][:training_organization],
       :is_correspondence => params[:course][:is_correspondence],
-      :course_code => params[:course][:course_code],
+      :course_code => course_code,
       :course_date => params[:course][:course_date],
       :location_relation_id => location_relation_id.id,
       :venue_id => params[:course][:venue],

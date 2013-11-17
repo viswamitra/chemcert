@@ -7,5 +7,9 @@ class PostalCode < ActiveRecord::Base
 
   validates :code, :uniqueness => true, :presence => true
 
+  def self.by_matching_code(code)
+    where("code like ?","%#{code}%");
+  end
+
 
 end
