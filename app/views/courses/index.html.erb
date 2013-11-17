@@ -24,14 +24,9 @@
                 <div class="span3">
                     <%= label_tag :town %> </br>
                     <% towns = Town.all %>
-                    <select id="town" name="town">
-                        <option value=""></option>
-                        <% if towns.present? %>
-                            <% towns.each do |town| %>
-                                <option value="<%=town.id %>"><%=town.name %></option>
-                            <% end %>
-                        <% end %>
-                    </select>
+                    <input type="text" id="town" autocomplete="off" placeholder="Enter Town">
+                    <input type="hidden" id="town_hidden" name="town" value="6" />
+
                 </div>
 
                 <div class="span3">
@@ -72,11 +67,31 @@
                 }
         );
 
-        $('#town').select2(
+        $('#town').typeahead(
                 {
-                    placeholder: 'Select Town',
-                    allowClear: true,
-                    minimumInputLength: 3
+                    minLength: 3,
+                    source : function(query, process) {
+                        map = {};
+                        towns = [];
+                        $.ajax({
+                            url : '../towns/name.json',
+                            type : 'get',
+                            data : 'name='+query,
+                            dataType: 'JSON',
+                            success : function(data) {
+                                $.each(data, function(index, element) {
+                                    towns.push(element.name);
+                                    map[element.name] = element;
+                                });
+                                process(towns);
+                            }
+                        });
+                    },
+                    updater : function(item) {
+                        $('#town_hidden').val(map[item].id);
+                        return item;
+                    }
+
                 }
         );
     });
