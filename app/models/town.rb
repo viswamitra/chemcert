@@ -10,4 +10,9 @@ class Town < ActiveRecord::Base
 
 
   scope :by_id, lambda {|id| where(:id => id) if id.present?}
+
+
+  def self.by_matching_name(name)
+    where("name like ?","%#{name}%");
+  end
 end

@@ -5,6 +5,13 @@ ChemcertBakshi::Application.routes.draw do
   resources :training_organizations, :path => "rtos"
   resources :courses
 
+  resources :towns do
+    collection do
+      get '/name/:name' => 'towns#by_name'
+    end
+  end
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
