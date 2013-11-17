@@ -7,7 +7,7 @@ ChemcertBakshi::Application.routes.draw do
 
   resources :towns do
     collection do
-      get '/name/:name' => 'towns#by_name'
+      get '/name' => 'towns#by_name'
     end
   end
 
