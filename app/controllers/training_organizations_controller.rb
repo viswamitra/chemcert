@@ -2,7 +2,7 @@ class TrainingOrganizationsController < ApplicationController
 
   #get /rtos
   def index
-    @rtos = TrainingOrganization.all
+    @rtos = TrainingOrganization.all.paginate(page: params[:page], per_page: 10)
   end
 
   #get /rtos/1
