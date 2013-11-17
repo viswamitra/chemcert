@@ -1,5 +1,6 @@
 class AddLocationRelations
   def self.enroll
+      #"postalcode","town","state"
       file_csv = CSV.parse(File.open('/Users/abhiramk/codeground/chemcert_bakshi/location_relations.csv'))
       file_csv.each do |row|
         begin

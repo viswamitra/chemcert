@@ -3,7 +3,11 @@ ChemcertBakshi::Application.routes.draw do
 
   root 'training_organizations#index'
   resources :training_organizations, :path => "rtos"
-  resources :courses
+  resources :courses do
+    collection do
+      get '/code' => 'courses#by_code'
+    end
+  end
 
   resources :towns do
     collection do

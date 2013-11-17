@@ -9,24 +9,14 @@
             <%= form_tag courses_path, :method => "get", :class => "form-inline" do %>
                 <div class="span3">
                     <%= label_tag :course_code%> </br>
-                    <% courses = Course.all %>
-                    <select id="course_code" name="course_code">
-                        <option value="" ></option>
-                        <% if courses.present? %>
-                            <% courses.each do |course| %>
-                                <option value="<%=course.course_code %>"><%=course.course_code %></option>
-                            <% end %>
-                        <% end %>
-                    </select>
+                    <input type="text" id="course_code" name="course_code" autocomplete="off" placeholder="Enter Course code">
                 </div>
 
 
                 <div class="span3">
                     <%= label_tag :town %> </br>
-                    <% towns = Town.all %>
                     <input type="text" id="town" autocomplete="off" placeholder="Enter Town">
-                    <input type="hidden" id="town_hidden" name="town" value="6" />
-
+                    <input type="hidden" id="town_hidden" name="town" value="" />
                 </div>
 
                 <div class="span3">
@@ -60,10 +50,25 @@
 <script type="text/javascript">
     $(function(){
         $(".datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
-        $('#course_code').select2(
+        $('#course_code').typeahead(
                 {
-                    placeholder: 'Select Course code',
-                    allowClear: true
+                    minLength: 3,
+                    source : function(query, process) {
+                        courses = [];
+                        $.ajax({
+                            url : 'courses/code.json',
+                            type : 'get',
+                            data : 'code='+query,
+                            dataType: 'JSON',
+                            success : function(data) {
+
+                                $.each(data, function(index, element) {
+                                    courses.push(element.course_code);
+                                });
+                                process(courses);
+                            }
+                        });
+                    }
                 }
         );
 

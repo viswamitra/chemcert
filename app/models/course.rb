@@ -20,4 +20,9 @@ class Course < ActiveRecord::Base
     Course.by_course_code(course_code).merge(by_course_date(course_date)).merge(by_town_id(town_id))
   end
 
+  def self.by_matching_code(code)
+    where("course_code like ?","%#{code}%")
+  end
+
+
 end
