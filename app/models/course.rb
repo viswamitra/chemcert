@@ -17,7 +17,6 @@ class Course < ActiveRecord::Base
   def self.search(course_code, town_id, course_date)
     return [] unless (course_code.present? || town_id.present? || course_date.present?)
     course_date = Time.parse(course_date).strftime('%Y-%m-%d') if course_date.present?
-    p "---> course_date =-> #{course_date}"
     Course.by_course_code(course_code).merge(by_course_date(course_date)).merge(by_town_id(town_id))
   end
 
