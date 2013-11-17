@@ -7,4 +7,7 @@ class State < ActiveRecord::Base
 
   validates :name, :uniqueness => true, :presence => true
 
+  scope :by_id, lambda {|id| where(:id => id) if id.present?}
+
+
 end

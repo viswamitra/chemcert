@@ -14,6 +14,11 @@ class CoursesController < ApplicationController
     @courses = Course.search(params[:course_code], params[:town], params[:course_date])
   end
 
+  #get /schedule
+  def schedule
+    @courses = Course.search_by_schedule(params[:course_start_date], params[:course_end_date], params[:state])
+  end
+
   #get /course/1
   def show
     @course = Course.find(params[:id])

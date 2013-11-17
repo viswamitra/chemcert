@@ -38,7 +38,7 @@
         <%= f.label :postal_code, :class => 'control-label' %>
         <div class="controls">
             <input type="text" id="course_postal_code" autocomplete="off" placeholder="Enter Postal Code" >
-            <input type="hidden" id="course_postal_code_hidden" name="course[postal_code]" value="" />
+            <input type="hidden" id="course_postal_code_hidden" name="course[postal_code]" />
         </div>
     </div>
 
@@ -93,6 +93,12 @@
             $('#course_course_code').val('<%= @course.course_code %>');
         <% else %>
             $('#course_course_code').val('CT');
+        <% end %>
+
+        <% if @course.location_relation.postal_code.present? %>
+            $('#course_postal_code').val('<%= @course.location_relation.postal_code.code %>');
+            $('#course_postal_code_hidden').val('<%= @course.location_relation.postal_code.id %>');
+
         <% end %>
 
         $(".datepicker").datepicker({ dateFormat: 'dd/mm/yy' });

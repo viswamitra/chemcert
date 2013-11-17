@@ -6,6 +6,7 @@ ChemcertBakshi::Application.routes.draw do
   resources :courses do
     collection do
       get '/code' => 'courses#by_code'
+      get '/schedule' => 'courses#schedule'
     end
   end
 

@@ -1,0 +1,56 @@
+<%- model_class = Course -%>
+<div class="container">
+    <div class="row">
+        <div class="span9">
+            <h3> Course Schedule </h3>
+        </div>
+    </div>
+    <div class="row">
+        <%= form_tag schedule_courses_path, :method => "get", :class => "form-inline" do %>
+            <div class="span3">
+                <%= label_tag :course_start_date%> </br>
+                <%= text_field_tag :course_start_date, params[:course_start_date], :class => 'text_field datepicker' %>
+            </div>
+
+            <div class="span3">
+                <%= label_tag :course_end_date%> </br>
+                <%= text_field_tag :course_end_date, params[:course_end_date], :class => 'text_field datepicker' %>
+            </div>
+
+
+            <div class="span3">
+                <%= label_tag :state %> </br>
+                <% state_array = State.all.map {|state| [state.name, state.id]} %>
+                <%= select_tag :state, options_for_select(state_array) %>
+            </div>
+
+            <div class="span3">
+                <div class="control-group">
+                    <%= label :course_date, "Find Date", :class => "invisible" %>
+                    <div class="controls">
+                        <%= submit_tag "Find course", :class => 'btn btn-primary', :name => nil %>
+                    </div>
+                </div>
+            </div>
+
+        <% end %>
+    </div>
+    <div class="row">
+        <div class="span12">
+            <div id="global-message" class="msg info">
+                Find Courses
+            </div>
+        </div>
+    </div>
+
+    <%= render 'course_table_container' %>
+</div>
+</div>
+
+
+<script type="text/javascript">
+    $(function(){
+        $(".datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
+    });
+</script>
+
