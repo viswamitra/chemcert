@@ -24,7 +24,6 @@ class TrainingOrganizationsController < ApplicationController
   #post /rto
   def create
     @rto = TrainingOrganization.new(rto_params)
-
     respond_to do |format|
       if @rto.save
         format.html {redirect_to @rto, notice: "rto was succesfully created."}

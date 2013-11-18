@@ -2,7 +2,7 @@
 <div class="span5">
     <h3> Listing RTOs</h3>
 
-
+    <%= will_paginate  @rtos%>
 
 <table class="table table-striped">
     <tr>
@@ -13,7 +13,7 @@
         <th></th>
     </tr>
 
-    <%= will_paginate  @rtos%>
+
     <% @rtos.each do |rto| %>
         <tr>
             <td> <%= rto.name %></td>

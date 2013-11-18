@@ -1,3 +1,4 @@
+<div id="container">
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <a class="brand" href="#">CSES</a>
@@ -67,8 +68,8 @@
                     <li class="dropdown-submenu">
                         <a href="#">Venues</a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Add new Venues</a></li>
-                            <li><a href="#">View venues</a></li>
+                            <li><a href="<%= new_venue_path %>">Add new Venues</a></li>
+                            <li><a href="<%= venues_path %>">View venues</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
@@ -83,5 +84,6 @@
             <li class="divider-vertical"></li>
         </ul>
     </div>
+</div>
 </div>
 

@@ -95,7 +95,7 @@
             $('#course_course_code').val('CT');
         <% end %>
 
-        <% if @course.location_relation.postal_code.present? %>
+        <% if @course.location_relation.try(:postal_code).present? %>
             $('#course_postal_code').val('<%= @course.location_relation.postal_code.code %>');
             $('#course_postal_code_hidden').val('<%= @course.location_relation.postal_code.id %>');
 
