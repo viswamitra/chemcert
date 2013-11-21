@@ -78,7 +78,7 @@
 
 
     <div class="form-actions">
-        <%= f.submit "create course", :class => 'btn btn-primary' %>
+        <%= f.submit "create course", :id => 'create_course', :class => 'btn btn-primary' %>
         <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                     courses_path, :class => 'btn' %>
     </div>
@@ -181,8 +181,5 @@
         $('#course_state').append("<option value="+"<%= @state_selected.id %>"+" selected=selected>"+ "<%= @state_selected.name %>"+"</option>");
 
     <% end %>
-
-
-
 
 </script>

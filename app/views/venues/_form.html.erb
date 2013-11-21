@@ -1,27 +1,199 @@
-<div class="container">
+
 <div class="row">
+    <%= form_for @venue, :html => { :class => 'form-horizontal' } do |f| %>
         <div class="span6">
-            <div class="control-group">
-                <%= label_tag :postal_code %>
+            <div class="control-group" class="span12">
+                <%= f.label :name, :class => 'control-label'%>
                 <div class="controls">
-                    <input type="text" id="course_postal_code" autocomplete="off" placeholder="Enter Postal Code" >
-                    <input type="hidden" id="course_postal_code_hidden" name="course[postal_code]" />
+                    <input type="text" id="venue_name" name="venue[name]">
                 </div>
             </div>
+            <div class="control-group">
+                <%= f.label :address, :class => 'control-label'%>
+                <div class="controls">
+                    <input type="text" id="venue_address" name="venue[address]">
+                </div>
+            </div>
+            <div class="control-group">
+                <%= f.label :postal_code, :class => 'control-label' %>
+                <div class="controls">
+                    <input type="text" id="venue_postal_code" autocomplete="off" placeholder="Enter Postal Code" >
+                    <input type="hidden" id="venue_postal_code_hidden" name="venue[postal_code]" />
+                </div>
+            </div>
+            <div class="control-group">
+                <%= f.label :town, :class => 'control-label' %>
+                <div class="controls">
+                    <select id="venue_town" name="venue[town]">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <%= f.label :state, :class => 'control-label' %>
+                <div class="controls">
+                    <select id="venue_state" name="venue[state]">
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <%= f.label :room_name, :class => 'control-label'%>
+                <div class="controls">
+                    <input type="text" id="venue_room_name" name="venue[room_name]">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <%= f.label :room_cost, :class => 'control-label'%>
+                <div class="controls">
+                    <input type="text" id="venue_room_cost" name="venue[room_cost]">
+                </div>
+            </div>
+
+
         </div>
         <div class="span6">
             <div class="control-group">
-                <%= label :postal_code, :class => 'control-label' %>
+                <%= f.label :room_setup, :class => 'control-label'%>
                 <div class="controls">
-                    <input type="text" id="course_postal_code" autocomplete="off" placeholder="Enter Postal Code" >
-                    <input type="hidden" id="course_postal_code_hidden" name="course[postal_code]" />
+                    <input type="text" id="venue_room_setup" name="venue[room_setup]">
+                </div>
+            </div>
+            <div class="control-group">
+                <%= f.label :capacity, :class => 'control-label'%>
+                <div class="controls">
+                    <input type="text" id="venue_capacity" name="venue[capacity]">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <%= f.label :screen, :class => 'control-label'%>
+                <div class="controls">
+                    <input type="text" id="venue_screen" name="venue[screen]">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <%= f.label :whiteboard, :class => 'control-label' %>
+                <div class="controls">
+                    <%= f.check_box :whiteboard_available %>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <%= f.label :catering, :class => 'control-label'%>
+                <div class="controls">
+                    <input type="text" id="venue_catering" class="venue_catering">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <%= f.label :lunch, :class => 'control-label' %>
+                <div class="controls">
+                    <%= f.check_box :lunch_available %>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <%= f.label :notes, :class => 'control-label' %>
+                <div class="controls">
+                    <textarea rows="3" id="venue_notes" name="venue[notes]"></textarea>
                 </div>
             </div>
         </div>
-    </div>
+
+        <div class="row">
+            <div class="container">
+                <div class="span12">
+                    <div class="form-actions">
+                        <%= f.submit "create Venue", :url => venues_path,   :class => 'btn btn-primary' %>
+                        <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                                    venues_path, :class => 'btn' %>
+                        </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
 </div>
 
+<script type="text/javascript">
+    // for edit fuctionality on page load
+    $(function(){
+        <% if @venue.name.present? %> $('#venue_name').val('<%= @venue.name %>');  <% end %>
+
+        <% if @venue.address.present? %> $('#venue_address').val('<%= @venue.address %>'); <% end %>
+        <% if @venue.room_name.present? %> $('#venue_room_name').val('<%= @venue.room_name %>'); <% end %>
+        <% if @venue.room_cost.present? %> $('#venue_room_cost').val('<%= @venue.room_cost %>'); <% end %>
+        <% if @venue.room_setup.present? %> $('#venue_room_setup').val('<%= @venue.room_setup %>'); <% end %>
+        <% if @venue.capacity.present? %> $('#venue_capacity').val('<%= @venue.capacity %>'); <% end %>
+        <% if @venue.screen.present? %> $('#venue_screen').val('<%= @venue.screen %>'); <% end %>
+        <% if @venue.whiteboard_available.present? %> $('#venue_whiteboard_available').val('<%= @venue.whiteboard_available %>'); <% end %>
+        <% if @venue.catering.present? %> $('#venue_catering').val('<%= @venue.catering %>'); <% end %>
+        <% if @venue.lunch_available.present? %> $('#venue_lunch_available').val('<%= @venue.lunch_available %>'); <% end %>
+        <% if @venue.notes.present? %> $('#venue_notes').val('<%= @venue.notes %>'); <% end %>
+
+        <% if @postal_code_selected.present? && @town_selected.present? && @state_selected.present? %>
+            $('#venue_postal_code').val('<%=@postal_code_selected.code%>');
+            $('#venue_town').append("<option value="+"<%= @town_selected.id %>"+" selected=selected>"+ "<%= @town_selected.name %>"+"</option>");
+            $('#venue_state').append("<option value="+"<%= @state_selected.id %>"+" selected=selected>"+ "<%= @state_selected.name %>"+"</option>");
+        <% end %>
 
 
+    });
 
+    $('#venue_postal_code').typeahead(
+            {
+                minLength: 2,
+                source : function(query, process) {
+                    map = {};
+                    postal_codes = [];
+                    $.ajax({
+                        url : '/postal_codes/code.json',
+                        type : 'get',
+                        data : 'code='+query,
+                        dataType: 'JSON',
+                        success : function(data) {
+                            $.each(data, function(index, element) {
+                                postal_codes.push(element.code);
+                                map[element.code] = element;
+                            });
+                            process(postal_codes);
+                        }
+                    });
+                },
+                updater : function(item) {
+                    $('#venue_postal_code_hidden').val(map[item].id);
+                    $('#venue_postal_code').val(map[item].name);
+                    return item;
+                }
 
+            }
+    );
+
+    $('#venue_postal_code').change(function(){
+        postal_code = $(this).val();
+        console.log(postal_code);
+        $.ajax({
+            url : '/location_relations/postal_code.json',
+            type : 'get',
+            data : 'postal_code='+postal_code,
+            dataType: 'JSON',
+            success : function(data) {
+                $('#venue_town').empty();
+                $('#venue_state').empty();
+                $('#venue_town').append("<option value="+data[0].town_id+" selected=selected>"+data[0].town+"</option>");
+                $('#venue_state').append("<option value="+data[0].state_id+" selected=selected>"+data[0].state+"</option>");
+                data.shift();
+                $.each(data, function(index, element) {
+                    $('#venue_town').append("<option value="+element.town_id+">"+element.town+"</option>");
+                    $('#venue_state').append("<option value="+element.state_id+">"+element.state+"</option>");
+                });
+
+            }
+        });
+    });
+
+</script>
