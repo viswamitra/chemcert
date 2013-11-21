@@ -1,6 +1,5 @@
-<%- model_class = Venue -%>
-<div class="span5">
-    <h3> Listing Venues</h3>
+<div class="span12">
+    <h3> Listing Venue</h3>
     <table class="table table-striped">
         <tr>
             <th> Name </th>
@@ -15,7 +14,34 @@
             <th> Catering</th>
             <th> Lunch?</th>
             <th> Notes</th>
+            <th>  </th>
+            <th>  </th>
+            <th>  </th>
         </tr>
+
+            <tr>
+                <td> <%=@venue.try(:name) ? @venue.name : "-" %></td>
+                <td> <%=@venue.location_relation.try(:town).try(:name) %></td>
+                <td> <%=@venue.location_relation.try(:state).try(:name) %></td>
+                <td> <%=@venue.try(:room_name) ? @venue.room_name : "-" %></td>
+                <td> <%=@venue.try(:room_cost) ? @venue.room_cost : "-" %></td>
+                <td> <%=@venue.try(:room_setup) ? @venue.room_setup : "-" %></td>
+                <td> <%=@venue.try(:capacity) ? @venue.capacity : "-" %></td>
+                <td> <%=@venue.try(:screen) ? @venue.screen : "-" %></td>
+                <td> <%=@venue.try(:whiteboard_available) ? @venue.whiteboard_available : "-" %></td>
+                <td> <%=@venue.try(:catering) ? @venue.catering : "-" %></td>
+                <td> <%=@venue.try(:lunch_available) ? @venue.lunch_available : "-" %></td>
+                <td> <%=@venue.try(:notes) ? @venue.notes : "-" %></td>
+                <td> <%= link_to "Back", venues_path, :class => 'btn btn-mini'  %> </td>
+                <td> <%= link_to "Edit", edit_venue_path(@venue), :class => 'btn btn-mini' %></td>
+                <td> <%= link_to "Remove", @venue,
+                                 method: :delete,
+                                 data: { confirm: "Are you sure?" },
+                                 :class => 'btn btn-mini btn-danger'
+
+                %></td>
+            </tr>
+
 
 
     </table>

@@ -2,7 +2,7 @@ class VenuesController < ApplicationController
 
   #get /venues
   def index
-    @venues = Venue.all.paginate(page: params[:page], per_page: 10)
+    @venues = Venue.search(params[:town])
   end
 
   #get /venues/1
@@ -60,35 +60,43 @@ class VenuesController < ApplicationController
   # PATCH/PUT /products/1.json
   def update
     @venue = Venue.find(params[:id])
+    state_id = params[:venue][:state]
+    town_id = params[:venue][:town]
+    postal_code_id = params[:venue][:postal_code]
+    p state_id, town_id, postal_code_id
+    location_relation = LocationRelation.where(:state_id => state_id, :postal_code_id => postal_code_id, :town_id => town_id).first
+
     respond_to do |format|
-      if @venue.update(rto_params)
-        format.html { redirect_to @rto, notice: 'RTO was successfully updated.' }
+      if @venue.update(
+          :name => params[:venue][:name],
+          :address => params[:venue][:address],
+          :location_relation_id => location_relation.id,
+          :room_name => params[:venue][:room_name],
+          :room_cost => params[:venue][:room_cost],
+          :room_setup => params[:venue][:room_setup],
+          :capacity => params[:venue][:capacity],
+          :screen => params[:venue][:screen],
+          :whiteboard_available => params[:venue][:whiteboard_available],
+          :catering => params[:venue][:catering],
+          :lunch_available => params[:venue][:lunch],
+          :notes => params[:venue][:notes]
+      )
+        format.html { redirect_to venues_path, notice: 'RTO was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @rto.errors, status: :unprocessable_entity }
+        format.json { render json: @venue.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /products/1
   def destroy
-    @rto = TrainingOrganization.find(params[:id])
-    @rto.destroy
+    @venue = Venue.find(params[:id])
+    @venue.destroy
     respond_to do |format|
-      format.html { redirect_to training_organizations_url }
+      format.html { redirect_to venues_path }
       format.json { head :no_content }
     end
-  end
-
-  private
-  # Use callbacks to share common setup or constraints between actions.
-  def set_rto
-    @rto = TrainingOrganization.find(params[:id])
-  end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def rto_params
-    params.require(:training_organization).permit(:name, :provider)
   end
 end

@@ -1,0 +1,40 @@
+<div class="row">
+<div class="span12">
+    <h3> Listing Venues </h3>
+
+    <table class="table table-striped">
+        <tr>
+            <th> Name </th>
+            <th> Town</th>
+            <th> State</th>
+            <th> Room Name</th>
+            <th> Room Cost</th>
+            <th> Room Setup</th>
+            <th> Capacity</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+
+        <% @venues.each do |venue| %>
+            <tr>
+                <td> <%=venue.try(:name) ? venue.name : "-" %></td>
+                <td> <%=venue.location_relation.try(:town).try(:name) %></td>
+                <td> <%=venue.location_relation.try(:state).try(:name) %></td>
+                <td> <%=venue.try(:room_name) ? venue.room_name : "-" %></td>
+                <td> <%=venue.try(:room_cost) ? venue.room_cost : "-" %></td>
+                <td> <%=venue.try(:room_setup) ? venue.room_setup : "-" %></td>
+                <td> <%=venue.try(:capacity) ? venue.capacity : "-" %></td>
+                <td> <%= link_to "Edit", edit_venue_path(venue), :class => 'btn btn-mini' %></td>
+                <td> <%= link_to "Remove", venue,
+                                 method: :delete,
+                                 data: { confirm: "Are you sure?" },
+                                 :class => 'btn btn-mini btn-danger'
+
+                %></td>
+            </tr>
+        <% end %>
+    </table>
+    <%= link_to "New Venue", new_venue_path, :class => 'btn btn-primary btn-large pull-right', :id => 'new_rto_btn'%>
+</div>
+</div>

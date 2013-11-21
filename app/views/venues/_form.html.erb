@@ -86,7 +86,7 @@
             <div class="control-group">
                 <%= f.label :catering, :class => 'control-label'%>
                 <div class="controls">
-                    <input type="text" id="venue_catering" class="venue_catering">
+                    <input type="text" id="venue_catering" name="venue[catering]">
                 </div>
             </div>
 
@@ -137,6 +137,8 @@
 
         <% if @postal_code_selected.present? && @town_selected.present? && @state_selected.present? %>
             $('#venue_postal_code').val('<%=@postal_code_selected.code%>');
+            $('#venue_postal_code_hidden').val('<%=@venue.location_relation.postal_code.id%>');
+
             $('#venue_town').append("<option value="+"<%= @town_selected.id %>"+" selected=selected>"+ "<%= @town_selected.name %>"+"</option>");
             $('#venue_state').append("<option value="+"<%= @state_selected.id %>"+" selected=selected>"+ "<%= @state_selected.name %>"+"</option>");
         <% end %>

@@ -1,36 +1,72 @@
-<div class="span12">
-    <h3> Listing Venues </h3>
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            <h3> Find Venue </h3>
+        </div>
+    </div>
+    <div class="row">
+        <%= form_tag venues_path, :method => "get", :class => "form-inline" do %>
 
-    <table class="table table-striped">
-        <tr>
-            <th> Name </th>
-            <th> Town</th>
-            <th> State</th>
-            <th> Room Name</th>
-            <th> Room Cost</th>
-            <th> Room Setup</th>
-            <th> Capacity</th>
-            <th> </th>
-            <th></th>
-        </tr>
+            <div class="span3">
+                <%= label_tag :town %> </br>
+                <input type="text" id="town" autocomplete="off" placeholder="Enter Town">
+                <input type="hidden" id="town_hidden" name="town" value="" />
+            </div>
 
-        <%= will_paginate  @venues%>
-        <% @venues.each do |venue| %>
-            <tr>
-                <td> <%=venue.try(:name) ? venue.name : "-" %></td>
-                <td> <%=venue.location_relation.try(:town).try(:name) %></td>
-                <td> <%=venue.location_relation.try(:state).try(:name) %></td>
-                <td> <%=venue.try(:room_name) ? venue.room_name : "-" %></td>
-                <td> <%=venue.try(:room_cost) ? venue.room_cost : "-" %></td>
-                <td> <%=venue.try(:room_setup) ? venue.room_setup : "-" %></td>
-                <td> <%=venue.try(:capacity) ? venue.capacity : "-" %></td>
+            <div class="span3">
+                <div class="control-group">
+                    <%= label :course_date, "Find Date", :class => "invisible" %>
+                    <div class="controls">
+                        <%= submit_tag "Find Venue", :class => 'btn btn-primary', :name => nil %>
+                    </div>
+                </div>
+            </div>
 
-                <td> <%= link_to "Show", venue, :class => 'btn btn-primary btn-mini'%></td>
-                <td> <%= link_to "Edit", edit_venue_path(venue), :class => 'btn btn-mini' %></td>
-            </tr>
         <% end %>
-    </table>
-    <%= will_paginate  @venues %>
-    <%= link_to "New Venue", new_venue_path, :class => 'btn btn-primary btn-large pull-right', :id => 'new_rto_btn'%>
+    </div>
+    <div class="row">
+        <div class="span12">
+            <div id="global-message" class="msg info">
+                Find Venues
+            </div>
+        </div>
+    </div>
+
+    <%= render 'venue_table_container' %>
 </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $('#town').typeahead(
+                {
+                    minLength: 3,
+                    source : function(query, process) {
+                        map = {};
+                        towns = [];
+                        $.ajax({
+                            url : '../towns/name.json',
+                            type : 'get',
+                            data : 'name='+query,
+                            dataType: 'JSON',
+                            success : function(data) {
+                                $.each(data, function(index, element) {
+                                    towns.push(element.name);
+                                    map[element.name] = element;
+                                });
+                                process(towns);
+                            }
+                        });
+                    },
+                    updater : function(item) {
+                        $('#town_hidden').val(map[item].id);
+                        $('#town').val(map[item].name);
+                        return item;
+                    }
+
+                }
+        );
+    });
+</script>
+
 
