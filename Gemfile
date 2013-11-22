@@ -4,9 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 
 # Use sqlite3 as the database for Active Record
-group :production do
-  gem 'pg'
-end
+
 
 
 # using less for bootstrap
@@ -59,6 +57,10 @@ end
 gem 'protected_attributes'
 gem 'devise'
 
+group :production do
+  gem 'rails_12factor'
+  gem 'pg'
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
