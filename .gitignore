@@ -16,4 +16,5 @@
 /tmp
 
 .idea/*
+.idea/datasources*
 chemcert_bakshi.iml
