@@ -20,7 +20,8 @@
             <div class="form-inline">
             <%= f.text_field :course_code, :class => 'input-small' %>
                 <span style="font-size: 20px; margin-left:10px">
-                    <%= Course.last.id + 1 unless @course.course_code.present? %>
+
+                    <%=  (Course.last.try(:id).present? ? Course.last.id : 0) +1 unless @course.course_code.present? %>
                 </span>
             </div>
         </div>
