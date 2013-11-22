@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131117170722) do
+ActiveRecord::Schema.define(version: 20131122152419) do
 
   create_table "course_process_details", force: true do |t|
     t.datetime "performa_received_at"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20131117170722) do
     t.string   "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "course_id",                limit: 8, null: false
   end
 
   create_table "courses", force: true do |t|
