@@ -14,10 +14,20 @@ class Course < ActiveRecord::Base
   scope :by_course_date, lambda {|date| where(:course_date => date) if date.present?}
   scope :by_town_id, lambda {|town_id| Course.joins(:location_relation => :town).merge(Town.by_id(town_id)) if town_id.present?}
   scope :by_state_id, lambda {|state_id| Course.joins(:location_relation => :state).merge(State.by_id(state_id)) if state_id.present?}
-  scope :by_course_status, lambda{|course_status| Course.joins(:course_process_detail).where('course_process_details.course_status =?',course_status) if course_status.present? }
+  scope :by_start_date, lambda {|date| Course.where('course_date >= ?',date) if date.present?}
+  scope :by_end_date, lambda {|date| Course.where('course_date <= ?',date) if date.present?}
 
 
 
+  def self.by_course_status(status)
+     if status == 'open'
+       where(:course_status => false)
+     elsif status == 'closed'
+       where(:course_status => true)
+     elsif status == 'payment_pending'
+       #joins(:students).
+     end
+  end
 
   def self.search(course_code, town_id, course_date)
     return [] unless (course_code.present? || town_id.present? || course_date.present?)
@@ -35,11 +45,11 @@ class Course < ActiveRecord::Base
     return [] unless (course_code.present? || course_status.present? || start_date.present? || end_date.present?)
     start_date = Time.parse(start_date).strftime('%Y-%m-%d') if start_date.present?
     end_date = Time.parse(end_date).strftime('%Y-%m-%d') if end_date.present?
-    Course.between_dates(start_date, end_date).merge(by_course_status(course_status)).merge(by_course_code(course_code))
+    Course.by_start_date(start_date).merge(by_end_date(end_date)).merge(by_course_status(course_status)).merge(by_course_code(course_code))
   end
 
   def self.between_dates(start_date, end_date)
-    where("course_date between ? and ?", start_date, end_date)
+    by_start_date(start_date).merge(by_end_date(end_date))
   end
 
   def self.by_matching_code(code)
@@ -47,4 +57,8 @@ class Course < ActiveRecord::Base
   end
 
 
+
+
+
 end
+

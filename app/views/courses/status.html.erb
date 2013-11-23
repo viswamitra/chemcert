@@ -1,0 +1,110 @@
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            <h3> Find Course </h3>
+        </div>
+    </div>
+    <div class="row">
+        <%= form_tag status_courses_path, :method => "get", :class => "form-inline" do %>
+            <div class="span3">
+                <%= label_tag :course_code%> </br>
+                <input type="text" id="course_code" name="course_code" autocomplete="off" placeholder="Enter Course code" value="<%= params[:course_code] %>">
+            </div>
+
+            <div class="span3">
+                <%= label_tag :course_start_date%> </br>
+                <%= text_field_tag :course_start_date, params[:course_start_date], :class => 'text_field datepicker'%>
+            </div>
+
+            <div class="span3">
+                <%= label_tag :course_end_date%> </br>
+                <%= text_field_tag :course_end_date, params[:course_end_date], :class => 'text_field datepicker' %>
+            </div>
+
+            <div class="span3">
+                <%= label_tag :course_status %> </br>
+                <select id="course_status" name="course_status">
+                    <option value=""></option>
+                    <option value="open">open</option>
+                    <option value="closed">closed</option>
+                    <option value="payment_due">payment due</option>
+                </select>
+            </div>
+
+
+            <div class="span3">
+                    <%= label :course_date, "Find Date", :class => "invisible" %>
+                    <div class="controls">
+                        <%= submit_tag "Find course", :class => 'btn btn-primary', :name => nil %>
+                    </div>
+            </div>
+        <% end %>
+    </div>
+
+    <div class="row">
+        <div class="span12">
+            <div id="global-message" class="msg info">
+                Find Courses
+            </div>
+        </div>
+    </div>
+
+
+    <%= render 'course_table_status_container' %>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        $(".datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
+        $('#course_code').typeahead(
+                {
+                    minLength: 3,
+                    source : function(query, process) {
+                        courses = [];
+                        $.ajax({
+                            url : 'courses/code.json',
+                            type : 'get',
+                            data : 'code='+query,
+                            dataType: 'JSON',
+                            success : function(data) {
+
+                                $.each(data, function(index, element) {
+                                    courses.push(element.course_code);
+                                });
+                                process(courses);
+                            }
+                        });
+                    }
+                }
+        );
+
+        $('#town').typeahead(
+                {
+                    minLength: 3,
+                    source : function(query, process) {
+                        map = {};
+                        towns = [];
+                        $.ajax({
+                            url : '../towns/name.json',
+                            type : 'get',
+                            data : 'name='+query,
+                            dataType: 'JSON',
+                            success : function(data) {
+                                $.each(data, function(index, element) {
+                                    towns.push(element.name);
+                                    map[element.name] = element;
+                                });
+                                process(towns);
+                            }
+                        });
+                    },
+                    updater : function(item) {
+                        $('#town_hidden').val(map[item].id);
+                        $('#town').val(map[item].name);
+                        return item;
+                    }
+
+                }
+        );
+    });
+</script>

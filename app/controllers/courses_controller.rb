@@ -21,7 +21,7 @@ class CoursesController < ApplicationController
 
   #get /status
   def status
-    @courses = Course.search_process(params[:course_code], params[:course_status], params[:course_start_date], params[:courses_end_date])
+    @courses = Course.search_process(params[:course_code], params[:course_status], params[:course_start_date], params[:course_end_date])
   end
 
   #get /course/1

@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="span12">
+        <table class="table table-striped">
+            <tr>
+                <th> CT Code </th>
+                <th> Date </th>
+                <th> Course Status </th>
+                <th>  </th>
+                <th>  </th>
+            </tr>
+
+            <% @courses.each do |course| %>
+                <tr>
+                    <td> <%= course.course_code %></td>
+                    <td> <%= l course.course_date %></td>
+                    <td> <% if course.course_status  %>
+                            Closed
+                         <% else %>
+                            Open
+                        <% end %>
+                    </td>
+                    <td> <%= link_to "Show", course, :class => 'btn btn-primary btn-mini'%></td>
+                    <td> <%= link_to "Edit", edit_course_path(course), :class => 'btn btn-mini' %></td>
+                    </td>
+                </tr>
+            <% end %>
+        </table>
+    </div>
+</div>
+
