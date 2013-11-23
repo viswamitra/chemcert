@@ -19,6 +19,11 @@ class CoursesController < ApplicationController
     @courses = Course.search_by_schedule(params[:course_start_date], params[:course_end_date], params[:state])
   end
 
+  #get /status
+  def status
+    @courses = Course.search_process(params[:course_code], params[:course_status], params[:course_start_date], params[:courses_end_date])
+  end
+
   #get /course/1
   def show
     @course = Course.find(params[:id])
@@ -52,7 +57,7 @@ class CoursesController < ApplicationController
     town_id = params[:course][:town]
     postal_code_id = params[:course][:postal_code]
     location_relation_id = LocationRelation.where(:state_id => state_id, :postal_code_id => postal_code_id, :town_id => town_id).first
-    course_code = params[:course][:course_code]+(Course.last.id+1).to_s
+    course_code = params[:course][:course_code]+((Course.last.try(:id).present? ? Course.last.id : 0) +1).to_s
     @course = Course.new(:training_organization_id => params[:course][:training_organization],
       :is_correspondence => params[:course][:is_correspondence],
       :course_code => course_code,
