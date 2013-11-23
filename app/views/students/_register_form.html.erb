@@ -1,0 +1,229 @@
+<div class="container">
+    <div class="row">
+        <div class="span3">
+            <div class="bottom-gap">
+                <%= label_tag :course_types %>
+                <% state_array = State.all.map {|state| [state.name, state.id]} %>
+                <%= select_tag :state, options_for_select(state_array) %>
+            </div>
+
+            <div class="bottom-gap">
+                <%= label_tag :additional_modules %>
+                <select id="additional_modules" name="student[additional_modules]">
+                    <option value=""></option>
+                    <option value="1">weeds</option>
+                </select>
+            </div>
+
+            <div class="bottom-gap">
+                <%= label_tag :date_enrolled %>
+                <%= text_field_tag :course_date,nil, :class => 'text_field datepicker' %>
+            </div>
+
+            <div class="bottom-gap">
+                <%= label_tag :first_name %>
+                <%= text_field_tag :first_name,nil, :class => 'text_field' %>
+            </div>
+
+            <div class="bottom-gap">
+                <%= label_tag :middle_name %>
+                <%= text_field_tag :middle_name,nil, :class => 'text_field' %>
+            </div>
+
+            <div class="bottom-gap">
+                <%= label_tag :last_name %>
+                <%= text_field_tag :last_name,nil, :class => 'text_field' %>
+            </div>
+
+            <div class="bottom-gap">
+                <%= label_tag :phone %>
+                <%= text_field_tag :phone,nil, :class => 'text_field' %>
+            </div>
+
+            <div class="bottom-gap">
+                <%= label_tag :mobile %>
+                <%= text_field_tag :mobile,nil, :class => 'text_field' %>
+            </div>
+
+            <div class="bottom-gap">
+                <%= label_tag :email %>
+                <%= text_field_tag :email,nil, :class => 'text_field' %>
+            </div>
+
+            <div class="bottom-gap">
+                <%= label_tag :fax %>
+                <%= text_field_tag :fax,nil, :class => 'text_field' %>
+            </div>
+
+            <div class="bottom-gap-50"></div>
+
+        </div>
+
+        <div class="span3">
+            <div class="bottom-gap">
+                <%= label_tag :current_accrediation %>
+                <%= text_field_tag :current_accrediation,nil, :class => 'text_field' %>
+            </div>
+
+            <div class="bottom-gap">
+                <%= label_tag :current_expiry_date %>
+                <%= text_field_tag :current_expiry_date,nil, :class => 'text_field' %>
+            </div>
+
+            <div class="border-bottom">
+                <%= label_tag :postal_details, nil %>
+            </div>
+
+            <div class="top-gap bottom-gap">
+                <%= label_tag :address %>
+                <%= text_field_tag :current_expiry_date,nil, :class => 'text_field' %>
+            </div>
+
+            <div class="bottom-gap">
+                <%= label_tag :postal_code,nil, :class => 'control-label' %>
+                    <input type="text" id="course_postal_code" autocomplete="off" placeholder="Enter Postal Code" >
+                    <input type="hidden" id="course_postal_code_hidden" name="course[postal_code]" />
+            </div>
+
+            <div class="bottom-gap">
+                <%= label_tag :town,nil, :class => 'control-label' %>
+                    <select id="course_town" name="course[town]">
+                        <option value=""></option>
+                    </select>
+            </div>
+
+            <div class="bottom-gap">
+                <%= label_tag :state, nil, :class => 'control-label' %>
+                <select id="course" name="course[town]">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="border-bottom">
+                <%= label_tag :further_information, nil %>
+            </div>
+
+            <div class="top-gap bottom-gap">
+                <%= label_tag :industry, nil, :class => 'control-label' %>
+                <select id="course" name="course[town]">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="bottom-gap row" style="margin-left:20px">
+                    <input id="special_needs" name="special_needs" type="checkbox" class="pull-left"/>
+                    <label class="pull-left left-gap-10" for="special_needs">Special Needs</label>
+            </div>
+
+
+
+            <div class="bottom-gap row" style="margin-left:0px">
+                <div class="bottom-gap pull-left">
+                    <input id="hearing" name="hearing" type="checkbox" class="pull-left"/>
+                    <label class="pull-left left-gap-10" for="hearing">Hearing</label>
+                </div>
+
+                <div class="bottom-gap pull-right" style="margin-right:50px">
+                    <input id="hearing" name="hearing" type="checkbox" class="pull-left"/>
+                    <label class="pull-left left-gap-10" for="hearing">Hearing</label>
+                </div>
+            </div>
+
+
+
+            <div class="bottom-gap row" style="margin-left:0px">
+                <div class="bottom-gap pull-left">
+                    <input id="hearing" name="hearing" type="checkbox" class="pull-left"/>
+                    <label class="control-label pull-left left-gap-10" for="hearing">Hearing</label>
+                </div>
+
+                <div class="bottom-gap pull-right" style="margin-right:50px">
+                    <input id="hearing" name="hearing" type="checkbox" class="pull-left"/>
+                    <label class="control-label pull-left left-gap-10" for="hearing">Hearing</label>
+                </div>
+            </div>
+
+            <div class="bottom-gap row" style="margin-left:0px">
+                <div class="bottom-gap pull-left">
+                    <input id="hearing" name="hearing" type="checkbox" class="pull-left"/>
+                    <label class="control-label pull-left left-gap-10" for="hearing">Hearing</label>
+                </div>
+
+                <div class="bottom-gap pull-right" style="margin-right:50px">
+                    <input id="hearing" name="hearing" type="checkbox" class="pull-left"/>
+                    <label class="control-label pull-left left-gap-10" for="hearing">Hearing</label>
+                </div>
+            </div>
+
+            <div class="bottom-gap row" style="margin-left:0px">
+                <div class="bottom-gap pull-left">
+                    <input id="hearing" name="hearing" type="checkbox" class="pull-left"/>
+                    <label class="control-label pull-left left-gap-10" for="hearing">Hearing</label>
+                </div>
+
+                <div class="bottom-gap pull-right" style="margin-right:50px">
+                    <input id="hearing" name="hearing" type="checkbox" class="pull-left"/>
+                    <label class="control-label pull-left left-gap-10" for="hearing">Hearing</label>
+                </div>
+            </div>
+
+            <div class="bottom-gap">
+                <%= label_tag :others_specify %>
+                <%= text_field_tag :current_expiry_date,nil, :class => 'text_field' %>
+            </div>
+
+            <div class="bottom-gap-50"></div>
+        </div>
+
+    <div class="span3">
+        <%= label_tag :name%>
+        <input type="text" id="venue_name" name="venue[name]">
+
+        <%= label_tag :name%>
+        <input type="text" id="venue_name" name="venue[name]">
+
+    </div>
+
+    <div class="span3">
+        <%= label_tag :name%>
+        <input type="text" id="venue_name" name="venue[name]">
+
+        <%= label_tag :name%>
+        <input type="text" id="venue_name" name="venue[name]">
+
+    </div>
+
+    </div>
+
+
+
+
+    </div>
+
+
+
+
+<style>
+    select {
+        height: 25px;
+    }
+
+    input[type="text"] {
+        height: 20px;
+    }
+
+    .table-striped tbody > tr:nth-child(2n+1) > th {
+        background-color:#606060;
+        color:#FFF;
+    }
+
+    .table td{
+        background-color:#E0E0E0;
+        color:#fff;
+    }
+
+    .table-striped tbody > tr:nth-child(2n+1) > td {
+        background-color:#D0D0D0;
+        color:#000;
+    }
+</style>

@@ -16,6 +16,7 @@
 //= require turbolinks
 //= require utils
 //= require jquery.ui.datepicker
+//= require jquery.ui.tabs
 //= require select2
 //= require_tree .
 

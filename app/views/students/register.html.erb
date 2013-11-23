@@ -1,0 +1,101 @@
+<div class="container">
+    <div class="row">
+        <div class="span12">
+            <h3> New Enquiry/Enrolment </h3>
+        </div>
+    </div>
+    <div class="row">
+            <div class="span3">
+                <%= label_tag :state %>
+                <% state_array = State.all.map {|state| [state.name, state.id]} %>
+                <%= select_tag :state, options_for_select(state_array) %>
+            </div>
+
+            <div class="span3">
+                <%= label_tag :town %>
+                <input type="text" id="town" autocomplete="off" placeholder="Enter Town">
+                <input type="hidden" id="town_hidden" name="town" value="" />
+            </div>
+
+            <div class="span3">
+                <%= label_tag :available_course_dates %>
+                <select id="course_dates" name="course_dates">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="span3">
+                <%= label_tag :venues %>
+                <select id="venues" name="venues">
+                    <option value=""></option>
+                </select>
+            </div>
+    </div>
+    <div class="row">
+        <div class="span12">
+            <div style="border: 1px #f5f5f5 solid;margin:10px 0 10px 0"></div>
+        </div>
+    </div>
+
+
+    <%= render 'register_form' %>
+</div>
+
+
+
+<script type="text/javascript">
+    $(function(){
+        $(".datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
+        $('#course_code').typeahead(
+                {
+                    minLength: 3,
+                    source : function(query, process) {
+                        courses = [];
+                        $.ajax({
+                            url : 'courses/code.json',
+                            type : 'get',
+                            data : 'code='+query,
+                            dataType: 'JSON',
+                            success : function(data) {
+
+                                $.each(data, function(index, element) {
+                                    courses.push(element.course_code);
+                                });
+                                process(courses);
+                            }
+                        });
+                    }
+                }
+        );
+
+        $('#town').typeahead(
+                {
+                    minLength: 3,
+                    source : function(query, process) {
+                        map = {};
+                        towns = [];
+                        $.ajax({
+                            url : '../towns/name.json',
+                            type : 'get',
+                            data : 'name='+query,
+                            dataType: 'JSON',
+                            success : function(data) {
+                                $.each(data, function(index, element) {
+                                    towns.push(element.name);
+                                    map[element.name] = element;
+                                });
+                                process(towns);
+                            }
+                        });
+                    },
+                    updater : function(item) {
+                        $('#town_hidden').val(map[item].id);
+                        $('#town').val(map[item].name);
+                        return item;
+                    }
+
+                }
+        );
+    });
+</script>
+
