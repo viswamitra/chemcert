@@ -1,14 +1,16 @@
 class AddLocationRelations
   def self.enroll
       #"postalcode","town","state"
-      file_csv = CSV.parse(File.open('location_relations.csv'))
+      file_csv = CSV.parse(File.open('scripts/location_relations.csv'))
       file_csv.each do |row|
         begin
           postal_code = row[0]
           town = row[1]
           state = row[2]
 
-          p = PostalCode.create(:code => postal_code.to_s)
+
+
+            p = PostalCode.create(:code => postal_code.to_s)
           t = Town.create(:name => town.to_s)
           s = State.create(:name => state.to_s)
           #
