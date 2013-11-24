@@ -15,4 +15,8 @@ class Town < ActiveRecord::Base
   def self.by_matching_name(name)
     where("name like ?","%#{name}%");
   end
+
+  def self.by_state(state_id)
+    joins(:location_relations).where("location_relations.state_id = ?",state_id).uniq
+  end
 end

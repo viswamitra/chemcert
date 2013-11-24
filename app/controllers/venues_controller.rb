@@ -10,6 +10,14 @@ class VenuesController < ApplicationController
     @venue = Venue.find(params[:id])
   end
 
+  #get /venues/by_course_date.json?course_id=x
+  def by_course_date
+    @venues = Venue.by_course_date(params[:date])
+    respond_to do |format|
+      format.json {render json: @venues}
+    end
+  end
+
 
   #get /venues/new
   def new

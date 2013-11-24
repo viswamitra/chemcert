@@ -3,19 +3,25 @@ ChemcertBakshi::Application.routes.draw do
 
   root 'training_organizations#index'
   resources :training_organizations, :path => "rtos"
-  resources :venues
+  resources :venues do
+    collection do
+      get '/by_course_date' => 'venues#by_course_date'
+    end
+  end
 
   resources :courses do
     collection do
       get '/code' => 'courses#by_code'
       get '/schedule' => 'courses#schedule'
       get '/status' => 'courses#status'
+      get '/by_town' => 'courses#by_town'
     end
   end
 
   resources :towns do
     collection do
       get '/name' => 'towns#by_name'
+      get '/by_state' => 'towns#by_state'
     end
   end
 
@@ -34,6 +40,7 @@ ChemcertBakshi::Application.routes.draw do
   resources :students do
     collection do
       get '/register' => 'students#register'
+      post '/register' => 'students#enroll'
     end
   end
 

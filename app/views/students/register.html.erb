@@ -44,58 +44,82 @@
 
 
 <script type="text/javascript">
+
     $(function(){
+
         $(".datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
-        $('#course_code').typeahead(
-                {
-                    minLength: 3,
-                    source : function(query, process) {
-                        courses = [];
-                        $.ajax({
-                            url : 'courses/code.json',
-                            type : 'get',
-                            data : 'code='+query,
-                            dataType: 'JSON',
-                            success : function(data) {
-
-                                $.each(data, function(index, element) {
-                                    courses.push(element.course_code);
-                                });
-                                process(courses);
-                            }
-                        });
-                    }
-                }
-        );
-
-        $('#town').typeahead(
-                {
-                    minLength: 3,
-                    source : function(query, process) {
-                        map = {};
-                        towns = [];
-                        $.ajax({
-                            url : '../towns/name.json',
-                            type : 'get',
-                            data : 'name='+query,
-                            dataType: 'JSON',
-                            success : function(data) {
-                                $.each(data, function(index, element) {
-                                    towns.push(element.name);
-                                    map[element.name] = element;
-                                });
-                                process(towns);
-                            }
-                        });
-                    },
-                    updater : function(item) {
-                        $('#town_hidden').val(map[item].id);
-                        $('#town').val(map[item].name);
-                        return item;
-                    }
-
-                }
-        );
     });
+
+    $('#town').typeahead(
+            {
+                minLength: 4,
+                source : function(query, process) {
+                    map = {};
+                    towns = [];
+                    $.ajax({
+                        url : '/towns/by_state.json',
+                        type : 'get',
+                        data : 'id='+$('#state').val(),
+                        dataType: 'JSON',
+                        success : function(data) {
+                            $.each(data, function(index, element) {
+                                towns.push(element.name);
+                                map[element.name] = element;
+                            });
+                            process(towns);
+                        }
+                    });
+                },
+                updater : function(item) {
+                    $('#town_hidden').val(map[item].id);
+                    $('#town').val(map[item].name);
+                    return item;
+                }
+
+            }
+    );
+
+    $('#town').change(function(){
+        $.ajax({
+            url : '/courses/by_town.json',
+            type : 'get',
+            data : 'id='+$('#town_hidden').val(),
+            dataType: 'JSON',
+            success : function(data) {
+                $('#course_dates').empty();
+                $('#course_dates').append("<option value="+data[0].course_date+" selected=selected>"+data[0].course_date+"</option>");
+                data.shift();
+                $.each(data, function(index, element) {
+                    $('#course_dates').append("<option value="+element.course_date+">"+element.course_date+"</option>");
+                });
+                getVenuesForCourseDate();
+            }
+        });
+    });
+
+    var getVenuesForCourseDate = function() {
+        $.ajax({
+            url : '/venues/by_course_date.json',
+            type : 'get',
+            data : 'date='+$('#course_dates').val(),
+            dataType: 'JSON',
+            success : function(data) {
+                $('#venues').empty();
+                $('#venues').append("<option value="+data[0].id+" selected=selected>"+data[0].name+"</option>");
+                data.shift();
+                $.each(data, function(index, element) {
+                    $('#venues').append("<option value="+element.id+">"+element.name+"</option>");
+                });
+            }
+
+        });
+    }
+
+    $('#course_dates').change(function(){
+        getVenuesForCourseDate();
+    });
+
+
+
 </script>
 

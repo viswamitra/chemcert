@@ -9,6 +9,13 @@ class CoursesController < ApplicationController
     end
   end
 
+  def by_town
+    @courses = Course.by_town_id(params[:id])
+    respond_to do |format|
+      format.json {render json: @courses}
+    end
+  end
+
   #get /courses
   def index
     @courses = Course.search(params[:course_code], params[:town], params[:course_date])

@@ -12,6 +12,9 @@ class Venue < ActiveRecord::Base
 
 
 
+  def self.by_course_date(date)
+    Venue.joins(:courses).where('courses.course_date = ?',date)
+  end
 
   def self.search(town_id)
     return [] unless town_id.present?

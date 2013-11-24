@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131123070214) do
+ActiveRecord::Schema.define(version: 20131124122904) do
 
   create_table "course_process_details", force: true do |t|
     t.datetime "performa_received_at"
@@ -149,6 +149,7 @@ ActiveRecord::Schema.define(version: 20131123070214) do
     t.datetime "current_expiry_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "student_course_id",     limit: 8, null: false
   end
 
   create_table "student_courses", force: true do |t|
