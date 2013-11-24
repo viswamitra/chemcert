@@ -1,5 +1,7 @@
 <div class="container">
     <div class="row">
+    <%= form_tag("/register", method: "post") do %>
+
         <div class="span3">
             <div class="bottom-gap">
                 <%= label_tag :course_types %>
@@ -60,16 +62,6 @@
         </div>
 
         <div class="span3">
-            <div class="bottom-gap">
-                <%= label_tag :current_accrediation %>
-                <%= text_field_tag :current_accrediation,nil, :class => 'text_field' %>
-            </div>
-
-            <div class="bottom-gap">
-                <%= label_tag :current_expiry_date %>
-                <%= text_field_tag :current_expiry_date,nil, :class => 'text_field' %>
-            </div>
-
             <div class="border-bottom">
                 <%= label_tag :postal_details, nil %>
             </div>
@@ -169,36 +161,80 @@
 
             <div class="bottom-gap">
                 <%= label_tag :others_specify %>
-                <%= text_field_tag :current_expiry_date,nil, :class => 'text_field' %>
+                <%= text_field_tag :others_specify,nil, :class => 'text_field' %>
             </div>
 
             <div class="bottom-gap-50"></div>
         </div>
 
-    <div class="span3">
-        <%= label_tag :name%>
-        <input type="text" id="venue_name" name="venue[name]">
+        <div class="span3">
+            <div class="bottom-gap">
+                <%= label_tag :comments %>
+                <textarea rows="3" id="venue_notes" name="students[comments]"></textarea>
+            </div>
 
-        <%= label_tag :name%>
-        <input type="text" id="venue_name" name="venue[name]">
 
+            <div class="bottom-gap">
+                <%= label_tag :course_fee %>
+                <%= text_field_tag :course_fee,nil, :class => 'text_field' %>
+            </div>
+
+            <div class="bottom-gap">
+                <%= label_tag :payment_method,nil, :class => 'control-label' %>
+                <select id="payment_method" name="student[payment_method]">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="bottom-gap">
+                <%= label_tag :payment_date %>
+                <%= text_field_tag :payment_date,nil, :class => 'text_field datepicker' %>
+            </div>
+
+            <div class="bottom-gap row" style="margin-left:0px">
+                <input id="paid" name="paid" type="checkbox" class="pull-left"/>
+                <label class="pull-left left-gap-10" for="paid">Paid</label>
+            </div>
+
+        </div>
+
+        <div class="span3">
+            <div class="bottom-gap">
+                <%= label_tag :current_accreditation %>
+                <%= text_field_tag :first_name,nil, :class => 'text_field' %>
+            </div>
+
+            <div class="bottom-gap">
+                <%= label_tag :current_expiry_date %>
+                <%= text_field_tag :first_name,nil, :class => 'text_field' %>
+            </div>
+
+            <div class="top-gap bottom-gap">
+                <label for="feedback" id="feedback">How did you hear about Chemcert?</label>
+                <select id="feedback" name="student[feedback]">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="bottom-gap">
+                <%= label_tag :other %>
+                <%= text_field_tag :other,nil, :class => 'text_field' %>
+            </div>
+
+            <div class="form-actions">
+                <div class="row bottom-gap-20">
+                    <%= submit_tag "Save as Enquiry", :id => 'save_enquiry', :class => 'btn btn-primary pull-left' %>
+                </div>
+
+                <div class="row">
+                    <%= submit_tag "Save as Enrollment", :id => 'save_enrolment', :class => 'btn btn-primary pull-left'%>
+                </div>
+            </div>
     </div>
 
-    <div class="span3">
-        <%= label_tag :name%>
-        <input type="text" id="venue_name" name="venue[name]">
-
-        <%= label_tag :name%>
-        <input type="text" id="venue_name" name="venue[name]">
-
+    <% end %>
     </div>
-
-    </div>
-
-
-
-
-    </div>
+</div>
 
 
 
