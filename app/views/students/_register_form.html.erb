@@ -5,51 +5,57 @@
         <div class="span3">
             <div class="bottom-gap">
                 <%= label_tag :course_types %>
-                <% state_array = State.all.map {|state| [state.name, state.id]} %>
-                <%= select_tag :state, options_for_select(state_array) %>
+                <select id="course_types" name="student[course_types]">
+                    <option value=""></option>
+                    <%= StudentCourse.all.each do |sc| %>
+                        <option value="<%=sc.id%>"><%=sc.type_name%></option>
+                    <% end %>
+                </select>
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :additional_modules %>
                 <select id="additional_modules" name="student[additional_modules]">
                     <option value=""></option>
-                    <option value="1">weeds</option>
+                    <%= AdditionalModule.all.each do |sc| %>
+                        <option value="<%=sc.id%>"><%=sc.type_name%></option>
+                    <% end %>
                 </select>
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :date_enrolled %>
-                <%= text_field_tag :course_date,nil, :class => 'text_field datepicker' %>
+                <input type="text" id="date_enrolled" name="student[enrolled_at]" class="datepicker">
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :first_name %>
-                <%= text_field_tag :first_name,nil, :class => 'text_field' %>
+                <input type="text" id="first_name" name="student[first_name]">
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :middle_name %>
-                <%= text_field_tag :middle_name,nil, :class => 'text_field' %>
+                <input type="text" id="middle_name" name="student[middle_name]">
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :last_name %>
-                <%= text_field_tag :last_name,nil, :class => 'text_field' %>
+                <input type="text" id="last_name" name="student[last_name]">
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :phone %>
-                <%= text_field_tag :phone,nil, :class => 'text_field' %>
+                <input type="text" id="phone" name="student[phone]">
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :mobile %>
-                <%= text_field_tag :mobile,nil, :class => 'text_field' %>
+                <input type="text" id="mobile" name="student[mobile]">
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :email %>
-                <%= text_field_tag :email,nil, :class => 'text_field' %>
+                <input type="text" id="email" name="student[email]">
             </div>
 
             <div class="bottom-gap">
