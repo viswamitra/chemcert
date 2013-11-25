@@ -12,8 +12,8 @@ class Venue < ActiveRecord::Base
 
 
 
-  def self.by_course_date(date)
-    Venue.joins(:courses).where('courses.course_date = ?',date)
+  def self.by_course(id)
+    Venue.joins(:courses).where('courses.id = ?',id)
   end
 
   def self.search(town_id)

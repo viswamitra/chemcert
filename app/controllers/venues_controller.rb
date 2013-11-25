@@ -11,8 +11,8 @@ class VenuesController < ApplicationController
   end
 
   #get /venues/by_course_date.json?course_id=x
-  def by_course_date
-    @venues = Venue.by_course_date(params[:date])
+  def by_course
+    @venues = Venue.by_course(params[:id])
     respond_to do |format|
       format.json {render json: @venues}
     end

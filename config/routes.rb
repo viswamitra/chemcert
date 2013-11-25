@@ -5,7 +5,7 @@ ChemcertBakshi::Application.routes.draw do
   resources :training_organizations, :path => "rtos"
   resources :venues do
     collection do
-      get '/by_course_date' => 'venues#by_course_date'
+      get '/by_course' => 'venues#by_course'
     end
   end
 

@@ -30,6 +30,7 @@ class TrainingOrganizationsController < ApplicationController
         format.json {render action: 'show', status: :created, location: @rto}
       else
         flash[:error] = @rto.errors.full_messages
+        p "-------> #{flash[:error]}"
         format.html { render action: 'new' }
         format.json { render json: @rto.errors, status: :unprocessable_entity }
       end

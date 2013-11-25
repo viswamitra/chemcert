@@ -87,10 +87,10 @@
             dataType: 'JSON',
             success : function(data) {
                 $('#course_dates').empty();
-                $('#course_dates').append("<option value="+data[0].course_date+" selected=selected>"+data[0].course_date+"</option>");
+                $('#course_dates').append("<option value="+data[0].id+" selected=selected>"+data[0].course_date+"</option>");
                 data.shift();
                 $.each(data, function(index, element) {
-                    $('#course_dates').append("<option value="+element.course_date+">"+element.course_date+"</option>");
+                    $('#course_dates').append("<option value="+element.id+">"+element.course_date+"</option>");
                 });
                 getVenuesForCourseDate();
             }
@@ -99,9 +99,9 @@
 
     var getVenuesForCourseDate = function() {
         $.ajax({
-            url : '/venues/by_course_date.json',
+            url : '/venues/by_course.json',
             type : 'get',
-            data : 'date='+$('#course_dates').val(),
+            data : 'id='+$('#course_dates').val(),
             dataType: 'JSON',
             success : function(data) {
                 $('#venues').empty();

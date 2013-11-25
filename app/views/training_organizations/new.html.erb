@@ -2,8 +2,11 @@
 <div class="span5">
     <h3> Add New RTO</h3>
     <% if flash[:error] %>
-    <% flash[:error].each do |f| %>
-    <%= f.inspect  %>
+    <% flash[:error].each  %>
+        <div class="alert alert-danger">
+        <%= f.inspect %>
+        </div>
+
 
     <% end %>
     <% end %>
