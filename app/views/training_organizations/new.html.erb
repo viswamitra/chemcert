@@ -1,6 +1,12 @@
 <%- model_class = TrainingOrganization -%>
 <div class="span5">
     <h3> Add New RTO</h3>
+    <% if flash[:error] %>
+    <% flash[:error].each do |f| %>
+    <%= f.inspect  %>
+
+    <% end %>
+    <% end %>
     <%= render :partial => 'form', :locals => {rto: @rto} %>
 </div>
 
