@@ -74,27 +74,27 @@
 
             <div class="top-gap bottom-gap">
                 <%= label_tag :address %>
-                <input type="text" id="address" name="student[address]" >
+                <input type="text" id="address" name="student[address][address]" >
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :postal_code,nil, :class => 'control-label' %>
                     <input type="text" id="student_postal_code" autocomplete="off" placeholder="Enter Postal Code" >
-                    <input type="hidden" id="student_postal_code_hidden" name="student[postal_code]" />
-                    <input type="hidden" id="course_hidden" name="student[course_id]" value="" />
+                    <input type="hidden" id="student_postal_code_hidden" name="student[address][postal_code]" />
+                    <input type="hidden" id="course_hidden" name="student[course][course_id]" value="" />
 
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :town,nil, :class => 'control-label' %>
-                    <select id="student_town" name="student[town]">
+                    <select id="student_town" name="student[address][town_id]">
                         <option value=""></option>
                     </select>
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :state, nil, :class => 'control-label' %>
-                <select id="student_state" name="student[state]">
+                <select id="student_state" name="student[address][state_id]">
                     <option value=""></option>
                 </select>
             </div>
@@ -105,8 +105,10 @@
 
             <div class="top-gap bottom-gap">
                 <%= label_tag :industry, nil, :class => 'control-label' %>
-                <select id="course" name="course[town]">
+                <select id="course" name="student[course][industry]">
                     <option value=""></option>
+                    <option value="val1">val1</option>
+                    <option value="val2">val2</option>
                 </select>
             </div>
 
@@ -162,7 +164,7 @@
 
             <div class="bottom-gap">
                 <%= label_tag :others_specify %>
-                <input type="text" id="others" name="student[needs][others]" >
+                <input type="text" id="others" name="student[course][needs_specify]" >
             </div>
 
             <div class="bottom-gap-50"></div>
@@ -171,30 +173,32 @@
         <div class="span3">
             <div class="bottom-gap">
                 <%= label_tag :comments %>
-                <textarea rows="3" id="comments" name="student[comments]"></textarea>
+                <textarea rows="3" id="comments" name="student[course][comments]"></textarea>
             </div>
 
 
 
             <div class="bottom-gap">
                 <%= label_tag :course_fee %>
-                <input type="text" id="course_fee" name="student[course_fee]" >
+                <input type="text" id="course_fee" name="student[course][course_fee]" >
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :payment_method,nil, :class => 'control-label' %>
-                <select id="payment_method" name="student[payment_method]">
+                <select id="payment_method" name="student[course][payment_method]">
                     <option value=""></option>
+                    <option value="card">card</option>
+                    <option value="cash">cash</option>
                 </select>
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :payment_date %>
-                <input type="text" id="payment_date" name="student[payment_date]" class="datepicker">
+                <input type="text" id="payment_date" name="student[course][payment_date]" class="datepicker">
             </div>
 
             <div class="bottom-gap row" style="margin-left:0px">
-                <input id="paid" name="student[paid]" type="checkbox" class="pull-left"/>
+                <input id="paid" name="student[course][paid]" type="checkbox" class="pull-left" value="1"/>
                 <label class="pull-left left-gap-10" for="paid">Paid</label>
             </div>
 
@@ -203,24 +207,28 @@
         <div class="span3">
             <div class="bottom-gap">
                 <%= label_tag :current_accreditation %>
-                <input type="text" id="current_accreditation" name="student[current_accreditation]" >
+                <input type="text" id="current_accreditation" name="student[course][current_accreditation]" >
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :current_expiry_date %>
-                <input type="text" id="current_expiry_date" name="student[current_expiry_date]" class="datepicker" >
+                <input type="text" id="current_expiry_date" name="student[course][current_expiry_date]" class="datepicker" >
             </div>
 
             <div class="top-gap bottom-gap">
                 <label for="feedback" id="feedback">How did you hear about Chemcert?</label>
-                <select id="feedback" name="student[feedback]">
+                <select id="feedback" name="student[demo][feedback]">
                     <option value=""></option>
+                    <option value="paper">paper</option>
+                    <option value="news">news</option>
+                    <option value="email">email</option>
+                    <option value="friend">friend</option>
                 </select>
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :other %>
-                <input type="text" id="feedback2" name="student[feedback2]">
+                <input type="text" id="feedback2" name="student[demo][feedback2]">
             </div>
 
             <div class="form-actions">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131126192525) do
+ActiveRecord::Schema.define(version: 20131126214152) do
 
   create_table "additional_modules", force: true do |t|
     t.string   "type_name"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20131126192525) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "course_id",                limit: 8, null: false
+    t.string   "needs_specify"
   end
 
   create_table "courses", force: true do |t|
@@ -157,7 +158,7 @@ ActiveRecord::Schema.define(version: 20131126192525) do
     t.datetime "updated_at"
     t.integer  "student_course_id",     limit: 8, null: false
     t.integer  "addition_module_id",    limit: 8
-    t.integer  "student_bio_data_id",   limit: 8, null: false
+    t.string   "industry"
   end
 
   create_table "student_courses", force: true do |t|
@@ -179,6 +180,7 @@ ActiveRecord::Schema.define(version: 20131126192525) do
     t.string   "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "others_specify"
   end
 
   create_table "student_special_needs", force: true do |t|

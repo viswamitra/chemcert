@@ -18,4 +18,6 @@ class LocationRelation < ActiveRecord::Base
        :state => lr.state.name}
     end
   end
+
+
 end
