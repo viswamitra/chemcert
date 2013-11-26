@@ -60,7 +60,7 @@
 
             <div class="bottom-gap">
                 <%= label_tag :fax %>
-                <%= text_field_tag :fax,nil, :class => 'text_field' %>
+                <input type="text" id="fax" name="student[fax]">
             </div>
 
             <div class="bottom-gap-50"></div>
@@ -74,25 +74,25 @@
 
             <div class="top-gap bottom-gap">
                 <%= label_tag :address %>
-                <%= text_field_tag :current_expiry_date,nil, :class => 'text_field' %>
+                <input type="text" id="address" name="student[address]" >
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :postal_code,nil, :class => 'control-label' %>
-                    <input type="text" id="course_postal_code" autocomplete="off" placeholder="Enter Postal Code" >
-                    <input type="hidden" id="course_postal_code_hidden" name="course[postal_code]" />
+                    <input type="text" id="student_postal_code" autocomplete="off" placeholder="Enter Postal Code" >
+                    <input type="hidden" id="student_postal_code_hidden" name="student[postal_code]" />
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :town,nil, :class => 'control-label' %>
-                    <select id="course_town" name="course[town]">
+                    <select id="student_town" name="student[town]">
                         <option value=""></option>
                     </select>
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :state, nil, :class => 'control-label' %>
-                <select id="course" name="course[town]">
+                <select id="student_state" name="student[state]">
                     <option value=""></option>
                 </select>
             </div>
@@ -108,22 +108,15 @@
                 </select>
             </div>
 
-            <div class="bottom-gap row" style="margin-left:20px">
-                    <input id="special_needs" name="special_needs" type="checkbox" class="pull-left"/>
-                    <label class="pull-left left-gap-10" for="special_needs">Special Needs</label>
-            </div>
-
-
-
             <div class="bottom-gap row" style="margin-left:0px">
                 <div class="bottom-gap pull-left">
-                    <input id="hearing" name="hearing" type="checkbox" class="pull-left"/>
-                    <label class="pull-left left-gap-10" for="hearing">Hearing</label>
+                    <input id="hearing" name="student[needs][hearing]" type="checkbox" class="pull-left" value="1"/>
+                    <label class="pull-left left-gap-10" for="hearing">Hearing/Deaf</label>
                 </div>
 
                 <div class="bottom-gap pull-right" style="margin-right:50px">
-                    <input id="hearing" name="hearing" type="checkbox" class="pull-left"/>
-                    <label class="pull-left left-gap-10" for="hearing">Hearing</label>
+                    <input id="learning" name="student[needs][learning]" type="checkbox" class="pull-left" value="1"/>
+                    <label class="pull-left left-gap-10" for="learning">Learning</label>
                 </div>
             </div>
 
@@ -131,43 +124,43 @@
 
             <div class="bottom-gap row" style="margin-left:0px">
                 <div class="bottom-gap pull-left">
-                    <input id="hearing" name="hearing" type="checkbox" class="pull-left"/>
-                    <label class="control-label pull-left left-gap-10" for="hearing">Hearing</label>
+                    <input id="vision" name="student[needs][vision]" type="checkbox" class="pull-left" value="1"/>
+                    <label class="control-label pull-left left-gap-10" for="vision">Vision</label>
                 </div>
 
                 <div class="bottom-gap pull-right" style="margin-right:50px">
-                    <input id="hearing" name="hearing" type="checkbox" class="pull-left"/>
-                    <label class="control-label pull-left left-gap-10" for="hearing">Hearing</label>
+                    <input id="physical" name="student[needs][physical]" type="checkbox" class="pull-left" value="1"/>
+                    <label class="control-label pull-left left-gap-10" for="physical">Physical</label>
                 </div>
             </div>
 
             <div class="bottom-gap row" style="margin-left:0px">
                 <div class="bottom-gap pull-left">
-                    <input id="hearing" name="hearing" type="checkbox" class="pull-left"/>
-                    <label class="control-label pull-left left-gap-10" for="hearing">Hearing</label>
+                    <input id="mental" name="student[needs][mental]" type="checkbox" class="pull-left" value="1"/>
+                    <label class="control-label pull-left left-gap-10" for="mental">Mental</label>
                 </div>
 
                 <div class="bottom-gap pull-right" style="margin-right:50px">
-                    <input id="hearing" name="hearing" type="checkbox" class="pull-left"/>
-                    <label class="control-label pull-left left-gap-10" for="hearing">Hearing</label>
+                    <input id="medical" name="student[needs][medical]" type="checkbox" class="pull-left" value="1"/>
+                    <label class="control-label pull-left left-gap-10" for="medical">Medical Condition</label>
                 </div>
             </div>
 
             <div class="bottom-gap row" style="margin-left:0px">
                 <div class="bottom-gap pull-left">
-                    <input id="hearing" name="hearing" type="checkbox" class="pull-left"/>
-                    <label class="control-label pull-left left-gap-10" for="hearing">Hearing</label>
+                    <input id="intellectual" name="student[needs][intellectual]" type="checkbox" class="pull-left" value="1"/>
+                    <label class="control-label pull-left left-gap-10" for="intellectual">Intellectual</label>
                 </div>
 
                 <div class="bottom-gap pull-right" style="margin-right:50px">
-                    <input id="hearing" name="hearing" type="checkbox" class="pull-left"/>
-                    <label class="control-label pull-left left-gap-10" for="hearing">Hearing</label>
+                    <input id="brain" name="student[needs][brain]" type="checkbox" class="pull-left" value="1"/>
+                    <label class="control-label pull-left left-gap-10" for="brain">Acquired Brain Impairment</label>
                 </div>
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :others_specify %>
-                <%= text_field_tag :others_specify,nil, :class => 'text_field' %>
+                <input type="text" id="others" name="student[needs][others]" >
             </div>
 
             <div class="bottom-gap-50"></div>
@@ -176,13 +169,14 @@
         <div class="span3">
             <div class="bottom-gap">
                 <%= label_tag :comments %>
-                <textarea rows="3" id="venue_notes" name="students[comments]"></textarea>
+                <textarea rows="3" id="comments" name="student[comments]"></textarea>
             </div>
+
 
 
             <div class="bottom-gap">
                 <%= label_tag :course_fee %>
-                <%= text_field_tag :course_fee,nil, :class => 'text_field' %>
+                <input type="text" id="course_fee" name="student[course_fee]" >
             </div>
 
             <div class="bottom-gap">
@@ -194,11 +188,11 @@
 
             <div class="bottom-gap">
                 <%= label_tag :payment_date %>
-                <%= text_field_tag :payment_date,nil, :class => 'text_field datepicker' %>
+                <input type="text" id="payment_date" name="student[payment_date]" class="datepicker">
             </div>
 
             <div class="bottom-gap row" style="margin-left:0px">
-                <input id="paid" name="paid" type="checkbox" class="pull-left"/>
+                <input id="paid" name="student[paid]" type="checkbox" class="pull-left"/>
                 <label class="pull-left left-gap-10" for="paid">Paid</label>
             </div>
 
@@ -207,12 +201,12 @@
         <div class="span3">
             <div class="bottom-gap">
                 <%= label_tag :current_accreditation %>
-                <%= text_field_tag :first_name,nil, :class => 'text_field' %>
+                <input type="text" id="current_accreditation" name="student[current_accreditation]" >
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :current_expiry_date %>
-                <%= text_field_tag :first_name,nil, :class => 'text_field' %>
+                <input type="text" id="current_expiry_date" name="student[current_expiry_date]" class="datepicker" >
             </div>
 
             <div class="top-gap bottom-gap">
@@ -224,7 +218,7 @@
 
             <div class="bottom-gap">
                 <%= label_tag :other %>
-                <%= text_field_tag :other,nil, :class => 'text_field' %>
+                <input type="text" id="feedback2" name="student[feedback2]">
             </div>
 
             <div class="form-actions">
@@ -241,6 +235,63 @@
     <% end %>
     </div>
 </div>
+
+<script type="text/javascript">
+    $('#student_postal_code').typeahead(
+            {
+                minLength: 2,
+                source : function(query, process) {
+                    map = {};
+                    postal_codes = [];
+                    $.ajax({
+                        url : '/postal_codes/code.json',
+                        type : 'get',
+                        data : 'code='+query,
+                        dataType: 'JSON',
+                        success : function(data) {
+                            $.each(data, function(index, element) {
+                                postal_codes.push(element.code);
+                                map[element.code] = element;
+                            });
+                            process(postal_codes);
+                        }
+                    });
+                },
+                updater : function(item) {
+                    $('#student_postal_code_hidden').val(map[item].id);
+                    $('#student_postal_code').val(map[item].name);
+                    return item;
+                }
+
+            }
+    );
+
+    $('#student_postal_code').change(function(){
+        console.log("inside postal_code changed");
+        postal_code = $(this).val();
+        console.log(postal_code);
+        $.ajax({
+            url : '/location_relations/postal_code.json',
+            type : 'get',
+            data : 'postal_code='+postal_code,
+            dataType: 'JSON',
+            success : function(data) {
+                $('#student_town').empty();
+                $('#student_state').empty();
+                $('#student_town').append("<option value="+data[0].town_id+" selected=selected>"+data[0].town+"</option>");
+                $('#student_state').append("<option value="+data[0].state_id+" selected=selected>"+data[0].state+"</option>");
+                data.shift();
+                $.each(data, function(index, element) {
+                    $('#student_town').append("<option value="+element.town_id+">"+element.town+"</option>");
+                    $('#student_state').append("<option value="+element.state_id+">"+element.state+"</option>");
+                });
+
+            }
+        });
+    });
+
+
+</script>
 
 
 
