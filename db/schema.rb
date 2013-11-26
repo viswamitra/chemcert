@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131125182631) do
+ActiveRecord::Schema.define(version: 20131126175031) do
 
   create_table "additional_modules", force: true do |t|
     t.string   "type_name"
@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(version: 20131125182631) do
   end
 
   create_table "student_course_details", force: true do |t|
-    t.integer  "student_id",            limit: 8, null: false
+    t.string   "student_id",                      null: false
     t.integer  "course_id",             limit: 8, null: false
     t.datetime "enrolled_at"
     t.string   "result"
@@ -156,12 +156,14 @@ ActiveRecord::Schema.define(version: 20131125182631) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "student_course_id",     limit: 8, null: false
+    t.integer  "addition_module_id",    limit: 8
   end
 
   create_table "student_courses", force: true do |t|
     t.string   "type_name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "addition_module_id", limit: 8
   end
 
   create_table "student_demographies", force: true do |t|
@@ -183,13 +185,6 @@ ActiveRecord::Schema.define(version: 20131125182631) do
     t.integer "student_id",      limit: 8, null: false
     t.integer "special_need_id", limit: 8, null: false
   end
-
-  create_table "students", force: true do |t|
-    t.string "student_id"
-    t.string "usi_id"
-  end
-
-  add_index "students", ["student_id"], name: "index_students_on_student_id", unique: true, using: :btree
 
   create_table "towns", force: true do |t|
     t.string   "name"

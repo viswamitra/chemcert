@@ -81,6 +81,8 @@
                 <%= label_tag :postal_code,nil, :class => 'control-label' %>
                     <input type="text" id="student_postal_code" autocomplete="off" placeholder="Enter Postal Code" >
                     <input type="hidden" id="student_postal_code_hidden" name="student[postal_code]" />
+                    <input type="hidden" id="course_hidden" name="student[course_id]" value="" />
+
             </div>
 
             <div class="bottom-gap">
@@ -237,7 +239,9 @@
 </div>
 
 <script type="text/javascript">
-    $('#student_postal_code').typeahead(
+
+
+       $('#student_postal_code').typeahead(
             {
                 minLength: 2,
                 source : function(query, process) {
@@ -267,7 +271,8 @@
     );
 
     $('#student_postal_code').change(function(){
-        console.log("inside postal_code changed");
+        //adding course here as well.
+        console.log($('#course_dates').val());
         postal_code = $(this).val();
         console.log(postal_code);
         $.ajax({
@@ -289,7 +294,6 @@
             }
         });
     });
-
 
 </script>
 

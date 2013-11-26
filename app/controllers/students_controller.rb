@@ -3,9 +3,12 @@ class StudentsController < ApplicationController
 
   def register
 
+
   end
 
   def enroll
-    render :text => "hello"
+    @students = params[:student]
+    render text: @students
+    @student = Student
   end
 end
