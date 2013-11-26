@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131126175031) do
+ActiveRecord::Schema.define(version: 20131126192525) do
 
   create_table "additional_modules", force: true do |t|
     t.string   "type_name"
@@ -107,7 +107,6 @@ ActiveRecord::Schema.define(version: 20131126175031) do
   end
 
   create_table "student_biodata", force: true do |t|
-    t.integer  "student_id",    limit: 8, null: false
     t.string   "gender"
     t.string   "first_name"
     t.string   "middle_name"
@@ -119,6 +118,7 @@ ActiveRecord::Schema.define(version: 20131126175031) do
     t.string   "fax"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "student_id",    limit: 8, null: false
   end
 
   create_table "student_course_detail_histories", force: true do |t|
@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(version: 20131126175031) do
   end
 
   create_table "student_course_details", force: true do |t|
-    t.string   "student_id",                      null: false
+    t.integer  "student_id",            limit: 8, null: false
     t.integer  "course_id",             limit: 8, null: false
     t.datetime "enrolled_at"
     t.string   "result"
@@ -157,13 +157,13 @@ ActiveRecord::Schema.define(version: 20131126175031) do
     t.datetime "updated_at"
     t.integer  "student_course_id",     limit: 8, null: false
     t.integer  "addition_module_id",    limit: 8
+    t.integer  "student_bio_data_id",   limit: 8, null: false
   end
 
   create_table "student_courses", force: true do |t|
     t.string   "type_name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "addition_module_id", limit: 8
   end
 
   create_table "student_demographies", force: true do |t|
@@ -184,6 +184,12 @@ ActiveRecord::Schema.define(version: 20131126175031) do
   create_table "student_special_needs", force: true do |t|
     t.integer "student_id",      limit: 8, null: false
     t.integer "special_need_id", limit: 8, null: false
+  end
+
+  create_table "students", force: true do |t|
+    t.string   "student_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "towns", force: true do |t|

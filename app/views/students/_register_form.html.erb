@@ -5,7 +5,7 @@
         <div class="span3">
             <div class="bottom-gap">
                 <%= label_tag :course_types %>
-                <select id="course_types" name="student[course_types]">
+                <select id="course_types" name="student[course][course_types]">
                     <option value=""></option>
                     <%= StudentCourse.all.each do |sc| %>
                         <option value="<%=sc.id%>"><%=sc.type_name%></option>
@@ -15,7 +15,7 @@
 
             <div class="bottom-gap">
                 <%= label_tag :additional_modules %>
-                <select id="additional_modules" name="student[additional_modules]">
+                <select id="additional_modules" name="student[course][additional_modules]">
                     <option value=""></option>
                     <%= AdditionalModule.all.each do |sc| %>
                         <option value="<%=sc.id%>"><%=sc.type_name%></option>
@@ -25,42 +25,42 @@
 
             <div class="bottom-gap">
                 <%= label_tag :date_enrolled %>
-                <input type="text" id="date_enrolled" name="student[enrolled_at]" class="datepicker">
+                <input type="text" id="date_enrolled" name="student[course][enrolled_at]" class="datepicker">
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :first_name %>
-                <input type="text" id="first_name" name="student[first_name]">
+                <input type="text" id="first_name" name="student[bio][first_name]">
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :middle_name %>
-                <input type="text" id="middle_name" name="student[middle_name]">
+                <input type="text" id="middle_name" name="student[bio][middle_name]">
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :last_name %>
-                <input type="text" id="last_name" name="student[last_name]">
+                <input type="text" id="last_name" name="student[bio][last_name]">
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :phone %>
-                <input type="text" id="phone" name="student[phone]">
+                <input type="text" id="phone" name="student[bio][phone]">
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :mobile %>
-                <input type="text" id="mobile" name="student[mobile]">
+                <input type="text" id="mobile" name="student[bio][mobile]">
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :email %>
-                <input type="text" id="email" name="student[email]">
+                <input type="text" id="email" name="student[bio][email]">
             </div>
 
             <div class="bottom-gap">
                 <%= label_tag :fax %>
-                <input type="text" id="fax" name="student[fax]">
+                <input type="text" id="fax" name="student[bio][fax]">
             </div>
 
             <div class="bottom-gap-50"></div>
