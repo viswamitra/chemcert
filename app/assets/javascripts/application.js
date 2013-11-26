@@ -18,7 +18,7 @@
 //= require jquery.ui.datepicker
 //= require jquery.ui.tabs
 //= require select2
-//= require parsley.min
+//= require parsley
 //= require_tree .
 
 
