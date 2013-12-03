@@ -14,10 +14,14 @@ class StudentCourseDetail < ActiveRecord::Base
     begin
       ActiveRecord::Base.transaction do
         id = Student.create_unique_id
+        Student.create!(:student_id => id)
+        StudentCourseDetail
 
+
+        true #return true here
       end
     rescue ActiveRecord::RecordInvalid => e
-      return false
+      return false #in case of exception return false
     end
   end
 
