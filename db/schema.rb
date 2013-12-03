@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131126214152) do
+ActiveRecord::Schema.define(version: 20131203212348) do
 
   create_table "additional_modules", force: true do |t|
     t.string   "type_name"
@@ -86,7 +86,7 @@ ActiveRecord::Schema.define(version: 20131126214152) do
   add_index "postal_codes", ["code"], name: "index_postal_codes_on_code", unique: true, using: :btree
 
   create_table "special_needs", force: true do |t|
-    t.string   "type"
+    t.string   "need_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -102,7 +102,7 @@ ActiveRecord::Schema.define(version: 20131126214152) do
     t.string   "address"
     t.integer  "location_relation_id",      limit: 8, null: false
     t.string   "home_address"
-    t.integer  "home_location_relation_id", limit: 8, null: false
+    t.integer  "home_location_relation_id", limit: 8
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(version: 20131126214152) do
     t.integer  "student_course_id",     limit: 8, null: false
     t.integer  "addition_module_id",    limit: 8
     t.string   "industry"
+    t.string   "needs_specify"
   end
 
   create_table "student_courses", force: true do |t|
