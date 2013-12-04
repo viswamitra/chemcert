@@ -11,7 +11,7 @@ class StudentCourseDetail < ActiveRecord::Base
   belongs_to :course
   belongs_to :additional_module
 
-  def self.enroll_student(courses, bio, address, needs, demo)
+  def self.enroll_student(courses, bio, address, needs, demo, enquiry)
     begin
       ActiveRecord::Base.transaction do
         id = Student.create_unique_id
@@ -31,7 +31,8 @@ class StudentCourseDetail < ActiveRecord::Base
         :payment_date => courses["payment_date"],
         :paid => courses["paid"],
         :current_accreditation => courses["current_accreditation"],
-        :current_expiry_date => courses["current_expiry_date"]
+        :current_expiry_date => courses["current_expiry_date"],
+        :enquiry => enquiry
         )
 
         StudentBiodata.create!(:first_name => bio["first_name"],
@@ -49,15 +50,10 @@ class StudentCourseDetail < ActiveRecord::Base
         StudentDemography.create!(:hear_about_chemcert => demo["feedback"],
         :others_specify => demo["feedback2"], :student_id => student.id, :demograhics_id => 1)
 
-
-
-
-
-        true #return true here
+        student
       end
     rescue ActiveRecord::ActiveRecordError => e
-      p "----> Exception #{e}"
-      return false #in case of exception return false
+      return nil #in case of exception return false
     end
   end
 

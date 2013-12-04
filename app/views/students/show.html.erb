@@ -1,0 +1,25 @@
+<div class="span12">
+    <h3> Listing Student</h3>
+    <table class="table table-striped">
+        <tr>
+            <th> FirstName </th>
+            <th> LastName</th>
+            <th> StudentId</th>
+            <th>  </th>
+        </tr>
+
+        <tr>
+            <td> <%=@student.try(:student_id) ? @student.student_id : "-" %></td>
+            <td> <%= link_to "Back", students_path, :class => 'btn btn-mini'  %> </td>
+        </tr>
+
+
+
+    </table>
+</div>
+
+
+
+
+
+
