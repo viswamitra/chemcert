@@ -4,7 +4,7 @@ class StudentCourseDetail < ActiveRecord::Base
                   :enrolled_at, :student_course_id, :addition_module_id,
                   :industry, :needs_specify, :comments,
                   :course_fee, :payment_method, :payment_date,
-                  :paid, :current_accreditation, :current_expiry_date
+                  :paid, :current_accreditation, :current_expiry_date, :enquiry
 
   belongs_to :student
   belongs_to :student_course
