@@ -10,10 +10,24 @@ class Student < ActiveRecord::Base
   has_many :student_special_needs
 
 
+  #scopes
+  scope :by_first_name, lambda{|name| Student.joins(:student_biodata).where('student_biodata.first_name = ?',name) if name.present?}
+  scope :by_last_name, lambda{|name| Student.joins(:student_biodata).where('student_biodata.last_name = ?',name) if name.present?}
+  scope :by_student_id, lambda{|id| Student.find_by_student_id(id) if id.present?}
+  scope :by_enquiry, lambda{|enquiry| Student.joins(:student_course_details).where('student_course_details.enquiry = ?',enquiry) if enquiry.present?}
+
+
+
   def self.create_unique_id
+    #should modify this to accomodate a true random number.
     sql = ActiveRecord::Base.connection();
     num = sql.execute("select auto_increment from information_schema.tables where table_schema=database() and table_name = 'students'").to_a.first.first
     "ST"+num.to_s
+  end
+
+  def self.search(first_name, last_name, student_id, enquiry)
+    return [] unless (first_name.present? || last_name.present? || student_id.present? || enquiry.present? )
+    Student.by_first_name(first_name).merge(by_last_name(last_name)).merge(by_student_id(student_id)).merge(by_enquiry(enquiry))
   end
 
 end

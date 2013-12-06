@@ -36,6 +36,7 @@ class Course < ActiveRecord::Base
   end
 
   def self.search_by_schedule(start_date, end_date, state_id)
+     return [] unless (start_date.present? || end_date.present? || state_id.present?)
      start_date = Time.parse(start_date).strftime('%Y-%m-%d') if start_date.present?
      end_date = Time.parse(end_date).strftime('%Y-%m-%d') if end_date.present?
      Course.between_dates(start_date, end_date).merge(by_state_id(state_id))

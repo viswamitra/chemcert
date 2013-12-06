@@ -30,6 +30,6 @@ class StudentsController < ApplicationController
   end
 
   def search
-    @students = StudentCourseDetail.search(params[:first_name], params[:last_name], params[:student_id])
+    @students = Student.search(params[:first_name], params[:last_name], params[:student_id], params[:enquiry])
   end
 end

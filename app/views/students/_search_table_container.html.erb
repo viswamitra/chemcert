@@ -1,0 +1,19 @@
+<script>
+    //  Here we will have logic which will populate the info window with the js.
+    // initially, it should say 'Find course'
+    // on result,
+    // if there are no errors,
+    // then change info to - search result number.
+    // if there are errors then do not render the course_table
+    <%if @students.size > 0 %>
+    CHEMCERT.utils.ch_message.add("Listing Students", "info")
+    <% else %>
+    CHEMCERT.utils.ch_message.add("No Students found", "info");
+
+    <% end %>
+</script>
+
+<% if @students.size > 0 %>
+    <%= render 'students_table' %>
+<% end %>
+

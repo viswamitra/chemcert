@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="span12">
+        <table class="table table-striped">
+            <tr>
+                <th> CT Code </th>
+                <th> Date </th>
+                <th> Town </th>
+                <th> State</th>
+                <th> Trainer</th>
+                <th> Initials </th>
+                <th> Refreshers </th>
+                <th> Weeds </th>
+                <th> Total </th>
+                <th> venue </th>
+                <th>  </th>
+                <th>  </th>
+            </tr>
+
+            <% @courses.each do |course| %>
+                <tr>
+                    <td> <%= course.course_code %></td>
+                    <td> <%= l course.course_date %></td>
+                    <td> <%= course.location_relation.town.name %></td>
+                    <td> <%= course.location_relation.state.name %></td>
+                    <td> <%= course.trainer.name %></td>
+                    <td> <%= 2 %></td>
+                    <td> <%= 2 %></td>
+                    <td> <%= 2 %></td>
+                    <td> <%= 2 %></td>
+                    <td> <%= course.venue.name %></td>
+                    <td> <%= link_to "Show", course, :class => 'btn btn-primary btn-mini'%></td>
+                    <td> <%= link_to "Edit", edit_course_path(course), :class => 'btn btn-mini' %></td>
+                    </td>
+                </tr>
+            <% end %>
+        </table>
+    </div>
+</div>
