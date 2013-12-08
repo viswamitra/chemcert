@@ -11,15 +11,16 @@
     </tr>
 
 
+    <% @course.each do |course| %>
     <tr>
-        <td> </td>
-        <td> </td>
-        <td> </td>
-        <td> </td>
-        <td> </td>
-        <td> </td>
-        <td> </td>
-        <td> </td>
+        <td> <%=course.course_code %></td>
+        <td> <%=course.trainer.name %></td>
+        <td> <%=course.location_relation.town.name %></td>
+        <td> <%=course.location_relation.state.name %></td>
+        <td> <%=course.student_course_details.where(:result => 'AQFII').size %></td>
+        <td> <%=course.student_course_details.where(:result => 'AQFIII').size %></td>
+        <td> <%=course.student_course_details.where(:result => 'AQFIV').size %></td>
+        <td> <%=course.student_course_details.where(:result => 'NYC').size %></td>
     </tr>
-
+    <% end %>
 </table>

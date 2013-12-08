@@ -5,7 +5,7 @@
         <div class="control-group" class="span12">
             <label class="control-label" for="proforma_received">Proforma received</label>
             <div class="controls">
-                <input type="text" id="proforma_received" name="course[course_received]" class="datepicker"/>
+                <input type="text" id="proforma_received" name="course[proforma_received]" class="datepicker"/>
             </div>
         </div>
 
@@ -13,6 +13,7 @@
             <label class="control-label" for="course_received">Course received </label>
             <div class="controls">
                 <input type="text" id="course_received" name="course[course_received]" class="datepicker"/>
+                <input type="hidden" id="hidden_course_code" name="course[course_code]" value="<%= params[:course_code]%>"/>
             </div>
         </div>
 
@@ -97,8 +98,8 @@
             <div class="controls">
                 <select id="course_status" name="course[status]">
                     <option value=""></option>
-                    <option value="val1">open</option>
-                    <option value="val2">closed</option>
+                    <option value="0">open</option>
+                    <option value="1">closed</option>
                 </select>
             </div>
         </div>
@@ -114,7 +115,7 @@
         <div class="control-group" class="span12">
             <%= label :course_date, "Find Date", :class => "invisible" %>
             <div class="controls">
-                <%= submit_tag "Save Course Details", :class => 'btn btn-primary', :name => nil %>
+                <%= submit_tag "Save Course Details", :class => 'btn btn-primary', :id => 'save_course' %>
             </div>
         </div>
 
@@ -122,5 +123,13 @@
 </form>
 </div>
 
+
+<script type="text/javascript">
+    $('#course_code').change(function(){
+       $('#hidden_course_code').val($('#course_code').val());
+        alert($('#hidden_course_code').val());
+    });
+
+</script>
 
 

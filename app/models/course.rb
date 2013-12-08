@@ -1,7 +1,7 @@
 class Course < ActiveRecord::Base
 
   attr_accessible :location_relation_id, :training_organization_id,:is_correspondence, :course_code,
-                  :course_date, :venue_id, :trainer_id
+                  :course_date, :venue_id, :trainer_id, :course_status
 
   belongs_to :training_organization
   belongs_to :location_relation
@@ -17,6 +17,7 @@ class Course < ActiveRecord::Base
   scope :by_state_id, lambda {|state_id| Course.joins(:location_relation => :state).merge(State.by_id(state_id)) if state_id.present?}
   scope :by_start_date, lambda {|date| Course.where('course_date >= ?',date) if date.present?}
   scope :by_end_date, lambda {|date| Course.where('course_date <= ?',date) if date.present?}
+
 
 
 

@@ -61,12 +61,23 @@ class CoursesController < ApplicationController
 
   #get /courses/process
   def course_process
+
     @course = Course.search_for_processing(params[:course_code])
+
   end
   #
 
   #post /courses/process
   def course_post_process
+    @course = CourseProcessDetail.create_process_detail(params[:course])
+
+      if @course.present?
+        flash.now['notice'] = "created with some details"
+        redirect_to :action => :course_process
+      else
+        flash[:notice] = "something went wrong, try again."
+        render action: 'course_process'
+      end
 
   end
 

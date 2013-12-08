@@ -1,12 +1,15 @@
 class StudentsController < ApplicationController
 
-
   def register
     # same as new
   end
 
   def show
     @student = Student.find(params[:id])
+  end
+
+  def edit
+    render text: "something"
   end
 
   #equivalent of create

@@ -1,4 +1,4 @@
-<% if @course.size > 0 %>
-    <%= render 'course_ajax_filler_table' %>
+<% if @course.present? %>
+        <%= render 'course_ajax_filler_table' %>
 <% end %>
 

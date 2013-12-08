@@ -3,13 +3,18 @@
         <th> First Name</th>
         <th> Last Name </th>
         <th> Course Status </th>
+        <th> </th>
     </tr>
 
-
+    <% @course.each do |course| %>
+        <% course.student_course_details.each do |course_detail| %>
     <tr>
-        <td> </td>
-        <td> </td>
-        <td> </td>
+        <% student = course_detail.student %>
+        <td><%= course_detail.student.student_biodata.first_name %></td>
+        <td><%= course_detail.student.student_biodata.last_name %></td>
+        <td><%= course_detail.paid == 1 ? "paid":"not paid" %></td>
+        <td> <%= link_to "Edit", edit_student_path(student), :class => 'btn btn-mini' %></td>
     </tr>
-
+        <% end %>
+    <% end %>
 </table>
