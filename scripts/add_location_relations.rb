@@ -10,7 +10,7 @@ class AddLocationRelations
 
 
 
-            p = PostalCode.create(:code => postal_code.to_s)
+          p = PostalCode.create(:code => postal_code.to_s)
           t = Town.create(:name => town.to_s)
           s = State.create(:name => state.to_s)
           #

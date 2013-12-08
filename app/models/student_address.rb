@@ -3,4 +3,5 @@ class StudentAddress < ActiveRecord::Base
 
 
   belongs_to :student
+  belongs_to :location_relation
 end

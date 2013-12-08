@@ -3,34 +3,30 @@
         <table class="table table-striped">
             <tr>
                 <th> CT Code </th>
-                <th> Date </th>
+                <th> Course Date </th>
+                <th> Name </th>
+                <th> Address </th>
                 <th> Town </th>
-                <th> State</th>
-                <th> Trainer</th>
-                <th> Initials </th>
-                <th> Refreshers </th>
-                <th> Weeds </th>
-                <th> Total </th>
-                <th> venue </th>
-                <th>  </th>
+                <th> Postal Code </th>
+                <th> email </th>
+                <th> mobile </th>
                 <th>  </th>
             </tr>
 
-            <% @courses.each do |course| %>
+            <% @students.each do |student| %>
                 <tr>
-                    <td> <%= course.course_code %></td>
-                    <td> <%= l course.course_date %></td>
-                    <td> <%= course.location_relation.town.name %></td>
-                    <td> <%= course.location_relation.state.name %></td>
-                    <td> <%= course.trainer.name %></td>
-                    <td> <%= 2 %></td>
-                    <td> <%= 2 %></td>
-                    <td> <%= 2 %></td>
-                    <td> <%= 2 %></td>
-                    <td> <%= course.venue.name %></td>
-                    <td> <%= link_to "Show", course, :class => 'btn btn-primary btn-mini'%></td>
-                    <td> <%= link_to "Edit", edit_course_path(course), :class => 'btn btn-mini' %></td>
+                    <% student.student_course_details.each do |course_detail| %>
+                    <td> <%= course_detail.course.course_code %></td>
+                    <td> <%= l course_detail.course.course_date %></td>
+                    <td> <%= student.student_biodata.first_name %></td>
+                    <td> <%= student.student_addresses.first.address %></td>
+                    <td> <%= student.student_addresses.first.location_relation.town.name %></td>
+                    <td> <%= student.student_addresses.first.location_relation.postal_code.code %></td>
+                    <td> <%= student.student_biodata.email %></td>
+                    <td> <%= student.student_biodata.mobile %></td>
+                    <td> <%= link_to "Edit", edit_course_path(student), :class => 'btn btn-mini' %></td>
                     </td>
+                    <% end %>
                 </tr>
             <% end %>
         </table>
