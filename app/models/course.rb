@@ -58,9 +58,10 @@ class Course < ActiveRecord::Base
     where("course_code like ?","%#{code}%")
   end
 
-
-
-
+  #to include student_course_details also.
+  def self.search_for_processing(code)
+    Course.includes(:student_course_details).where(:course_code => code)
+  end
 
 end
 

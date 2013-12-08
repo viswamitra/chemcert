@@ -61,10 +61,11 @@ class CoursesController < ApplicationController
 
   #get /courses/process
   def course_process
-
+    @course = Course.search_for_processing(params[:course_code])
   end
   #
-  ##post /courses/process
+
+  #post /courses/process
   def course_post_process
 
   end

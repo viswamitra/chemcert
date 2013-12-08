@@ -11,6 +11,7 @@ class StudentCourseDetail < ActiveRecord::Base
   belongs_to :course
   belongs_to :additional_module
 
+
   def self.enroll_student(courses, bio, address, needs, demo, enquiry)
     begin
       ActiveRecord::Base.transaction do

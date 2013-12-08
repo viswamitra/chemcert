@@ -9,20 +9,23 @@
 
 
     <!--course ajax form-->
-    <div class="row">
-            <div class="span3">
-                <input class="text_field" id="course_code" name="course_code" placeholder="Enter course code" type="text" />
-            </div>
+    <form accept-charset="UTF-8" action="/courses/process" class="form-horizontal" method="get">
+        <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+        <div class="row">
+                <div class="span3">
+                    <input class="text_field" id="course_code" name="course_code" placeholder="Enter course code" type="text" />
+                </div>
 
-            <div class="span3">
-                <input class="btn btn-primary" type="submit" value="Find course" />
-            </div>
-    </div>
+                <div class="span3">
+                    <%= submit_tag "Find course", :class => 'btn btn-primary', :name => nil %>
+                </div>
+        </div>
+    </form>
 
     <!--course ajax table filler-->
     <div class="row">
         <div class="span12">
-            <%= render 'course_ajax_filler' %>
+            <%= render 'course_ajax_filler_table_container' %>
         </div>
     </div>
 
@@ -42,14 +45,16 @@
     <!--header-->
     <div class="row">
         <div class="span12">
-            <h6>Table</h6>
+            <h3>List of Student Names</h3>
         </div>
     </div>
 
     <!--list of student names-->
     <div class="row">
-        <div class="span12">
-            <h6>Table</h6>
+        <div class="span6">
+            <%= render 'course_student_payment_table_container' %>
         </div>
     </div>
+
+    <div class="bottom-gap-50"></div>
 </div>
