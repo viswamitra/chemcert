@@ -1,0 +1,126 @@
+<div class="row">
+<form accept-charset="UTF-8" action="/courses/process" class="form-horizontal" method="post">
+    <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+    <div class="span6">
+        <div class="control-group" class="span12">
+            <label class="control-label" for="proforma_received">Proforma received</label>
+            <div class="controls">
+                <input type="text" id="proforma_received" name="course[course_received]" class="datepicker"/>
+            </div>
+        </div>
+
+        <div class="control-group" class="span12">
+            <label class="control-label" for="course_received">Course received </label>
+            <div class="controls">
+                <input type="text" id="course_received" name="course[course_received]" class="datepicker"/>
+            </div>
+        </div>
+
+        <div class="control-group" class="span12">
+            <label class="control-label" for="course_finish_time">Course finish time</label>
+            <div class="controls">
+                <input type="text" id="course_finish_time" name="course[course_finish_time]"/>
+            </div>
+        </div>
+
+        <div class="control-group" class="span12">
+            <label class="control-label" for="venue_rating">Venue Rating</label>
+            <div class="controls">
+                <input type="text" id="venue_rating" name="course[venue_rating]"/>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="t4_received">T4 received</label>
+            <div class="controls">
+                <input name="course[t4_received]" type="hidden" value="0" />
+                <input id="t4_received" name="course[t4_received]" type="checkbox" value="1" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="declaration_form">Student Declaration form signed</label>
+            <div class="controls">
+                <input name="course[declaration_form_signed]" type="hidden" value="0" />
+                <input id="declaration_form" name="course[declaration_form_signed]" type="checkbox" value="1" />
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label class="control-label" for="enrolment_form">Enrolment Form Signed</label>
+            <div class="controls">
+                <input name="course[enrolment_form_signed]" type="hidden" value="0" />
+                <input id="enrolment_form" name="course[enrolment_form_signed]" type="checkbox" value="1" />
+            </div>
+        </div>
+
+        <div class="control-group" class="span12">
+            <label class="control-label" for="inhouse_client">Inhouse Client Name</label>
+            <div class="controls">
+                <input type="text" id="inhouse_client" name="course[inhouse_client_name]"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="span6">
+
+        <div class="control-group" class="span12">
+            <label class="control-label" for="cash_received">Cash received</label>
+            <div class="controls">
+                <input type="text" id="cash_received" name="course[cash_received]"/>
+            </div>
+        </div>
+
+        <div class="control-group" class="span12">
+            <label class="control-label" for="trainer_invoice">Trainer Invoice PO</label>
+            <div class="controls">
+                <input type="text" id="trainer_invoice" name="course[trainer_invoice]"/>
+            </div>
+        </div>
+
+        <div class="control-group" class="span12">
+            <label class="control-label" for="trainer_payment">Trainer Payment Amount</label>
+            <div class="controls">
+                <input type="text" id="trainer_payment" name="course[trainer_payment]"/>
+            </div>
+        </div>
+
+        <div class="control-group" class="span12">
+            <label class="control-label" for="enrolment_center_invoice">Enrolment center invoice</label>
+            <div class="controls">
+                <input type="text" id="enrolment_center_invoice" name="course[enrolment_center_invoice]"/>
+            </div>
+        </div>
+
+        <div class="control-group" class="span12">
+            <label class="control-label" for="enrolment_center_invoice">Course status</label>
+            <div class="controls">
+                <select id="course_status" name="course[status]">
+                    <option value=""></option>
+                    <option value="val1">open</option>
+                    <option value="val2">closed</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="control-group" class="span12">
+            <label class="control-label" for="course_comments">Course Comments</label>
+            <div class="controls">
+                <textarea rows="3" id="course_comments" name="course[comments]"></textarea>
+            </div>
+        </div>
+
+
+        <div class="control-group" class="span12">
+            <%= label :course_date, "Find Date", :class => "invisible" %>
+            <div class="controls">
+                <%= submit_tag "Save Course Details", :class => 'btn btn-primary', :name => nil %>
+            </div>
+        </div>
+
+    </div>
+</form>
+</div>
+
+
+

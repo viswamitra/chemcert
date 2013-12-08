@@ -2,9 +2,8 @@
     <div class="span12">
         <table class="table table-striped">
             <tr>
-                <th> CT Code </th>
-                <th> Course Date </th>
                 <th> Name </th>
+                <th> DOB </th>
                 <th> Address </th>
                 <th> Town </th>
                 <th> Postal Code </th>
@@ -15,10 +14,8 @@
 
             <% @students.each do |student| %>
                 <tr>
-                    <% student.student_course_details.each do |course_detail| %>
-                    <td> <%= course_detail.course.course_code %></td>
-                    <td> <%= l course_detail.course.course_date %></td>
                     <td> <%= student.student_biodata.first_name %></td>
+                    <td> <%= student.student_biodata.try(:date_of_birth) ? student.student_biodata.date_of_birth : "-"  %></td>
                     <td> <%= student.student_addresses.first.address %></td>
                     <td> <%= student.student_addresses.first.location_relation.town.name %></td>
                     <td> <%= student.student_addresses.first.location_relation.postal_code.code %></td>
@@ -26,7 +23,6 @@
                     <td> <%= student.student_biodata.mobile %></td>
                     <td> <%= link_to "Edit", edit_course_path(student), :class => 'btn btn-mini' %></td>
                     </td>
-                    <% end %>
                 </tr>
             <% end %>
         </table>

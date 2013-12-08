@@ -15,6 +15,8 @@ ChemcertBakshi::Application.routes.draw do
       get '/schedule' => 'courses#schedule'
       get '/status' => 'courses#status'
       get '/by_town' => 'courses#by_town'
+      get '/process' => 'courses#course_process'
+      post '/process' => 'courses#course_post_process'
     end
   end
 

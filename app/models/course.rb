@@ -7,6 +7,7 @@ class Course < ActiveRecord::Base
   belongs_to :location_relation
   belongs_to :venue
   belongs_to :trainer
+  has_many :student_course_details
 
   has_one :course_process_detail
 

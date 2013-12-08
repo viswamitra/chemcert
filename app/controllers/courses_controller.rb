@@ -1,7 +1,7 @@
 class CoursesController < ApplicationController
 
 
-  #get /towns/name/:name.json
+
   def by_code
     @course = Course.by_matching_code(params[:code])
     respond_to do |format|
@@ -9,6 +9,7 @@ class CoursesController < ApplicationController
     end
   end
 
+  #get /towns/name/:name.json
   def by_town
     @courses = Course.by_town_id(params[:id])
     respond_to do |format|
@@ -36,7 +37,7 @@ class CoursesController < ApplicationController
     @course = Course.find(params[:id])
     respond_to do |format|
       format.html {render 'show'}
-      format.json {render json: @course}
+      format.json {render json: @course.to_json(include: :student_course_details)}
     end
   end
 
@@ -56,6 +57,16 @@ class CoursesController < ApplicationController
     @state_selected = @course.location_relation.state
     @town_selected = @course.location_relation.town
     @course_code = @course.course_code
+  end
+
+  #get /courses/process
+  def course_process
+
+  end
+  #
+  ##post /courses/process
+  def course_post_process
+
   end
 
   #post /courses
