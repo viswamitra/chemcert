@@ -9,7 +9,7 @@ class StudentsController < ApplicationController
   end
 
   def edit
-    render text: "something"
+    @student = Student.find(params[:id])
   end
 
   #equivalent of create
