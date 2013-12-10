@@ -32,6 +32,12 @@ class StudentsController < ApplicationController
     end
   end
 
+  #PATCH/PUT students/id/update
+  def update
+    student = Student.find(params[:id])
+    # here update the student attributes
+  end
+
   def search
     @students = Student.search(params[:first_name], params[:last_name], params[:student_id], params[:enquiry], params[:state])
   end

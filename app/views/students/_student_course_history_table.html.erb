@@ -1,0 +1,25 @@
+<table class="table table-striped">
+    <tr>
+        <th> CT Code </th>
+        <th> Trainer </th>
+        <th> Town </th>
+        <th> State </th>
+        <th> AQF II </th>
+        <th> AQF III </th>
+        <th> AQF IV </th>
+        <th> NYC </th>
+    </tr>
+
+    <tr>
+        <td> </td>
+        <td> <%=course.trainer.name %></td>
+        <td> <%=course.location_relation.town.name %></td>
+        <td> <%=course.location_relation.state.name %></td>
+        <td> <%=course.student_course_details.where(:result => 'AQFII').size %></td>
+        <td> <%=course.student_course_details.where(:result => 'AQFIII').size %></td>
+        <td> <%=course.student_course_details.where(:result => 'AQFIV').size %></td>
+        <td> <%=course.student_course_details.where(:result => 'NYC').size %></td>
+    </tr>
+
+
+</table>

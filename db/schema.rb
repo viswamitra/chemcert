@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131203212348) do
+ActiveRecord::Schema.define(version: 20131210170931) do
 
   create_table "additional_modules", force: true do |t|
     t.string   "type_name"
@@ -138,6 +138,10 @@ ActiveRecord::Schema.define(version: 20131203212348) do
     t.datetime "current_expiry_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "student_course_id",     limit: 8, null: false
+    t.integer  "additional_module_id",  limit: 8, null: false
+    t.string   "industry"
+    t.string   "needs_specify"
   end
 
   create_table "student_course_details", force: true do |t|

@@ -1,0 +1,246 @@
+<div class="container">
+    <div class="row">
+        <div class="span3">
+            <div class="bottom-gap-5">
+                <%= label_tag :student_number %>
+                <input type="text" id="student_number" name="student[student_id]">
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :course_types %>
+                <select id="course_types" name="student[course][course_types]">
+                    <option value=""></option>
+                    <%= StudentCourse.all.each do |sc| %>
+                        <option value="<%=sc.id%>"><%=sc.type_name%></option>
+                    <% end %>
+                </select>
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :additional_modules %>
+                <select id="additional_modules" name="student[course][additional_modules]">
+                    <option value=""></option>
+                    <%= AdditionalModule.all.each do |sc| %>
+                        <option value="<%=sc.id%>"><%=sc.type_name%></option>
+                    <% end %>
+                </select>
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :date_enrolled %>
+                <input type="text" id="date_enrolled" name="student[course][enrolled_at]" class="datepicker">
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :first_name %>
+                <input type="text" id="first_name" name="student[bio][first_name]">
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :middle_name %>
+                <input type="text" id="middle_name" name="student[bio][middle_name]">
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :last_name %>
+                <input type="text" id="last_name" name="student[bio][last_name]">
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :date_of_birth %>
+                <input type="text" id="date_of_birth" name="student[bio][date_of_birth]" class="datepicker">
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :phone %>
+                <input type="text" id="phone" name="student[bio][phone]">
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :mobile %>
+                <input type="text" id="mobile" name="student[bio][mobile]">
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :email %>
+                <input type="text" id="email" name="student[bio][email]">
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :fax %>
+                <input type="text" id="fax" name="student[bio][fax]">
+            </div>
+
+            <div class="bottom-gap-5-50"></div>
+
+        </div>
+
+        <div class="span3">
+            <div class="border-bottom">
+                <%= label_tag :postal_details%>
+            </div>
+
+            <div class="top-gap bottom-gap-5">
+                <%= label_tag :address %>
+                <input type="text" id="address" name="student[address][address]" >
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :postal_code %>
+                <input type="text" id="student_postal_code" autocomplete="off" placeholder="Enter Postal Code" >
+                <input type="hidden" id="student_postal_code_hidden" name="student[address][postal_code]" />
+                <input type="hidden" id="course_hidden" name="student[course][course_id]" value="" />
+
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :town %>
+                <select id="student_town" name="student[address][town_id]">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :state %>
+                <select id="student_state" name="student[address][state_id]">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="border-bottom">
+                <%= label_tag :further_information%>
+            </div>
+
+            <div class="top-gap bottom-gap-5">
+                <%= label_tag :industry%>
+                <select id="course" name="student[course][industry]">
+                    <option value=""></option>
+                    <option value="val1">val1</option>
+                    <option value="val2">val2</option>
+                </select>
+            </div>
+
+            <div class="bottom-gap-5 row" style="margin-left:0px">
+                <div class="bottom-gap pull-left">
+                    <input id="hearing" name="student[needs][hearing]" type="checkbox" class="pull-left" value="1"/>
+                    <label class="pull-left left-gap-10" for="hearing">Hearing/Deaf</label>
+                </div>
+
+                <div class="bottom-gap-5 pull-right" style="margin-right:50px">
+                    <input id="learning" name="student[needs][learning]" type="checkbox" class="pull-left" value="1"/>
+                    <label class="pull-left left-gap-10" for="learning">Learning</label>
+                </div>
+            </div>
+
+
+
+            <div class="bottom-gap-5 row" style="margin-left:0px">
+                <div class="bottom-gap-5 pull-left">
+                    <input id="vision" name="student[needs][vision]" type="checkbox" class="pull-left" value="1"/>
+                    <label class="pull-left left-gap-10" for="vision">Vision</label>
+                </div>
+
+                <div class="bottom-gap-5 pull-right" style="margin-right:50px">
+                    <input id="physical" name="student[needs][physical]" type="checkbox" class="pull-left" value="1"/>
+                    <label class="pull-left left-gap-10" for="physical">Physical</label>
+                </div>
+            </div>
+
+            <div class="bottom-gap-5 row" style="margin-left:0px">
+                <div class="bottom-gap pull-left">
+                    <input id="mental" name="student[needs][mental]" type="checkbox" class="pull-left" value="1"/>
+                    <label class=" pull-left left-gap-10" for="mental">Mental</label>
+                </div>
+
+                <div class="bottom-gap-5 pull-right" style="margin-right:50px">
+                    <input id="medical" name="student[needs][medical]" type="checkbox" class="pull-left" value="1"/>
+                    <label class=" pull-left left-gap-10" for="medical">Medical Condition</label>
+                </div>
+            </div>
+
+            <div class="bottom-gap-5 row" style="margin-left:0px">
+                <div class="bottom-gap-5 pull-left">
+                    <input id="intellectual" name="student[needs][intellectual]" type="checkbox" class="pull-left" value="1"/>
+                    <label class=" pull-left left-gap-10" for="intellectual">Intellectual</label>
+                </div>
+
+                <div class="bottom-gap-5 pull-right" style="margin-right:50px">
+                    <input id="brain" name="student[needs][brain]" type="checkbox" class="pull-left" value="1"/>
+                    <label class="pull-left left-gap-10" for="brain">Acquired Brain Impairment</label>
+                </div>
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :others_specify %>
+                <input type="text" id="others" name="student[course][needs_specify]" >
+            </div>
+
+            <div class="bottom-gap-50"></div>
+        </div>
+
+        <div class="span3">
+            <div class="bottom-gap-5">
+                <%= label_tag :comments %>
+                <textarea rows="3" id="comments" name="student[course][comments]"></textarea>
+            </div>
+
+
+
+            <div class="bottom-gap-5">
+                <%= label_tag :course_fee %>
+                <input type="text" id="course_fee" name="student[course][course_fee]" >
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :payment_method%>
+                <select id="payment_method" name="student[course][payment_method]">
+                    <option value=""></option>
+                    <option value="card">card</option>
+                    <option value="cash">cash</option>
+                </select>
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :payment_date %>
+                <input type="text" id="payment_date" name="student[course][payment_date]" class="datepicker">
+            </div>
+
+            <div class="bottom-gap-5 row" style="margin-left:0px">
+                <input id="paid" name="student[course][paid]" type="checkbox" class="pull-left" value="1"/>
+                <label class="pull-left left-gap-10" for="paid">Paid</label>
+            </div>
+
+        </div>
+
+
+
+        <div class="span3">
+            <div class="bottom-gap-5">
+                <%= label_tag :current_accreditation %>
+                <input type="text" id="current_accreditation" name="student[course][current_accreditation]" >
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :current_expiry_date %>
+                <input type="text" id="current_expiry_date" name="student[course][current_expiry_date]" class="datepicker" >
+            </div>
+
+            <div class="top-gap bottom-gap-5">
+                <label for="feedback" id="feedback">How did you hear about Chemcert?</label>
+                <select id="feedback" name="student[demo][feedback]">
+                    <option value=""></option>
+                    <option value="paper">paper</option>
+                    <option value="news">news</option>
+                    <option value="email">email</option>
+                    <option value="friend">friend</option>
+                </select>
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :other %>
+                <input type="text" id="feedback2" name="student[demo][feedback2]">
+            </div>
+        </div>
+    </div>
+</div>
+

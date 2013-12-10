@@ -1,7 +1,10 @@
 // on pageload, initializing jquery stuff.
 $(function() {
     // initializing stuff here and also
-    $(".datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
+    $(".datepicker").datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true });
 });
 
 var CHEMCERT = CHEMCERT || {};

@@ -5,27 +5,31 @@
         </div>
     </div>
 
-
-    <%= render 'edit_student_form' %>
-
-    <div class="row">
-        <div class="span12">
-            <div style="border: 1px #f5f5f5 solid;margin:10px 0 10px 0"></div>
+    <form accept-charset="UTF-8" action="/students/update" class="form-horizontal" method="post">
+        <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+        <div class="row">
+            <div class="span12">
+                <div style="border: 1px #f5f5f5 solid;margin:10px 0 10px 0"></div>
+            </div>
         </div>
-    </div>
+        <%= render 'edit_student_form' %>
 
-    <%= render 'edit_student_gender_form' %>
-
-    <div class="row">
-        <div class="span12">
-            <div style="border: 1px #f5f5f5 solid;margin:10px 0 10px 0"></div>
+        <div class="row">
+            <div class="span12">
+                <div style="border: 1px #f5f5f5 solid;margin:10px 0 10px 0"></div>
+            </div>
         </div>
-    </div>
 
-    <%= render 'edit_student_result_form' %>
+        <%= render 'edit_student_gender_form' %>
 
+        <div class="row">
+            <div class="span12">
+                <div style="border: 1px #f5f5f5 solid;margin:10px 0 10px 0"></div>
+            </div>
+        </div>
 
+        <%= render 'edit_student_result_form' %>
 
-
+    </form>
 
 </div>

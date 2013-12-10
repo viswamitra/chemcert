@@ -1,0 +1,104 @@
+<div class="container">
+    <div class="row">
+        <div class="span4">
+            <div class="bottom-gap-5">
+                <%= label_tag :gender%>
+                <select id="gender" name="student[bio][gender]">
+                    <option value=""></option>
+                    <option value="male">male</option>
+                    <option value="female">female</option>
+                </select>
+            </div>
+
+            <div class="border-bottom">
+                <%= label_tag :home_address%>
+            </div>
+
+            <div class="top-gap bottom-gap-5">
+                <%= label_tag :address %>
+                <input type="text" id="address" name="student[address][address]" >
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :postal_code %>
+                <input type="text" id="student_postal_code" autocomplete="off" placeholder="Enter Postal Code" >
+                <input type="hidden" id="student_postal_code_hidden" name="student[address][postal_code]" />
+                <input type="hidden" id="course_hidden" name="student[course][course_id]" value="" />
+
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :town %>
+                <select id="student_town" name="student[address][town_id]">
+                    <option value=""></option>
+                </select>
+            </div>
+
+            <div class="bottom-gap-5">
+                <%= label_tag :state %>
+                <select id="student_state" name="student[address][state_id]">
+                    <option value=""></option>
+                </select>
+            </div>
+
+
+            <div class="bottom-gap-5-50"></div>
+
+        </div>
+        <div class="span4">
+            <div class="border-bottom">
+                <%= label_tag :demographies%>
+            </div>
+
+            <div class="top-gap bottom-gap-5">
+                <%= label_tag :country_of_birth%>
+                <select id="country_of_birth" name="student[demo][country_of_birth]">
+                    <option value=""></option>
+                    <option value="val1">country1</option>
+                    <option value="val2">country2</option>
+                </select>
+            </div>
+
+            <div class="top-gap bottom-gap-5">
+                <%= label_tag :residency_status%>
+                <select id="residency_status" name="student[demo][residency_status]">
+                    <option value=""></option>
+                    <option value="val1">country1</option>
+                    <option value="val2">country2</option>
+                </select>
+            </div>
+
+            <div class="top-gap bottom-gap-5">
+                <%= label_tag :employment_status%>
+                <select id="employment_status" name="student[demo][employment_status]">
+                    <option value=""></option>
+                    <option value="val1">country1</option>
+                    <option value="val2">country2</option>
+                </select>
+            </div>
+
+            <div class="top-gap bottom-gap-5">
+                <%= label_tag :highest_education_level%>
+                <select id="highest_education_level" name="student[demo][highest_education_level]">
+                    <option value=""></option>
+                    <option value="val1">country1</option>
+                    <option value="val2">country2</option>
+                </select>
+            </div>
+
+            <div class="top-gap bottom-gap-5">
+                <%= label_tag :study_reason%>
+                <select id="study_reason" name="student[demo][study_reason]">
+                    <option value=""></option>
+                    <option value="val1">country1</option>
+                    <option value="val2">country2</option>
+                </select>
+            </div>
+
+
+            <div class="bottom-gap-5-50"></div>
+
+        </div>
+
+    </div>
+</div>

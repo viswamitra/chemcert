@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+        <div class="span3">
+            <div class="top-gap bottom-gap-5">
+                <%= label_tag :level_of_competency%>
+                <select id="course" name="student[course][competency]">
+                    <option value=""></option>
+                    <option value="AQFII">AQFII</option>
+                    <option value="AQFIII">AQFIII</option>
+                    <option value="AQFIV">AQFIV</option>
+                </select>
+            </div>
+
+            <div class="top-gap bottom-gap-5">
+                <%= label_tag :special_modules%>
+                <select id="course" name="student[course][special_modules]">
+                    <option value=""></option>
+                    <option value="weeds">weeds</option>
+                </select>
+            </div>
+
+            <div class="border-bottom">
+                <%= label_tag :previous_course_details%>
+            </div>
+
+            <%= render 'student_course_history_table' %>
+
+        </div>
+    </div>
+</div>
