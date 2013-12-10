@@ -6,6 +6,7 @@
     </div>
 
     <%= p @student.inspect %>
+    <%= p @course.inspect %>
 
     <form accept-charset="UTF-8" action="/students/update" class="form-horizontal" method="post">
         <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
@@ -44,3 +45,50 @@
     </form>
 
 </div>
+
+<script type="text/javascript">
+    $(function(){
+        <% student_id = @student.student_id %>
+        <% if student_id.present? %>
+            $('#student_number').val('<%= @student.student_id %>');
+        <% end %>
+
+        <% student_course_detail = @student.student_course_details.where(:course_id => @course.id) %>
+        <% student_course_detail = student_course_detail.first %>
+        <% student_bio_data = @student.student_biodata %>
+        <% student_address = @student.student_addresses.first %>
+
+
+        <% if student_course_detail.present? %>
+            $('#course_types').val('<%= student_course_detail.student_course_id %>');
+            $('#additional_modules').val('<%= student_course_detail.addition_module_id %>');
+            $('#date_enrolled').val('<%= l student_course_detail.enrolled_at %>');
+        <% end %>
+
+        <% if student_bio_data.present? %>
+            $('#first_name').val('<%= student_bio_data.first_name %>');
+            $('#middle_name').val('<%= student_bio_data.middle_name %>');
+            $('#last_name').val('<%= student_bio_data.last_name %>');
+            $('#date_of_birth').val('<%= student_bio_data.date_of_birth %>');
+            $('#phone').val('<%= student_bio_data.phone %>');
+            $('#mobile').val('<%= student_bio_data.mobile %>');
+            $('#email').val('<%= student_bio_data.email %>');
+            $('#fax').val('<%= student_bio_data.fax %>');
+
+        <% end %>
+
+        <% if student_address.present? %>
+
+            $('#first_name').val('<%= student_bio_data.first_name %>');
+
+
+
+        <% end %>
+
+
+
+
+
+
+    });
+</script>

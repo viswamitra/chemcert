@@ -10,6 +10,8 @@ class StudentsController < ApplicationController
 
   def edit
     @student = Student.find(params[:id])
+    @course = Course.find(params[:course_id])
+    p "-----> "
   end
 
   #equivalent of create
