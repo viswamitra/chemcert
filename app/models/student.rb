@@ -6,8 +6,10 @@ class Student < ActiveRecord::Base
   has_one :student_biodata
   has_one :student_demography
   has_many :student_course_details
+  has_many :student_course_detail_histories
   has_many :special_needs, :through => :student_special_needs
   has_many :student_special_needs
+
 
 
   #scopes

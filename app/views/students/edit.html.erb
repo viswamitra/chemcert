@@ -5,6 +5,8 @@
         </div>
     </div>
 
+    <%= p @student.inspect %>
+
     <form accept-charset="UTF-8" action="/students/update" class="form-horizontal" method="post">
         <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
         <div class="row">
@@ -29,6 +31,15 @@
         </div>
 
         <%= render 'edit_student_result_form' %>
+
+        <div class="control-group" class="span12">
+            <%= label :course_date, "Find Date", :class => "invisible" %>
+            <div class="controls">
+                <%= submit_tag "Update Student", :class => 'btn btn-primary', :id => 'update_student' %>
+            </div>
+        </div>
+
+        <div class="bottom-gap-50"></div>
 
     </form>
 

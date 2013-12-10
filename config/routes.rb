@@ -44,6 +44,7 @@ ChemcertBakshi::Application.routes.draw do
       get '/register' => 'students#register'
       post '/register' => 'students#enroll'
       get '/' => 'students#search'
+      post '/update' => 'students#update'
     end
   end
 

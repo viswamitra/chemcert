@@ -32,9 +32,9 @@ class StudentsController < ApplicationController
     end
   end
 
-  #PATCH/PUT students/id/update
+  #PATCH/PUT students/update
   def update
-    student = Student.find(params[:id])
+    student = Student.find(params["student"]["student_id"])
     # here update the student attributes
   end
 

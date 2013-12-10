@@ -1,25 +1,31 @@
 <table class="table table-striped">
     <tr>
-        <th> CT Code </th>
+        <th> Course Code </th>
+        <th> Course Date </th>
         <th> Trainer </th>
         <th> Town </th>
         <th> State </th>
-        <th> AQF II </th>
-        <th> AQF III </th>
-        <th> AQF IV </th>
-        <th> NYC </th>
+        <th> Result</th>
+        <th> Course Type </th>
+        <th> Special Modules </th>
     </tr>
 
+
+    <% @student.student_course_detail_histories.each do |course_detail| %>
     <tr>
-        <td> </td>
-        <td> <%=course.trainer.name %></td>
-        <td> <%=course.location_relation.town.name %></td>
-        <td> <%=course.location_relation.state.name %></td>
-        <td> <%=course.student_course_details.where(:result => 'AQFII').size %></td>
-        <td> <%=course.student_course_details.where(:result => 'AQFIII').size %></td>
-        <td> <%=course.student_course_details.where(:result => 'AQFIV').size %></td>
-        <td> <%=course.student_course_details.where(:result => 'NYC').size %></td>
+
+        <td> <%= course_detail.course.course_code %> </td>
+        <td> <%= course_detail.course.course_date %> </td>
+        <td> <%= course_detail.course.trainer.name %> </td>
+        <td> <%= course_detail.course.location_relation.town.name %> </td>
+        <td> <%= course_detail.course.location_relation.state.name %> </td>
+        <td> <%= course_detail.result %> </td>
+        <td> <%= course_detail.student_course.type_name %> </td>
+        <td> <%= course_detail.additional_module.type_name %> </td>
+
     </tr>
+
+    <% end %>
 
 
 </table>
