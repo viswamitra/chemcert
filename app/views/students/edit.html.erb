@@ -99,10 +99,16 @@
             $('#address').val('<%= student_address.address %>');
             $('#home_address').val('<%= student_address.home_address %>');
             $('#student_postal_code').val('<%= student_address.location_relation.postal_code.code %>');
-            $('#student_home_postal_code').val('<%= student_address.home_location_relation.try(:postal_code).try(:code) %>');
             $('#student_postal_code_hidden').val('<%= student_address.location_relation.postal_code.code %>');
-            $('#student_home_postal_code_hidden').val('<%= student_address.home_location_relation.try(:postal_code).try(:code) %>');
+            $('#student_town').append("<option value="+"<%= student_address.location_relation.town.id %>"+" selected=selected>"+ "<%= student_address.location_relation.town.name %>"+"</option>");
+            $('#student_state').append("<option value="+"<%= student_address.location_relation.state.id %>"+" selected=selected>"+ "<%= student_address.location_relation.state.name %>"+"</option>");
 
+            <% if student_address.home_location_relation.present? %>
+                $('#student_home_postal_code').val('<%= student_address.home_location_relation.try(:postal_code).try(:code) %>');
+                $('#student_home_postal_code_hidden').val('<%= student_address.home_location_relation.try(:postal_code).try(:code) %>');
+                $('#home_town').append("<option value="+"<%= student_address.home_location_relation.try(:town).try(:id) %>"+" selected=selected>"+ "<%= student_address.location_relation.try(:town).try(:name) %>"+"</option>");
+                $('#home_state').append("<option value="+"<%= student_address.home_location_relation.try(:state).try(:id) %>"+" selected=selected>"+ "<%= student_address.location_relation.try(:state).try(:name) %>"+"</option>");
+            <% end %>
         <% end %>
 
         <% @student.special_needs.each do |need|%>
@@ -116,6 +122,110 @@
             $('#highest_education_level').val('<%= student_demography.highest_education_level %>');
             $('#study_reason').val('<%= student_demography.study_reason %>');
         <% end %>
+    });
+
+    $('#student_postal_code').typeahead(
+            {
+                minLength: 2,
+                source : function(query, process) {
+                    map = {};
+                    postal_codes = [];
+                    $.ajax({
+                        url : '/postal_codes/code.json',
+                        type : 'get',
+                        data : 'code='+query,
+                        dataType: 'JSON',
+                        success : function(data) {
+                            $.each(data, function(index, element) {
+                                postal_codes.push(element.code);
+                                map[element.code] = element;
+                            });
+                            process(postal_codes);
+                        }
+                    });
+                },
+                updater : function(item) {
+                    $('#student_postal_code_hidden').val(map[item].id);
+                    $('#student_postal_code').val(map[item].name);
+                    return item;
+                }
+
+            }
+    );
+
+    $('#student_home_postal_code').typeahead(
+            {
+                minLength: 2,
+                source : function(query, process) {
+                    map = {};
+                    postal_codes = [];
+                    $.ajax({
+                        url : '/postal_codes/code.json',
+                        type : 'get',
+                        data : 'code='+query,
+                        dataType: 'JSON',
+                        success : function(data) {
+                            $.each(data, function(index, element) {
+                                postal_codes.push(element.code);
+                                map[element.code] = element;
+                            });
+                            process(postal_codes);
+                        }
+                    });
+                },
+                updater : function(item) {
+                    $('#student_home_postal_code_hidden').val(map[item].id);
+                    $('#student_home_postal_code').val(map[item].name);
+                    return item;
+                }
+
+            }
+    );
+
+    $('#student_postal_code').change(function(){
+        postal_code = $(this).val();
+        console.log(postal_code);
+        $.ajax({
+            url : '/location_relations/postal_code.json',
+            type : 'get',
+            data : 'postal_code='+postal_code,
+            dataType: 'JSON',
+            success : function(data) {
+                $('#student_town').empty();
+                $('#student_state').empty();
+                $('#student_town').append("<option value="+data[0].town_id+" selected=selected>"+data[0].town+"</option>");
+                $('#student_state').append("<option value="+data[0].state_id+" selected=selected>"+data[0].state+"</option>");
+                data.shift();
+                $.each(data, function(index, element) {
+                    $('#student_town').append("<option value="+element.town_id+">"+element.town+"</option>");
+                    $('#student_state').append("<option value="+element.state_id+">"+element.state+"</option>");
+                });
+
+            }
+        });
+    });
+
+    $('#student_home_postal_code').change(function(){
+        postal_code = $(this).val();
+        console.log(postal_code);
+        $.ajax({
+            url : '/location_relations/postal_code.json',
+            type : 'get',
+            data : 'postal_code='+postal_code,
+            dataType: 'JSON',
+            success : function(data) {
+                $('#home_town').empty();
+                $('#home_state').empty();
+                $('#home_town').append("<option value="+data[0].town_id+" selected=selected>"+data[0].town+"</option>");
+                $('#home_state').append("<option value="+data[0].state_id+" selected=selected>"+data[0].state+"</option>");
+                data.shift();
+                $.each(data, function(index, element) {
+                    $('#home_town').append("<option value="+element.town_id+">"+element.town+"</option>");
+                    $('#home_state').append("<option value="+element.state_id+">"+element.state+"</option>");
+                });
+
+            }
+        });
     });
 
 
