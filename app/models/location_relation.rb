@@ -5,6 +5,7 @@ class LocationRelation < ActiveRecord::Base
   belongs_to :town
   belongs_to :postal_code
 
+
   validates_uniqueness_of :state_id, :scope => [:town_id,:postal_code_id]
 
   def self.by_postal_code(code)

@@ -16,27 +16,27 @@
 
             <div class="top-gap bottom-gap-5">
                 <%= label_tag :address %>
-                <input type="text" id="address" name="student[address][address]" >
+                <input type="text" id="home_address" name="student[bio][home_address]" >
             </div>
 
             <div class="bottom-gap-5">
                 <%= label_tag :postal_code %>
-                <input type="text" id="student_postal_code" autocomplete="off" placeholder="Enter Postal Code" >
-                <input type="hidden" id="student_postal_code_hidden" name="student[address][postal_code]" />
+                <input type="text" id="student_home_postal_code" autocomplete="off" placeholder="Enter Postal Code" >
+                <input type="hidden" id="student_home_postal_code_hidden" name="student[address][postal_code]" />
                 <input type="hidden" id="course_hidden" name="student[course][course_id]" value="" />
 
             </div>
 
             <div class="bottom-gap-5">
                 <%= label_tag :town %>
-                <select id="student_town" name="student[address][town_id]">
+                <select id="home_town" name="student[address][home_town_id]">
                     <option value=""></option>
                 </select>
             </div>
 
             <div class="bottom-gap-5">
                 <%= label_tag :state %>
-                <select id="student_state" name="student[address][state_id]">
+                <select id="home_state" name="student[address][home_state_id]">
                     <option value=""></option>
                 </select>
             </div>

@@ -56,6 +56,7 @@
         <% student_course_detail = @student.student_course_details.where(:course_id => @course.id) %>
         <% student_course_detail = student_course_detail.first %>
         <% student_bio_data = @student.student_biodata %>
+        <% student_demography = @student.student_demography %>
         <% student_address = @student.student_addresses.first %>
 
 
@@ -63,6 +64,20 @@
             $('#course_types').val('<%= student_course_detail.student_course_id %>');
             $('#additional_modules').val('<%= student_course_detail.addition_module_id %>');
             $('#date_enrolled').val('<%= l student_course_detail.enrolled_at %>');
+            $('#student_industry').val('<%= student_course_detail.industry %>');
+            $('#others').val('<%= student_course_detail.needs_specify %>');
+            $('#comments').val('<%= student_course_detail.comments %>');
+            $('#course_fee').val('<%= student_course_detail.course_fee %>');
+            $('#payment_method').val('<%= student_course_detail.payment_method %>');
+            $('#payment_date').val('<%= student_course_detail.payment_date %>');
+            <% if student_course_detail.paid  %>
+                $('#paid').attr('checked','checked');
+            <% end %>
+            $('#current_accreditation').val('<%= student_course_detail.current_accreditation %>');
+            $('#current_expiry_date').val('<%= student_course_detail.current_expiry_date %>');
+            $('#course_result').val('<%= student_course_detail.result %>');
+            $('#course_special_modules').val('<%= student_course_detail.special_modules %>');
+
         <% end %>
 
         <% if student_bio_data.present? %>
@@ -74,21 +89,34 @@
             $('#mobile').val('<%= student_bio_data.mobile %>');
             $('#email').val('<%= student_bio_data.email %>');
             $('#fax').val('<%= student_bio_data.fax %>');
+            $('#gender').val('<%= student_bio_data.gender %>');
+
 
         <% end %>
 
         <% if student_address.present? %>
 
-            $('#first_name').val('<%= student_bio_data.first_name %>');
-
-
+            $('#address').val('<%= student_address.address %>');
+            $('#home_address').val('<%= student_address.home_address %>');
+            $('#student_postal_code').val('<%= student_address.location_relation.postal_code.code %>');
+            $('#student_home_postal_code').val('<%= student_address.home_location_relation.try(:postal_code).try(:code) %>');
+            $('#student_postal_code_hidden').val('<%= student_address.location_relation.postal_code.code %>');
+            $('#student_home_postal_code_hidden').val('<%= student_address.home_location_relation.try(:postal_code).try(:code) %>');
 
         <% end %>
 
+        <% @student.special_needs.each do |need|%>
+            $('#<%= need.need_type %>').attr('checked','checked');
+        <% end %>
 
-
-
-
-
+        <% if student_demography.present? %>
+            $('#country_of_birth').val('<%= student_demography.country_of_birth %>');
+            $('#residency_status').val('<%= student_demography.residency_status %>');
+            $('#employment_status').val('<%= student_demography.employment_status %>');
+            $('#highest_education_level').val('<%= student_demography.highest_education_level %>');
+            $('#study_reason').val('<%= student_demography.study_reason %>');
+        <% end %>
     });
+
+
 </script>
