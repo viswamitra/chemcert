@@ -36,7 +36,26 @@ class StudentsController < ApplicationController
 
   #PATCH/PUT students/update
   def update
-    student = Student.find(params["student"]["student_id"])
+    @student_id = params[:student][:student_id]
+    @course_details = params[:student][:course]
+    @bio = params[:student][:bio]
+    @address = params[:student][:address]
+    @needs = params[:student][:needs]
+    @demo = params[:student][:demo]
+
+    @student = StudentCourseDetail.update_student(@student_id, @course_details, @bio, @address, @needs, @demo)
+    respond_to do |format|
+      if @student.present?
+        format.html {redirect_to @student, notice: "student created/updated with these details"}
+      else
+        flash["notice"] = "something went wrong, try again."
+        format.html {render action: 'register'}
+      end
+    end
+
+
+
+
     # here update the student attributes
   end
 

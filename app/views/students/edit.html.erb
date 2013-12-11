@@ -5,6 +5,14 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="span12">
+            <% if flash[:notice] %>
+                <div class="alert alert-info"><%=h flash[:notice] %></div>
+            <% end %>
+        </div>
+    </div>
+
     <%= p @student.inspect %>
     <%= p @course.inspect %>
 
@@ -49,8 +57,13 @@
 <script type="text/javascript">
     $(function(){
         <% student_id = @student.student_id %>
+        <% course_id = @course.id %>
         <% if student_id.present? %>
             $('#student_number').val('<%= @student.student_id %>');
+        <% end %>
+
+        <% if course_id.present? %>
+            $('#course_hidden').val('<%= @course.id %>');
         <% end %>
 
         <% student_course_detail = @student.student_course_details.where(:course_id => @course.id) %>
@@ -99,13 +112,13 @@
             $('#address').val('<%= student_address.address %>');
             $('#home_address').val('<%= student_address.home_address %>');
             $('#student_postal_code').val('<%= student_address.location_relation.postal_code.code %>');
-            $('#student_postal_code_hidden').val('<%= student_address.location_relation.postal_code.code %>');
+            $('#student_postal_code_hidden').val('<%= student_address.location_relation.postal_code.id %>');
             $('#student_town').append("<option value="+"<%= student_address.location_relation.town.id %>"+" selected=selected>"+ "<%= student_address.location_relation.town.name %>"+"</option>");
             $('#student_state').append("<option value="+"<%= student_address.location_relation.state.id %>"+" selected=selected>"+ "<%= student_address.location_relation.state.name %>"+"</option>");
 
             <% if student_address.home_location_relation.present? %>
                 $('#student_home_postal_code').val('<%= student_address.home_location_relation.try(:postal_code).try(:code) %>');
-                $('#student_home_postal_code_hidden').val('<%= student_address.home_location_relation.try(:postal_code).try(:code) %>');
+                $('#student_home_postal_code_hidden').val('<%= student_address.home_location_relation.try(:postal_code).try(:id) %>');
                 $('#home_town').append("<option value="+"<%= student_address.home_location_relation.try(:town).try(:id) %>"+" selected=selected>"+ "<%= student_address.location_relation.try(:town).try(:name) %>"+"</option>");
                 $('#home_state').append("<option value="+"<%= student_address.home_location_relation.try(:state).try(:id) %>"+" selected=selected>"+ "<%= student_address.location_relation.try(:state).try(:name) %>"+"</option>");
             <% end %>

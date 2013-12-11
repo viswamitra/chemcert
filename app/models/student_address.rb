@@ -1,5 +1,5 @@
 class StudentAddress < ActiveRecord::Base
-  attr_accessible :student_id, :address, :location_relation_id, :home_location_relation_id
+  attr_accessible :student_id, :address, :location_relation_id, :home_location_relation_id,
                   :home_address
 
 

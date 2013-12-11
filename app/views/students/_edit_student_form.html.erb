@@ -89,7 +89,7 @@
                 <%= label_tag :postal_code %>
                 <input type="text" id="student_postal_code" autocomplete="off" placeholder="Enter Postal Code" >
                 <input type="hidden" id="student_postal_code_hidden" name="student[address][postal_code]" />
-                <input type="hidden" id="course_hidden" name="student[course][course_id]" value="" />
+                <input type="hidden" id="course_hidden" name="student[course][course_id]" value="<%= @course.id %>" />
 
             </div>
 
