@@ -20,7 +20,7 @@ class StudentCourseDetail < ActiveRecord::Base
         student = Student.create(:student_id => id)
         assign_needs(needs, student)
 
-        StudentCourseDetail.create!(:student_id => student.id, :course_id => 1,
+        StudentCourseDetail.create!(:student_id => student.id, :course_id => courses["course_id"],
         :enrolled_at => courses["enrolled_at"],
         :student_course_id => courses["course_types"],
         :addition_module_id => courses["additional_modules"],

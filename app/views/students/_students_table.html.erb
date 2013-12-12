@@ -21,7 +21,7 @@
                     <td> <%= student.student_addresses.first.location_relation.postal_code.code %></td>
                     <td> <%= student.student_biodata.email %></td>
                     <td> <%= student.student_biodata.mobile %></td>
-                    <td> <%= link_to "Edit", edit_course_path(student), :class => 'btn btn-mini' %></td>
+                    <td> <%= link_to "Edit", edit_student_path(student, :course_id => student.student_course_details.try(:first).course_id), :class => 'btn btn-mini' %></td>
                     </td>
                 </tr>
             <% end %>
