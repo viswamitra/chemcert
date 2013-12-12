@@ -2,7 +2,7 @@ class Student < ActiveRecord::Base
 
   attr_accessible :student_id
 
-  has_many :student_addresses
+  has_one :student_address
   has_one :student_biodata
   has_one :student_demography
   has_one :student_course_detail
@@ -17,7 +17,7 @@ class Student < ActiveRecord::Base
   scope :by_last_name, lambda{|name| Student.joins(:student_biodata).where('student_biodata.last_name = ?',name) if name.present?}
   scope :by_student_id, lambda{|id| Student.find_by_student_id(id) if id.present?}
   scope :by_enquiry, lambda{|enquiry| Student.joins(:student_course_detail).where('student_course_details.enquiry = ?',enquiry) if enquiry.present?}
-  scope :by_state_id, lambda {|state_id| Student.joins(:student_addresses => :location_relation).where('location_relations.state_id = ?', state_id) if state_id.present?}
+  scope :by_state_id, lambda {|state_id| Student.joins(:student_address => :location_relation).where('location_relations.state_id = ?', state_id) if state_id.present?}
 
 
   def self.create_unique_id

@@ -66,11 +66,10 @@
             $('#course_hidden').val('<%= @course.id %>');
         <% end %>
 
-        <% student_course_detail = @student.student_course_detail.where(:course_id => @course.id) %>
-        <% student_course_detail = student_course_detail.first %>
+        <% student_course_detail = @student.student_course_detail %>
         <% student_bio_data = @student.student_biodata %>
         <% student_demography = @student.student_demography %>
-        <% student_address = @student.student_addresses.first %>
+        <% student_address = @student.student_address %>
 
 
         <% if student_course_detail.present? %>
