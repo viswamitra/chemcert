@@ -5,7 +5,7 @@ class Student < ActiveRecord::Base
   has_many :student_addresses
   has_one :student_biodata
   has_one :student_demography
-  has_many :student_course_details
+  has_one :student_course_detail
   has_many :student_course_detail_histories
   has_many :special_needs, :through => :student_special_needs
   has_many :student_special_needs
@@ -16,7 +16,7 @@ class Student < ActiveRecord::Base
   scope :by_first_name, lambda{|name| Student.joins(:student_biodata).where('student_biodata.first_name = ?',name) if name.present?}
   scope :by_last_name, lambda{|name| Student.joins(:student_biodata).where('student_biodata.last_name = ?',name) if name.present?}
   scope :by_student_id, lambda{|id| Student.find_by_student_id(id) if id.present?}
-  scope :by_enquiry, lambda{|enquiry| Student.joins(:student_course_details).where('student_course_details.enquiry = ?',enquiry) if enquiry.present?}
+  scope :by_enquiry, lambda{|enquiry| Student.joins(:student_course_detail).where('student_course_details.enquiry = ?',enquiry) if enquiry.present?}
   scope :by_state_id, lambda {|state_id| Student.joins(:student_addresses => :location_relation).where('location_relations.state_id = ?', state_id) if state_id.present?}
 
 
