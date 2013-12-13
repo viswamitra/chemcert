@@ -48,6 +48,9 @@ ChemcertBakshi::Application.routes.draw do
     end
   end
 
+  resources :trainers do
+  end
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

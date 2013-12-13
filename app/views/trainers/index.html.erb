@@ -1,0 +1,35 @@
+<%- model_class = Trainer -%>
+<div class="span5">
+    <h3> Listing Trainers</h3>
+
+    <%= will_paginate  @trainers%>
+
+<table class="table table-striped">
+    <tr>
+        <th> <%= model_class.human_attribute_name(:name) %> </th>
+        <th> <%= model_class.human_attribute_name(:provider) %> </th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+
+
+    <% @trainers.each do |trainer| %>
+        <tr>
+            <td> <%= trainer.name %></td>
+            <td> <%= trainer.provider %></td>
+            <td> <%= link_to "Show", trainer, :class => 'btn btn-primary btn-mini'%></td>
+            <td> <%= link_to "Edit", edit_trainer_path(trainer), :class => 'btn btn-mini' %></td>
+            <td> <%= link_to "Remove", trainer,
+                             method: :delete,
+                             data: { confirm: "Are you sure?" },
+                             :class => 'btn btn-mini btn-danger'
+
+                 %></td>
+        </tr>
+    <% end %>
+</table>
+    <%= will_paginate  @trainers%>
+    <%= link_to "New RTO", new_trainer_path, :class => 'btn btn-primary btn-large pull-right', :id => 'new_trainer_btn'%>
+</div>
+

@@ -27,6 +27,8 @@ class CourseProcessDetail < ActiveRecord::Base
                                     :comments => course["comments"])
 
         crs.update_attributes(:course_status => course["status"])
+        # if course is closed, then fetch all the student_course_details for that course and add them to student_course_detail_histories.
+
         crs
       end
 
