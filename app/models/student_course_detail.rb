@@ -83,7 +83,8 @@ class StudentCourseDetail < ActiveRecord::Base
                                     :current_accreditation => courses["current_accreditation"],
                                     :current_expiry_date => courses["current_expiry_date"],
                                     :result => courses["competency"],
-                                    :special_modules => courses["special_modules"]
+                                    :special_modules => courses["special_modules"],
+                                    :enquiry => courses["enquiry"]
         )
         student_bio_data = StudentBiodata.where(student_id: student.id).first
         student_bio_data.update(:first_name => bio["first_name"],

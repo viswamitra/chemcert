@@ -2,6 +2,7 @@ class Student < ActiveRecord::Base
 
   attr_accessible :student_id
 
+
   has_one :student_address
   has_one :student_biodata
   has_one :student_demography

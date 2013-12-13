@@ -118,8 +118,8 @@
             <% if student_address.home_location_relation.present? %>
                 $('#student_home_postal_code').val('<%= student_address.home_location_relation.try(:postal_code).try(:code) %>');
                 $('#student_home_postal_code_hidden').val('<%= student_address.home_location_relation.try(:postal_code).try(:id) %>');
-                $('#home_town').append("<option value="+"<%= student_address.home_location_relation.try(:town).try(:id) %>"+" selected=selected>"+ "<%= student_address.location_relation.try(:town).try(:name) %>"+"</option>");
-                $('#home_state').append("<option value="+"<%= student_address.home_location_relation.try(:state).try(:id) %>"+" selected=selected>"+ "<%= student_address.location_relation.try(:state).try(:name) %>"+"</option>");
+                $('#home_town').append("<option value="+"<%= student_address.home_location_relation.try(:town).try(:id) %>"+" selected=selected>"+ "<%= student_address.home_location_relation.try(:town).try(:name) %>"+"</option>");
+                $('#home_state').append("<option value="+"<%= student_address.home_location_relation.try(:state).try(:id) %>"+" selected=selected>"+ "<%= student_address.home_location_relation.try(:state).try(:name) %>"+"</option>");
             <% end %>
         <% end %>
 
