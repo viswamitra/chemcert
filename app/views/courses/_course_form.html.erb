@@ -63,8 +63,9 @@
     <div class="control-group">
         <%= f.label :venue, :class => 'control-label' %>
         <div class="controls">
-                    <% rto_array = Venue.all.map {|rto| [rto.name, rto.id]} %>
-                    <%= f.select :venue, options_for_select(rto_array) %>
+            <select id="course_venue" name="course[venue]">
+                <option value=""></option>
+            </select>
         </div>
     </div>
 
@@ -161,12 +162,15 @@
             success : function(data) {
                 $('#course_town').empty();
                 $('#course_state').empty();
+                $('#course_venue').empty();
                 $('#course_town').append("<option value="+data[0].town_id+" selected=selected>"+data[0].town+"</option>");
                 $('#course_state').append("<option value="+data[0].state_id+" selected=selected>"+data[0].state+"</option>");
+                $('#course_venue').append("<option value="+data[0].state_id+" selected=selected>"+data[0].venue+"</option>");
                 data.shift();
                 $.each(data, function(index, element) {
                     $('#course_town').append("<option value="+element.town_id+">"+element.town+"</option>");
                     $('#course_state').append("<option value="+element.state_id+">"+element.state+"</option>");
+                    $('#course_state').append("<option value="+element.state_id+">"+element.venue+"</option>");
                 });
 
             }
@@ -179,6 +183,8 @@
         $('#course_postal_code').val('<%=@postal_code_selected.code%>');
         $('#course_town').append("<option value="+"<%= @town_selected.id %>"+" selected=selected>"+ "<%= @town_selected.name %>"+"</option>");
         $('#course_state').append("<option value="+"<%= @state_selected.id %>"+" selected=selected>"+ "<%= @state_selected.name %>"+"</option>");
+        $('#course_venue').append("<option value="+"<%= @venue_selected.id %>"+" selected=selected>"+ "<%= @venue_selected.name %>"+"</option>");
+
 
     <% end %>
 

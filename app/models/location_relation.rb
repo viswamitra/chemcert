@@ -4,6 +4,7 @@ class LocationRelation < ActiveRecord::Base
   belongs_to :state
   belongs_to :town
   belongs_to :postal_code
+  has_one :venue
 
 
   validates_uniqueness_of :state_id, :scope => [:town_id,:postal_code_id]
@@ -16,7 +17,8 @@ class LocationRelation < ActiveRecord::Base
        :town_id => lr.town.id,
        :town => lr.town.name,
        :state_id => lr.state.id,
-       :state => lr.state.name}
+       :state => lr.state.name,
+       :venue => lr.venue.name}
     end
   end
 
