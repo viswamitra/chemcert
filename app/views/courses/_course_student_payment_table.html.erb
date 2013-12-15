@@ -7,7 +7,7 @@
     </tr>
 
     <% @course.each do |course| %>
-        <% course.student_course_details.where(enquiry: 0).each do |course_detail| %>
+        <% course.student_course_details.where(enquiry: false).each do |course_detail| %>
     <tr>
         <% student = course_detail.student %>
         <td><%= course_detail.student.student_biodata.first_name %></td>

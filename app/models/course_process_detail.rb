@@ -26,11 +26,31 @@ class CourseProcessDetail < ActiveRecord::Base
                                     :enrolment_center_invoice => course["enrolment_center_invoice"],
                                     :comments => course["comments"])
 
+        # cannot close the course if any of the students are not paid for that course yet.
+        if(course["status"])
+          p "coming inside course status"
+          student_course_details = crs.student_course_details.where(enquiry: 0)
+          res = true
+          student_course_details.each do |detail|
+            res = res && detail.paid
+            unless res
+              raise CannotCloseCourseException
+              break
+            end
+          end
+        end
+
+
+
         crs.update_attributes!(:course_status => course["status"])
         # if course is closed, then fetch all the student_course_details for that course and add them to student_course_detail_histories.
 
         {:error => nil, :success => true}
       end
+
+    rescue CannotCloseCourseException
+      error = "Cannot close course while students are not paid"
+      {:error => error, :success => false}
 
     rescue ActiveRecord::ActiveRecordError => e
       {:error => e.message, :success => false}

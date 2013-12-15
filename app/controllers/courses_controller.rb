@@ -70,8 +70,7 @@ class CoursesController < ApplicationController
   def course_post_process
     result = CourseProcessDetail.create_process_detail(params[:course])
       if result[:success]
-        flash[:notice] ="created"
-        render 'courses/course_process'
+        redirect_to process_courses_path
       else
         flash[:notice] = result[:error]
         render action: 'course_process'

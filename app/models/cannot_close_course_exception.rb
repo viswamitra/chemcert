@@ -1,0 +1,3 @@
+class CannotCloseCourseException < StandardError
+
+end
