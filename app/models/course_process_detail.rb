@@ -72,6 +72,7 @@ class CourseProcessDetail < ActiveRecord::Base
         current_expiry_date = Time.mktime(course_date_time.year+5, course_date_time.month,course_date_time.day)
         current_expiry_date = Date.parse(current_expiry_date.to_s)
         detail.update!(:current_expiry_date => current_expiry_date)
+        detail.update!(:enquiry => 2)
       end
     rescue Exception => e
       {:error => e.message, :success => false}
