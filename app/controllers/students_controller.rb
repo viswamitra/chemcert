@@ -11,6 +11,7 @@ class StudentsController < ApplicationController
   def edit
     @student = Student.find(params[:id])
     @course = @student.student_course_detail.course
+    @from_process = params[:from_process]
   end
 
   #equivalent of create
@@ -45,16 +46,13 @@ class StudentsController < ApplicationController
     @student = StudentCourseDetail.update_student(@student_id, @course_details, @bio, @address, @needs, @demo)
     respond_to do |format|
       if @student.present?
+
         format.html {redirect_to @student, notice: "student created/updated with these details"}
       else
         flash["notice"] = "something went wrong, try again."
         format.html {render action: 'register'}
       end
     end
-
-
-
-
     # here update the student attributes
   end
 

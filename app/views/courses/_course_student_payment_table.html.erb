@@ -7,13 +7,13 @@
     </tr>
 
     <% @course.each do |course| %>
-        <% course.student_course_details.where(enquiry: 1).each do |course_detail| %>
+        <% course.student_course_details.where('enquiry in (?)',[1,2]).each do |course_detail| %>
     <tr>
         <% student = course_detail.student %>
         <td><%= course_detail.student.student_biodata.first_name %></td>
         <td><%= course_detail.student.student_biodata.last_name %></td>
         <td><%= course_detail.paid ? "paid":"not paid" %></td>
-        <td> <%= link_to "Edit", edit_student_path(student), :class => 'btn btn-mini' %></td>
+        <td> <%= link_to "Edit", edit_student_path(student, :from_process => true), :class => 'btn btn-mini' %></td>
     </tr>
         <% end %>
     <% end %>
