@@ -32,11 +32,11 @@ class CourseProcessDetail < ActiveRecord::Base
           student_course_details = crs.student_course_details.where(enquiry: 0)
           res = true
           student_course_details.each do |detail|
-            res = res && detail.paid
-            unless res
-              raise CannotCloseCourseException
-              break
-            end
+             res = res && detail.paid
+             unless res
+               raise CannotCloseCourseException
+               break;
+             end
           end
         end
 
