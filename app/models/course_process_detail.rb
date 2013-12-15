@@ -26,14 +26,15 @@ class CourseProcessDetail < ActiveRecord::Base
                                     :enrolment_center_invoice => course["enrolment_center_invoice"],
                                     :comments => course["comments"])
 
-        crs.update_attributes(:course_status => course["status"])
+        crs.update_attributes!(:course_status => course["status"])
         # if course is closed, then fetch all the student_course_details for that course and add them to student_course_detail_histories.
 
-        crs
+        {:error => nil, :success => true}
       end
 
     rescue ActiveRecord::ActiveRecordError => e
-      return nil #in case of exception return false
+      {:error => e.message, :success => false}
+      #return nil #in case of exception return false
     end
   end
 

@@ -7,10 +7,12 @@
         </div>
     </div>
 
+    <%= p flash.inspect %>
+
     <div class="row">
         <div class="span12">
             <% if flash[:notice] %>
-                <div class="alert alert-info"><%=h flash[:notice] %></div>
+                <div class="alert alert-info"><%=flash[:notice] %></div>
             <% end %>
         </div>
     </div>

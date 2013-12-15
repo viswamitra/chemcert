@@ -3,6 +3,8 @@ class Course < ActiveRecord::Base
   attr_accessible :location_relation_id, :training_organization_id,:is_correspondence, :course_code,
                   :course_date, :venue_id, :trainer_id, :course_status
 
+  validates_inclusion_of :course_status, in: [true, false]
+
   belongs_to :training_organization
   belongs_to :location_relation
   belongs_to :venue

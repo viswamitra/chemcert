@@ -68,17 +68,16 @@ class CoursesController < ApplicationController
 
   #post /courses/process
   def course_post_process
-    @course = CourseProcessDetail.create_process_detail(params[:course])
-
-      if @course.present?
-        flash.now['notice'] = "created with some details"
-        redirect_to :action => :course_process
+    result = CourseProcessDetail.create_process_detail(params[:course])
+      if result[:success]
+        flash[:notice] ="created"
+        render 'courses/course_process'
       else
-        flash[:notice] = "something went wrong, try again."
+        flash[:notice] = result[:error]
         render action: 'course_process'
       end
+    end
 
-  end
 
   #post /courses
   def create
