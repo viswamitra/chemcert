@@ -30,7 +30,6 @@ class CourseProcessDetail < ActiveRecord::Base
 
         if(course["status"])
           student_course_details = crs.student_course_details.where(enquiry: 0)
-          p "-----> student_coursE_details #{student_course_details.inspect}"
           course_validation(student_course_details)
           update_course_expiry_date(student_course_details)
           update_student_course_detail_history(student_course_details)
@@ -56,12 +55,11 @@ class CourseProcessDetail < ActiveRecord::Base
 
   def self.course_validation(student_course_details)
     res = true
-    p "---- inside course_validaion detail #{student_course_details.inspect}"
     student_course_details.each do |detail|
       res = res && detail.paid
       unless res
         raise CannotCloseCourseException
-        break;
+        break
       end
     end
   end
@@ -73,8 +71,7 @@ class CourseProcessDetail < ActiveRecord::Base
         course_date_time = Time.parse(course_date_str)
         current_expiry_date = Time.mktime(course_date_time.year+5, course_date_time.month,course_date_time.day)
         current_expiry_date = Date.parse(current_expiry_date.to_s)
-        detail.update(:current_expiry_date => current_expiry_date)
-        p detail.current_expiry_date
+        detail.update!(:current_expiry_date => current_expiry_date)
       end
     rescue Exception => e
       {:error => e.message, :success => false}
