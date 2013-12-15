@@ -74,7 +74,7 @@
 
         <% if student_course_detail.present? %>
             $('#course_types').val('<%= student_course_detail.student_course_id %>');
-            $('#additional_modules').val('<%= student_course_detail.addition_module_id %>');
+            $('#additional_modules').val('<%= student_course_detail.additional_module_id %>');
             $('#date_enrolled').val('<%= l student_course_detail.enrolled_at %>');
             $('#student_industry').val('<%= student_course_detail.industry %>');
             $('#others').val('<%= student_course_detail.needs_specify %>');

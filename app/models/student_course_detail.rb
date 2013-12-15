@@ -23,7 +23,7 @@ class StudentCourseDetail < ActiveRecord::Base
         StudentCourseDetail.create!(:student_id => student.id, :course_id => courses["course_id"],
         :enrolled_at => courses["enrolled_at"],
         :student_course_id => courses["course_types"],
-        :addition_module_id => courses["additional_modules"],
+        :additional_module_id => courses["additional_modules"],
         :industry => courses["industry"],
         :needs_specify => courses["needs_specify"],
         :comments => courses["comments"],
@@ -72,7 +72,7 @@ class StudentCourseDetail < ActiveRecord::Base
         student_course_detail.update(
                                     :enrolled_at => courses["enrolled_at"],
                                     :student_course_id => courses["course_types"],
-                                    :addition_module_id => courses["additional_modules"],
+                                    :additional_module_id => courses["additional_modules"],
                                     :industry => courses["industry"],
                                     :needs_specify => courses["needs_specify"],
                                     :comments => courses["comments"],
