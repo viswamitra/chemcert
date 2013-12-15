@@ -13,7 +13,7 @@
             <td> <%=@student.try(:student_id) ? @student.student_id : "-" %></td>
             <td> <%=@student.student_biodata.try(:first_name) ? @student.student_biodata.first_name : "-" %></td>
             <td> <%=@student.student_biodata.try(:last_name) ? @student.student_biodata.last_name : "-" %></td>
-            <td> <%=@student.student_course_detail.enquiry ? "Enquiry" : "Enrolment" %></td>
+            <td> <%=@student.student_course_detail.enquiry == 0 ? "Enquiry" : "Enrolment" %></td>
             <td> <%= link_to "Back", students_path, :class => 'btn btn-mini'  %> </td>
         </tr>
     </table>

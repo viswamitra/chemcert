@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131215095601) do
+ActiveRecord::Schema.define(version: 20131215113458) do
 
   create_table "additional_modules", force: true do |t|
     t.string   "type_name"
@@ -133,7 +133,7 @@ ActiveRecord::Schema.define(version: 20131215095601) do
     t.string   "payment_method"
     t.datetime "payment_date"
     t.boolean  "paid"
-    t.boolean  "enquiry"
+    t.integer  "enquiry"
     t.string   "current_accreditation"
     t.datetime "current_expiry_date"
     t.datetime "created_at"
@@ -155,7 +155,7 @@ ActiveRecord::Schema.define(version: 20131215095601) do
     t.string   "payment_method"
     t.datetime "payment_date"
     t.boolean  "paid"
-    t.boolean  "enquiry"
+    t.integer  "enquiry"
     t.string   "current_accreditation"
     t.datetime "current_expiry_date"
     t.datetime "created_at"
