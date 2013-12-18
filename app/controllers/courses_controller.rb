@@ -32,6 +32,11 @@ class CoursesController < ApplicationController
     @courses = Course.search_process(params[:course_code], params[:course_status], params[:course_start_date], params[:course_end_date])
   end
 
+  #get /proforma
+  def proforma
+    @course = Course.where(course_code: params[:course_code]).first
+  end
+
   #get /course/1
   def show
     @course = Course.find(params[:id])

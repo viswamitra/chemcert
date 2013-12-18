@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row">
+        <div class="span9">
+            <h3> Generate Proforma </h3>
+        </div>
+    </div>
+    <div class="row">
+        <%= form_tag proforma_courses_path, :method => "get", :class => "form-inline" do %>
+            <div class="span3">
+                <%= label_tag :course_code%> </br>
+                <input type="text" id="course_code" name="course_code" autocomplete="off" placeholder="Enter Course code" value="<%= params[:course_code] %>">
+            </div>
+
+            <div class="span3">
+                <div class="control-group">
+                    <%= label :course_date, "Find Date", :class => "invisible" %>
+                    <div class="controls">
+                        <%= submit_tag "Find course", :class => 'btn btn-primary', :name => nil %>
+                    </div>
+                </div>
+            </div>
+
+        <% end %>
+    </div>
+    <div class="row">
+        <div class="span12">
+            <div id="global-message" class="msg info">
+                Find Courses
+            </div>
+        </div>
+    </div>
+
+    <%= render 'generate_proforma_table_container' %>
+</div>
+</div>
+
+
+<script type="text/javascript">
+    $(function(){
+        $(".datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
+    });
+</script>
+
