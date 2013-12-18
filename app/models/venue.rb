@@ -5,6 +5,7 @@ class Venue < ActiveRecord::Base
 
   belongs_to :location_relation
   has_many :courses
+  has_one :venue_contact
 
   validates_presence_of :name
 

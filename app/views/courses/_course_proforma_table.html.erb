@@ -19,8 +19,7 @@
                             Open
                         <% end %>
                     </td>
-                    <td> <%= link_to "Show", @course, :class => 'btn btn-primary btn-mini'%></td>
-                    <td> <%= link_to "Edit", edit_course_path(@course), :class => 'btn btn-mini' %></td>
+                    <td> <%= link_to "Print proforma", proforma_course_path(id: @course.id, format: "csv"), :class => 'btn btn-primary btn-mini'%></td>
                     </td>
                 </tr>
 

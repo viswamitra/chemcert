@@ -1,6 +1,5 @@
+require 'csv'
 class CoursesController < ApplicationController
-
-
 
   def by_code
     @course = Course.by_matching_code(params[:code])
@@ -35,6 +34,13 @@ class CoursesController < ApplicationController
   #get /proforma
   def proforma
     @course = Course.where(course_code: params[:course_code]).first
+  end
+
+  def print_proforma
+    @course = Course.find(params[:id])
+    respond_to do |format|
+      format.csv { send_data @course.to_csv, filename: "proforma_#{@course.course_code}.csv"}
+    end
   end
 
   #get /course/1

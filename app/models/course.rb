@@ -67,5 +67,35 @@ class Course < ActiveRecord::Base
     Course.includes(:student_course_details).where(:course_code => code)
   end
 
+  def to_csv
+    CSV.generate do |csv|
+      csv << ["Course Date", self.course_date, "Venue", self.venue.try(:name)]
+      csv << ["Course Finish Time", self.course_process_detail.course_finish_time, "Venue", self.venue.address]
+      csv << ["Course Code", self.course_code, "Venue Town", self.venue.location_relation.try(:town).try(:name)]
+      csv << ["Trainer", self.trainer.name, "Venue State", self.venue.location_relation.try(:state).try(:name)]
+      csv << ["Catering", self.venue.catering, "Venue Contact", self.venue.location_relation.try(:state).try(:name)]
+      csv << []
+      csv << []
+      csv << []
+
+
+      csv << ["Sl.no","Student No","Name","Industry","Control Weeds/learner Needs/Comments","Attendance","Amount Payable","Pay Method","No enrolment Form","No workbook"]
+      id = 1
+      self.student_course_details.each do |student_detail|
+        csv << [id, student_detail.student.student_id,
+                student_detail.student.student_biodata.first_name,
+                student_detail.industry,
+                "",
+                "",
+                student_detail.course_fee,
+                student_detail.payment_method,
+                "",
+                ""
+                ]
+        id +=1
+      end
+    end
+  end
+
 end
 

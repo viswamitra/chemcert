@@ -1,0 +1,4 @@
+<%= CSV.generate do |line| %>
+    <% line << ["Course Date",@course.course_date,"","blah","something"] %>
+
+<% end .html_safe%>

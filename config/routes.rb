@@ -19,6 +19,10 @@ ChemcertBakshi::Application.routes.draw do
       post '/process' => 'courses#course_post_process'
       get '/proforma' => 'courses#proforma'
     end
+
+    member do
+      get '/proforma' => 'courses#print_proforma'
+    end
   end
 
   resources :towns do
