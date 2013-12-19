@@ -21,7 +21,7 @@ class TrainersController < ApplicationController
 
   #post /rto
   def create
-    @trainer = TrainingOrganization.new(rto_params)
+    @trainer = Trainer.new(rto_params)
     respond_to do |format|
       if @trainer.save
         format.html {redirect_to @trainer, notice: "rto was succesfully created."}
@@ -38,7 +38,7 @@ class TrainersController < ApplicationController
   # PATCH/PUT /products/1
   # PATCH/PUT /products/1.json
   def update
-    @trainer = TrainingOrganization.find(params[:id])
+    @trainer = Trainer.find(params[:id])
     p rto_params
     respond_to do |format|
       if @trainer.update(rto_params)
@@ -53,7 +53,7 @@ class TrainersController < ApplicationController
 
   # DELETE /products/1
   def destroy
-    @trainer = TrainingOrganization.find(params[:id])
+    @trainer = Trainer.find(params[:id])
     @trainer.destroy
     respond_to do |format|
       format.html { redirect_to training_organizations_url }
