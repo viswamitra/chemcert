@@ -21,7 +21,7 @@ class StudentsController < ApplicationController
     @address = params[:student][:address]
     @needs = params[:student][:needs]
     @demo = params[:student][:demo]
-    @enquiry = params[:student][:commit] == 'Enrollment' ? 0 : 1
+    @enquiry = params[:student][:commit] == 'Enrollment' ? 1 : 0
 
 
     @student = StudentCourseDetail.enroll_student(@course_details, @bio, @address, @needs, @demo, @enquiry)

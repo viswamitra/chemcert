@@ -77,13 +77,21 @@
         <% if student_course_detail.present? %>
             $('#course_types').val('<%= student_course_detail.student_course_id %>');
             $('#additional_modules').val('<%= student_course_detail.additional_module_id %>');
-            $('#date_enrolled').val('<%= l student_course_detail.enrolled_at %>');
+            <% if student_course_detail.enrolled_at.present? %>
+                $('#date_enrolled').val('<%= l student_course_detail.enrolled_at %>');
+            <% else %>
+                $('#date_enrolled').val('');
+            <% end %>
             $('#student_industry').val('<%= student_course_detail.industry %>');
             $('#others').val('<%= student_course_detail.needs_specify %>');
             $('#comments').val('<%= student_course_detail.comments %>');
             $('#course_fee').val('<%= student_course_detail.course_fee %>');
             $('#payment_method').val('<%= student_course_detail.payment_method %>');
-            $('#payment_date').val('<%= student_course_detail.payment_date %>');
+            <% if student_course_detail.payment_date.present? %>
+                $('#payment_date').val('<%= l student_course_detail.payment_date %>');
+            <% else %>
+                $('#payment_date').val('');
+            <% end %>
             <% if student_course_detail.paid  %>
                 $('#paid').attr('checked','checked');
             <% end %>
