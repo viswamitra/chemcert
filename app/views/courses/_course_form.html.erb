@@ -165,12 +165,12 @@
                 $('#course_venue').empty();
                 $('#course_town').append("<option value="+data[0].town_id+" selected=selected>"+data[0].town+"</option>");
                 $('#course_state').append("<option value="+data[0].state_id+" selected=selected>"+data[0].state+"</option>");
-                $('#course_venue').append("<option value="+data[0].state_id+" selected=selected>"+data[0].venue+"</option>");
+                $('#course_venue').append("<option value="+data[0].venue_id+" selected=selected>"+data[0].venue+"</option>");
                 data.shift();
                 $.each(data, function(index, element) {
                     $('#course_town').append("<option value="+element.town_id+">"+element.town+"</option>");
                     $('#course_state').append("<option value="+element.state_id+">"+element.state+"</option>");
-                    $('#course_state').append("<option value="+element.state_id+">"+element.venue+"</option>");
+                    $('#course_state').append("<option value="+element.venue_id+">"+element.venue+"</option>");
                 });
 
             }
@@ -178,7 +178,7 @@
     });
 
 
-    <% if @postal_code_selected.present? && @town_selected.present? && @state_selected.present? %>
+    <% if @postal_code_selected.present? && @town_selected.present? && @state_selected.present? && @venue_selected.present? %>
 
         $('#course_postal_code').val('<%=@postal_code_selected.code%>');
         $('#course_town').append("<option value="+"<%= @town_selected.id %>"+" selected=selected>"+ "<%= @town_selected.name %>"+"</option>");

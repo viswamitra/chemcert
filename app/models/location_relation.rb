@@ -18,7 +18,9 @@ class LocationRelation < ActiveRecord::Base
        :town => lr.town.name,
        :state_id => lr.state.id,
        :state => lr.state.name,
-       :venue => lr.venue.try(:name)}
+       :venue_id => lr.venue.try(:id),
+       :venue => lr.venue.try(:name)
+       }
     end
   end
 
