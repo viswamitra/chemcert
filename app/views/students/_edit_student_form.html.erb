@@ -7,6 +7,11 @@
             </div>
 
             <div class="bottom-gap-5">
+                <%= label_tag :course_code %>
+                <input type="text" id="course_code" name="student[course_code]">
+            </div>
+
+            <div class="bottom-gap-5">
                 <%= label_tag :course_types %>
                 <select id="course_types" name="student[course][course_types]">
                     <option value=""></option>
@@ -244,7 +249,6 @@
             <div class="bottom-gap-5">
                 <%= label_tag :save_as%>
                 <select id="enquiry" name="student[course][enquiry]">
-                    <option value=""></option>
                     <option value="0">enquiry</option>
                     <option value="1">enrolment</option>
                 </select>

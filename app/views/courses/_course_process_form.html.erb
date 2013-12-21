@@ -34,24 +34,21 @@
         <div class="control-group">
             <label class="control-label" for="t4_received">T4 received</label>
             <div class="controls">
-                <input name="course[t4_received]" type="hidden" value="0" />
-                <input id="t4_received" name="course[t4_received]" type="checkbox" value="1" />
+                <input id="t4_received" name="course[t4_received]" type="checkbox" class="pull-left" value="1"/>
             </div>
         </div>
 
         <div class="control-group">
             <label class="control-label" for="declaration_form">Student Declaration form signed</label>
             <div class="controls">
-                <input name="course[declaration_form_signed]" type="hidden" value="0" />
-                <input id="declaration_form" name="course[declaration_form_signed]" type="checkbox" value="1" />
+                <input id="declaration_form" name="course[declaration_form_signed]" type="checkbox" class="pull-left" value="1"/>
             </div>
         </div>
 
         <div class="control-group">
             <label class="control-label" for="enrolment_form">Enrolment Form Signed</label>
             <div class="controls">
-                <input name="course[enrolment_form_signed]" type="hidden" value="0" />
-                <input id="enrolment_form" name="course[enrolment_form_signed]" type="checkbox" value="1" />
+                <input id="enrolment_form" name="course[enrolment_form_signed]" type="checkbox" class="pull-left" value="1"/>
             </div>
         </div>
 
@@ -97,7 +94,6 @@
             <label class="control-label" for="enrolment_center_invoice">Course status</label>
             <div class="controls">
                 <select id="course_status" name="course[status]">
-                    <option value=""></option>
                     <option value="0">open</option>
                     <option value="1">closed</option>
                 </select>

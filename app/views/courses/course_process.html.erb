@@ -68,3 +68,35 @@
 
     <div class="bottom-gap-50"></div>
 </div>
+
+<script type="text/javascript">
+    $(function(){
+        <% if @course.first.present? %>
+            <% course = @course.first %>
+            <% course_process_detail = course.course_process_detail %>
+            <% if course_process_detail.present? %>
+                $('#proforma_received').val('<%= course_process_detail.performa_received_at %>');
+                $('#course_received').val('<%= course_process_detail.course_received_at %>');
+                $('#course_finish_time').val('<%= course_process_detail.course_finish_time %>');
+                $('#venue_rating').val('<%= course_process_detail.venue_rating %>');
+                $('#inhouse_client').val('<%= course_process_detail.inhouse_client %>');
+                $('#cash_received').val('<%= course_process_detail.cash_received %>');
+                $('#trainer_invoice').val('<%= course_process_detail.trainer_invoice_po %>');
+                $('#trainer_payment').val('<%= course_process_detail.trainer_payment_amount %>');
+                $('#enrolment_center_invoice').val('<%= course_process_detail.enrolment_center_invoice %>');
+                $('#course_comments').val('<%= course_process_detail.comments %>');
+                <% if course_process_detail.t4_received  %> $('#t4_received').attr('checked','checked'); <% end %>
+                <% if course_process_detail.declaration_form_signed  %> $('#declaration_form').attr('checked','checked'); <% end %>
+                <% if course_process_detail.enrolment_form_signed  %> $('#enrolment_form').attr('checked','checked'); <% end %>
+                <% if course.course_status %>
+                    $('#course_status').val(1);
+                <% else %>
+                    $('#course_status').val(0);
+                <% end %>
+            <% end %>
+        <% end %>
+
+    });
+
+
+</script>

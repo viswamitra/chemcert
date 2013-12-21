@@ -5,8 +5,6 @@
         </div>
     </div>
 
-    <%= request.referer.inspect %>
-
     <div class="row">
         <div class="span12">
             <% if flash[:notice] %>
@@ -14,9 +12,6 @@
             <% end %>
         </div>
     </div>
-
-    <%= p @student.inspect %>
-    <%= p @course.inspect %>
 
     <form accept-charset="UTF-8" action="/students/update" class="form-horizontal" method="post">
         <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
@@ -66,6 +61,7 @@
 
         <% if course_id.present? %>
             $('#course_hidden').val('<%= @course.id %>');
+            $('#course_code').val('<%= @course.course_code %>');
         <% end %>
 
         <% student_course_detail = @student.student_course_detail %>

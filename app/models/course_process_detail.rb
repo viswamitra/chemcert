@@ -11,20 +11,40 @@ class CourseProcessDetail < ActiveRecord::Base
     begin
       ActiveRecord::Base.transaction do
         crs = Course.find_by_course_code(course["course_code"])
-        CourseProcessDetail.create!(:performa_received_at => course["proforma_received"],
-                                    :course_received_at => course["course_received"],
-                                    :course_id => crs.try(:id),
-                                    :course_finish_time => course["course_finish_time"],
-                                    :venue_rating => course["venue_rating"],
-                                    :t4_received => course["t4_received"],
-                                    :declaration_form_signed => course["declaration_form_signed"],
-                                    :enrolment_form_signed => course["enrolment_form_signed"],
-                                    :inhouse_client => course["inhouse_client_name"],
-                                    :cash_received => course["cash_received"],
-                                    :trainer_invoice_po => course["trainer_invoice"],
-                                    :trainer_payment_amount => course["trainer_payment"],
-                                    :enrolment_center_invoice => course["enrolment_center_invoice"],
-                                    :comments => course["comments"])
+        course_process_detail = crs.course_process_detail
+
+        if course_process_detail.present?
+          course_process_detail.update!(:performa_received_at => course["proforma_received"],
+          :course_received_at => course["course_received"],
+              :course_finish_time => course["course_finish_time"],
+          :venue_rating => course["venue_rating"],
+          :t4_received => course["t4_received"],
+          :declaration_form_signed => course["declaration_form_signed"],
+          :enrolment_form_signed => course["enrolment_form_signed"],
+          :inhouse_client => course["inhouse_client_name"],
+          :cash_received => course["cash_received"],
+          :trainer_invoice_po => course["trainer_invoice"],
+          :trainer_payment_amount => course["trainer_payment"],
+          :enrolment_center_invoice => course["enrolment_center_invoice"],
+          :comments => course["comments"])
+
+        else
+          CourseProcessDetail.create!(:performa_received_at => course["proforma_received"],
+                                      :course_received_at => course["course_received"],
+                                      :course_id => crs.try(:id),
+                                      :course_finish_time => course["course_finish_time"],
+                                      :venue_rating => course["venue_rating"],
+                                      :t4_received => course["t4_received"],
+                                      :declaration_form_signed => course["declaration_form_signed"],
+                                      :enrolment_form_signed => course["enrolment_form_signed"],
+                                      :inhouse_client => course["inhouse_client_name"],
+                                      :cash_received => course["cash_received"],
+                                      :trainer_invoice_po => course["trainer_invoice"],
+                                      :trainer_payment_amount => course["trainer_payment"],
+                                      :enrolment_center_invoice => course["enrolment_center_invoice"],
+                                      :comments => course["comments"])
+        end
+
 
         # cannot close the course if any of the students are not paid for that course yet.
 
