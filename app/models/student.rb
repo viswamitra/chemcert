@@ -16,7 +16,7 @@ class Student < ActiveRecord::Base
   #scopes
   scope :by_first_name, lambda{|name| Student.joins(:student_biodata).where('student_biodata.first_name = ?',name) if name.present?}
   scope :by_last_name, lambda{|name| Student.joins(:student_biodata).where('student_biodata.last_name = ?',name) if name.present?}
-  scope :by_student_id, lambda{|id| Student.find_by_student_id(id) if id.present?}
+  scope :by_student_id, lambda{|id| Student.where(:student_id => id) if id.present?}
   scope :by_enquiry, lambda{|enquiry| Student.joins(:student_course_detail).where('student_course_details.enquiry = ?',enquiry) if enquiry.present?}
   scope :by_state_id, lambda {|state_id| Student.joins(:student_address => :location_relation).where('location_relations.state_id = ?', state_id) if state_id.present?}
 
@@ -30,7 +30,7 @@ class Student < ActiveRecord::Base
 
   def self.search(first_name, last_name, student_id, enquiry, state_id)
     return [] unless (first_name.present? || last_name.present? || student_id.present? || enquiry.present? )
-    Student.by_first_name(first_name).merge(by_last_name(last_name)).merge(by_student_id(student_id)).merge(by_enquiry(enquiry)).merge(by_state_id(state_id))
+    Student.by_first_name(first_name).merge(self.by_last_name(last_name)).merge(self.by_student_id(student_id)).merge(self.by_enquiry(enquiry)).merge(self.by_state_id(state_id))
   end
 
 end
