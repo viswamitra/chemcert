@@ -24,11 +24,10 @@ class TrainersController < ApplicationController
     @trainer = Trainer.new(rto_params)
     respond_to do |format|
       if @trainer.save
-        format.html {redirect_to @trainer, notice: "rto was succesfully created."}
+        format.html {redirect_to @trainer, notice: "trainer was succesfully created."}
         format.json {render action: 'show', status: :created, location: @trainer}
       else
         flash[:error] = @trainer.errors.full_messages
-        p "-------> #{flash[:error]}"
         format.html { render action: 'new' }
         format.json { render json: @trainer.errors, status: :unprocessable_entity }
       end
@@ -42,7 +41,7 @@ class TrainersController < ApplicationController
     p rto_params
     respond_to do |format|
       if @trainer.update(rto_params)
-        format.html { redirect_to @trainer, notice: 'RTO was successfully updated.' }
+        format.html { redirect_to @trainer, notice: 'Trainer was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -69,7 +68,7 @@ class TrainersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def rto_params
-    params.require(:trainer).permit(:name, :provider)
+    params.require(:trainer).permit(:name)
   end
 
 end

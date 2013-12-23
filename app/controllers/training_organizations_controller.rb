@@ -71,6 +71,6 @@ class TrainingOrganizationsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def rto_params
-    params.require(:training_organization).permit(:name, :provider)
+    params.require(:training_organization).permit(:name)
   end
 end

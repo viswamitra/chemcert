@@ -3,11 +3,6 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :null_session
 
-  def redirect_to(*args)
-    flash.keep
-    super
-  end
-
   def render_csv(filename = nil)
     filename ||= "#{params[:action]}_#{Time.now.to_s}_.csv"
     if request.env['HTTP_USER_AGENT'] =~ /msie/i
