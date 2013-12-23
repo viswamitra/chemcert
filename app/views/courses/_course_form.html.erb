@@ -151,7 +151,6 @@
     <% end %>
 
     $('#course_postal_code').change(function(){
-        console.log("inside postal_code changed");
         postal_code = $(this).val();
         console.log(postal_code);
         $.ajax({
@@ -170,7 +169,7 @@
                 $.each(data, function(index, element) {
                     $('#course_town').append("<option value="+element.town_id+">"+element.town+"</option>");
                     $('#course_state').append("<option value="+element.state_id+">"+element.state+"</option>");
-                    $('#course_state').append("<option value="+element.venue_id+">"+element.venue+"</option>");
+                    $('#course_venue').append("<option value="+element.venue_id+">"+element.venue+"</option>");
                 });
 
             }
@@ -178,13 +177,14 @@
     });
 
 
-    <% if @postal_code_selected.present? && @town_selected.present? && @state_selected.present? && @venue_selected.present? %>
+    <% if @postal_code_selected.present? && @town_selected.present? && @state_selected.present? %>
 
         $('#course_postal_code').val('<%=@postal_code_selected.code%>');
         $('#course_town').append("<option value="+"<%= @town_selected.id %>"+" selected=selected>"+ "<%= @town_selected.name %>"+"</option>");
         $('#course_state').append("<option value="+"<%= @state_selected.id %>"+" selected=selected>"+ "<%= @state_selected.name %>"+"</option>");
-        $('#course_venue').append("<option value="+"<%= @venue_selected.id %>"+" selected=selected>"+ "<%= @venue_selected.name %>"+"</option>");
-
+        <% if @venue_selected.present? %>
+            $('#course_venue').append("<option value="+"<%= @venue_selected.id %>"+" selected=selected>"+ "<%= @venue_selected.name %>"+"</option>");
+        <% end %>
 
     <% end %>
 
