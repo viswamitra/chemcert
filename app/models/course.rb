@@ -70,16 +70,18 @@ class Course < ActiveRecord::Base
   def generate_proforma_csv
     CSV.generate do |csv|
       csv << ["Course Date", self.course_date, "Venue", self.venue.try(:name)]
-      csv << ["Course Finish Time", self.course_process_detail.course_finish_time, "Venue", self.venue.address]
-      csv << ["Course Code", self.course_code, "Venue Town", self.venue.location_relation.try(:town).try(:name)]
-      csv << ["Trainer", self.trainer.name, "Venue State", self.venue.location_relation.try(:state).try(:name)]
-      csv << ["Catering", self.venue.catering, "Venue Contact", self.venue.location_relation.try(:state).try(:name)]
+      csv << ["Start time","", "Venue Address", self.venue.try(:address)]
+      csv << ["Course Finish Time", self.course_process_detail.course_finish_time,"Venue Town", self.venue.location_relation.try(:town).try(:name)]
+      csv << ["Course Code", self.course_code, "Venue State", self.venue.location_relation.try(:state).try(:name)]
+      csv << ["Trainer", self.trainer.name, "Venue Contact", self.venue.location_relation.try(:state).try(:name)]
+      csv << ["Catering Contact", self.venue.catering, "Venue number", ""]
+      csv << ["Catering Arrangements",""]
       csv << []
       csv << []
       csv << []
 
 
-      csv << ["Sl.no","Student No","Name","Industry","Control Weeds/learner Needs/Comments","Attendance","Amount Payable","Pay Method","No enrolment Form","No workbook"]
+      csv << ["Sl.no","Student No","Name","Industry","Control Weeds/learner Needs/Comments","Attendance","Amount Payable","Pay Method","No enrolment Form","No workbook", "NYC/AQFII/AQFIV"]
       id = 1
       self.student_course_details.each do |student_detail|
         csv << [id, student_detail.student.student_id,
@@ -89,6 +91,7 @@ class Course < ActiveRecord::Base
                 "",
                 student_detail.course_fee,
                 student_detail.payment_method,
+                "",
                 "",
                 ""
                 ]
