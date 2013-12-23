@@ -29,7 +29,7 @@ class Course < ActiveRecord::Base
        where(:course_status => false)
      elsif status == 'closed'
        where(:course_status => true)
-     elsif status == 'payment_pending'
+     elsif status == 'payment_due'
        joins(:student_course_details).where('student_course_details.paid = ?',false)
      end
   end
@@ -67,7 +67,7 @@ class Course < ActiveRecord::Base
     Course.includes(:student_course_details).where(:course_code => code)
   end
 
-  def to_csv
+  def generate_proforma_csv
     CSV.generate do |csv|
       csv << ["Course Date", self.course_date, "Venue", self.venue.try(:name)]
       csv << ["Course Finish Time", self.course_process_detail.course_finish_time, "Venue", self.venue.address]
