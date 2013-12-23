@@ -107,6 +107,11 @@ ActiveRecord::Schema.define(version: 20131215113458) do
     t.datetime "updated_at"
   end
 
+  create_table "student_bio_data", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "student_biodata", force: true do |t|
     t.string   "gender"
     t.string   "first_name"
@@ -191,12 +196,6 @@ ActiveRecord::Schema.define(version: 20131215113458) do
   create_table "student_special_needs", force: true do |t|
     t.integer "student_id",      limit: 8, null: false
     t.integer "special_need_id", limit: 8, null: false
-  end
-
-  create_table "students", force: true do |t|
-    t.string   "student_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "towns", force: true do |t|
