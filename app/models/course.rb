@@ -30,7 +30,7 @@ class Course < ActiveRecord::Base
      elsif status == 'closed'
        where(:course_status => true)
      elsif status == 'payment_pending'
-       #joins(:students).
+       joins(:student_course_details).where('student_course_details.paid = ?',false)
      end
   end
 

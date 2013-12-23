@@ -12,7 +12,11 @@
             <% @courses.each do |course| %>
                 <tr>
                     <td> <%= course.course_code %></td>
-                    <td> <%= l course.course_date %></td>
+                    <% if course.course_date.present? %>
+                        <td> <%= l course.course_date %></td>
+                    <% else %>
+                        <td> </td>
+                    <% end %>
                     <td> <% if course.course_status  %>
                             Closed
                          <% else %>
