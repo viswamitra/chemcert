@@ -23,7 +23,7 @@
         <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
         <div class="row">
                 <div class="span3">
-                    <input class="text_field" id="course_code" name="course_code" placeholder="Enter course code" type="text" value="<%= params[:course_code]%>"/>
+                    <input class="text_field" id="course_code" name="course_code" autocomplete="off" placeholder="Enter course code" type="text" value="<%= params[:course_code]%>"/>
                 </div>
 
                 <div class="span3">
@@ -97,6 +97,28 @@
         <% end %>
 
     });
+
+    $('#course_code').typeahead(
+            {
+                minLength: 3,
+                source : function(query, process) {
+                    courses = [];
+                    $.ajax({
+                        url : 'courses/code.json',
+                        type : 'get',
+                        data : 'code='+query,
+                        dataType: 'JSON',
+                        success : function(data) {
+
+                            $.each(data, function(index, element) {
+                                courses.push(element.course_code);
+                            });
+                            process(courses);
+                        }
+                    });
+                }
+            }
+    );
 
 
 </script>
