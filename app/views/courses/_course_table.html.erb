@@ -27,7 +27,7 @@
                 <td> <%= 2 %></td>
                 <td> <%= 2 %></td>
                 <td> <%= 2 %></td>
-                <td> <%= course.venue.name %></td>
+                <td> <%= course.try(:venue).try(:name) %></td>
                 <td> <%= link_to "Show", course, :class => 'btn btn-primary btn-mini'%></td>
                 <td> <%= link_to "Edit", edit_course_path(course), :class => 'btn btn-mini' %></td>
                 </td>
