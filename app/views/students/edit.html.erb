@@ -92,7 +92,11 @@
                 $('#paid').attr('checked','checked');
             <% end %>
             $('#current_accreditation').val('<%= student_course_detail.current_accreditation %>');
-            $('#current_expiry_date').val('<%= student_course_detail.current_expiry_date %>');
+            <% if student_course_detail.current_expiry_date.present? %>
+                $('#current_expiry_date').val('<%= l student_course_detail.current_expiry_date %>');
+            <% else %>
+                $('#current_expiry_date').val('');
+            <% end %>
             $('#course_result').val('<%= student_course_detail.result %>');
             $('#course_special_modules').val('<%= student_course_detail.special_modules %>');
 

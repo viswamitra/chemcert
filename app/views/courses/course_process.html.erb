@@ -75,8 +75,17 @@
             <% course = @course.first %>
             <% course_process_detail = course.course_process_detail %>
             <% if course_process_detail.present? %>
-                $('#proforma_received').val('<%= course_process_detail.performa_received_at %>');
-                $('#course_received').val('<%= course_process_detail.course_received_at %>');
+                    <% if course_process_detail.performa_received_at.present? %>
+                        $('#proforma_received').val('<%= l course_process_detail.performa_received_at %>');
+                    <% else %>
+                        $('#proforma_received').val('');
+                    <% end %>
+
+                    <% if course_process_detail.course_received_at.present? %>
+                        $('#course_received').val('<%= l course_process_detail.course_received_at %>');
+                    <% else %>
+                        $('#course_received').val('');
+                    <% end %>
                 $('#course_finish_time').val('<%= course_process_detail.course_finish_time %>');
                 $('#venue_rating').val('<%= course_process_detail.venue_rating %>');
                 $('#inhouse_client').val('<%= course_process_detail.inhouse_client %>');
@@ -104,7 +113,7 @@
                 source : function(query, process) {
                     courses = [];
                     $.ajax({
-                        url : 'courses/code.json',
+                        url : '../courses/code.json',
                         type : 'get',
                         data : 'code='+query,
                         dataType: 'JSON',
