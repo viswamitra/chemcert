@@ -18,10 +18,12 @@ ChemcertBakshi::Application.routes.draw do
       get '/process' => 'courses#course_process'
       post '/process' => 'courses#course_post_process'
       get '/proforma' => 'courses#proforma'
+      get '/merge' => 'courses#merge'
     end
 
     member do
       get '/proforma' => 'courses#print_proforma'
+      get '/merge' => 'courses#generate_merge'
     end
   end
 
