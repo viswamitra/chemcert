@@ -71,7 +71,7 @@ class Course < ActiveRecord::Base
     CSV.generate do |csv|
       csv << ["Course Date", self.course_date, "Venue", self.venue.try(:name)]
       csv << ["Start time","", "Venue Address", self.venue.try(:address)]
-      csv << ["Course Finish Time", self.course_process_detail.course_finish_time,"Venue Town", self.venue.location_relation.try(:town).try(:name)]
+      csv << ["Course Finish Time", "","Venue Town", self.venue.location_relation.try(:town).try(:name)]
       csv << ["Course Code", self.course_code, "Venue State", self.venue.location_relation.try(:state).try(:name)]
       csv << ["Trainer", self.trainer.name, "Venue Contact", self.venue.location_relation.try(:state).try(:name)]
       csv << ["Catering Contact", self.venue.catering, "Venue number", ""]
