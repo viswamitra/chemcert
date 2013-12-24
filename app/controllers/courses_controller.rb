@@ -107,7 +107,7 @@ class CoursesController < ApplicationController
       if @course.save
         redirect_to @course, notice: "rto was succesfully created."
       else
-        flash["notice"] = @course.errors.full_messages.first
+        flash["notice"] = @course.errors.full_messages
         render action: 'new'
     end
   end
