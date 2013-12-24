@@ -83,7 +83,7 @@ class Course < ActiveRecord::Base
 
       csv << ["Sl.no","Student No","Name","Industry","Control Weeds/learner Needs/Comments","Attendance","Amount Payable","Pay Method","No enrolment Form","No workbook", "NYC/AQFII/AQFIV"]
       id = 1
-      self.student_course_details.each do |student_detail|
+      self.student_course_details.where('enquiry = ?',1).each do |student_detail|
         csv << [id, student_detail.student.student_id,
                 student_detail.student.student_biodata.first_name,
                 student_detail.industry,
