@@ -39,7 +39,7 @@ class CoursesController < ApplicationController
   def print_proforma
     @course = Course.find(params[:id])
     respond_to do |format|
-      format.csv { send_data @course.generate_proforma_csv, filename: "proforma_#{@course.course_code}.csv"}
+      format.csv { send_data @course.generate_profor  ma_csv, filename: "proforma_#{@course.course_code}.csv"}
     end
   end
 
@@ -68,7 +68,7 @@ class CoursesController < ApplicationController
     @state_selected = @course.location_relation.state
     @town_selected = @course.location_relation.town
     @course_code = @course.course_code
-    @venue_selected = @course.location_relation.venue
+    @venue_selected = @course.location_relation.try(:venue)
   end
 
   #get /courses/process
@@ -95,7 +95,7 @@ class CoursesController < ApplicationController
     town_id = params[:course][:town]
     postal_code_id = params[:course][:postal_code]
     location_relation_id = LocationRelation.where(:state_id => state_id, :postal_code_id => postal_code_id, :town_id => town_id).first
-    course_code = params[:course][:course_code]+((Course.last.try(:id).present? ? Course.last.id : 0) +1).to_s
+    course_code = params[:course][:course_code]
     @course = Course.new(:training_organization_id => params[:course][:training_organization],
       :is_correspondence => params[:course][:is_correspondence],
       :course_code => course_code,
@@ -104,14 +104,11 @@ class CoursesController < ApplicationController
       :venue_id => params[:course][:venue],
       :trainer_id => params[:course][:trainer]
       )
-    respond_to do |format|
       if @course.save
-        format.html {redirect_to @course, notice: "rto was succesfully created."}
-        format.json {render action: 'show', status: :created, location: @rto}
+        redirect_to @course, notice: "rto was succesfully created."
       else
-        format.html { render action: 'new' }
-        format.json { render json: @course.errors, status: :unprocessable_entity }
-      end
+        flash["notice"] = @course.errors.full_messages.first
+        render action: 'new'
     end
   end
 

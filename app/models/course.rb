@@ -4,6 +4,7 @@ class Course < ActiveRecord::Base
                   :course_date, :venue_id, :trainer_id, :course_status
 
   validates_inclusion_of :course_status, in: [true, false]
+  validates_uniqueness_of :course_code
 
   belongs_to :training_organization
   belongs_to :location_relation
