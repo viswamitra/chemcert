@@ -68,6 +68,53 @@ class Course < ActiveRecord::Base
     Course.includes(:student_course_details).where(:course_code => code)
   end
 
+  def generate_merge_txt
+    CSV.generate do |csv|
+      csv << ["Student_No","First_Name","Surname","Address1","Address2","Suburb","State","Postcode","Instructor","RTO","Original_Course_Date",
+              "Last_Course_Date","Expiry_Date","Location","SpecialModule1","SpecialModule2","SpecialModule3"]
+
+
+      self.student_course_details.where('enquiry in (?)',[1,2]).each do |student_detail|
+        student_no = student_detail.try(:student).try(:student_id).present? ? student_detail.student.student_id : ""
+        first_name = student_detail.try(:student).try(:student_biodata).try(:first_name).present? ? student_detail.student.student_biodata.first_name : ""
+        surname = student_detail.try(:student).try(:student_biodata).try(:last_name).present? ? student_detail.student.student_biodata.last_name : ""
+        address = student_detail.try(:student).try(:student_address).try(:address).present? ? student_detail.student.student_address.address : ""
+        suburb = student_detail.try(:student).try(:student_address).try(:location_relation).try(:town).try(:name).present? ? student_detail.student.student_address.location_relation.town.name : ""
+        state = student_detail.try(:student).try(:student_address).try(:location_relation).try(:state).try(:name).present? ? student_detail.student.student_address.location_relation.state.name : ""
+        postal_code = student_detail.try(:student).try(:student_address).try(:location_relation).try(:postal_code).try(:code).present? ? student_detail.student.student_address.location_relation.postal_code.code : ""
+        instructor = student_detail.try(:course).try(:trainer).try(:name).present? ? student_detail.course.trainer.name : ""
+        rto = student_detail.try(:course).try(:training_organization).try(:name).present? ? student_detail.course.training_organization.name : ""
+        original_course_date = student_detail.try(:student).try(:student_course_detail_histories).try(:first).try(:course).try(:course_date).present? ? student_detail.student.student_course_detail_histories.first.course.course_date : ""
+        last_course_date = student_detail.try(:course).try(:course_date).present? ? student_detail.course.course_date : ""
+        expirty_date = student_detail.try(:current_expiry_date).present? ? student_detail.current_expiry_date : ""
+        location = student_detail.try(:course).try(:location_relation).try(:town).try(:name).present? ? student_detail.course.location_relation.town.name : ""
+        special_module = student_detail.try(:additional_module).try(:type_name).present? ? student_detail.additional_module.type_name : ""
+
+
+
+        csv << [
+            student_no,
+            first_name,
+            surname,
+            address,
+            "",
+            suburb,
+            state,
+            postal_code,
+            instructor,
+            rto,
+            original_course_date,
+            last_course_date,
+            expirty_date,
+            location,
+            special_module,
+            "",
+            ""
+        ]
+      end
+    end
+  end
+
   def generate_proforma_csv
     CSV.generate do |csv|
       csv << ["Course Date", self.course_date, "Venue", self.venue.try(:name)]

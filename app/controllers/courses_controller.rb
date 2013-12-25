@@ -50,7 +50,7 @@ class CoursesController < ApplicationController
   def generate_merge
     @course = Course.find(params[:id])
     respond_to do |format|
-      format.csv { send_data @course.generate_proforma_csv, filename: "CHEMMERGE.txt"}
+      format.csv { send_data @course.generate_merge_txt, filename: "CHEMMERGE.txt"}
     end
   end
 
