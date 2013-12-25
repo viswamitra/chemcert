@@ -13,7 +13,7 @@
         <td><%= course_detail.student.student_biodata.first_name %></td>
         <td><%= course_detail.student.student_biodata.last_name %></td>
         <td><%= course_detail.paid ? "paid":"not paid" %></td>
-        <td> <%= link_to "Edit", edit_student_path(student, :from_process => true), :class => 'btn btn-mini' %></td>
+        <td> <%= link_to "Edit", edit_student_path(student, :from_process => true), :target => "_blank", :class => 'btn btn-mini' %></td>
     </tr>
         <% end %>
     <% end %>
