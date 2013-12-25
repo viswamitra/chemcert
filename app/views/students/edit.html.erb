@@ -251,5 +251,36 @@
         });
     });
 
+    $('#course_code').typeahead(
+            {
+                minLength: 3,
+                source : function(query, process) {
+                    map = {};
+                    courses = [];
+                    $.ajax({
+                        url : '/courses/open.json',
+                        type : 'get',
+                        data : 'code='+query,
+                        dataType: 'JSON',
+                        success : function(data) {
+
+                            $.each(data, function(index, element) {
+                                courses.push(element.course_code);
+                                map[element.course_code] = element;
+                            });
+                            process(courses);
+                        }
+                    });
+                },
+                updater : function(item) {
+                    $('#course_hidden').val(map[item].id);
+                    $('#course_code').val(map[item].name);
+                    return item;
+                }
+
+            }
+
+    );
+
 
 </script>

@@ -60,7 +60,11 @@ class Course < ActiveRecord::Base
   end
 
   def self.by_matching_code(code)
-    where("course_code like ?","%#{code}%")
+      where("course_code like ?","%#{code}%")
+  end
+
+  def self.by_open_mode(code)
+    where("course_code like ? and course_status = ?","%#{code}%", false)
   end
 
   #to include student_course_details also.

@@ -8,6 +8,13 @@ class CoursesController < ApplicationController
     end
   end
 
+  def by_open_mode
+    @course = Course.by_open_mode(params[:code])
+    respond_to do |format|
+      format.json {render json: @course}
+    end
+  end
+
   #get /towns/name/:name.json
   def by_town
     @courses = Course.by_town_id(params[:id])

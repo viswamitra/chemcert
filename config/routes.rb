@@ -12,6 +12,7 @@ ChemcertBakshi::Application.routes.draw do
   resources :courses do
     collection do
       get '/code' => 'courses#by_code'
+      get '/open' => 'courses#by_open_mode'
       get '/schedule' => 'courses#schedule'
       get '/status' => 'courses#status'
       get '/by_town' => 'courses#by_town'

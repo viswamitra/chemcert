@@ -68,9 +68,10 @@ class StudentCourseDetail < ActiveRecord::Base
         p "-----> home_location_relation #{home_location_relation.inspect}"
         assign_needs(needs, student)
 
-        student_course_detail = StudentCourseDetail.where(student_id: student.id, course_id: courses["course_id"]).first
+        student_course_detail = StudentCourseDetail.where(student_id: student.id).first
         student_course_detail.update(
                                     :enrolled_at => courses["enrolled_at"],
+                                    :course_id => courses["course_id"],
                                     :student_course_id => courses["course_types"],
                                     :additional_module_id => courses["additional_modules"],
                                     :industry => courses["industry"],
