@@ -7,5 +7,4 @@ class PostalCodesController < ApplicationController
       format.json {render json: @postal_codes}
     end
   end
-
 end

@@ -198,6 +198,13 @@ ActiveRecord::Schema.define(version: 20131215113458) do
     t.integer "special_need_id", limit: 8, null: false
   end
 
+  create_table "students", force: true do |t|
+    t.string "student_id"
+    t.string "usi_id"
+  end
+
+  add_index "students", ["student_id"], name: "index_students_on_student_id", unique: true, using: :btree
+
   create_table "towns", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
