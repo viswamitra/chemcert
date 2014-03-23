@@ -95,12 +95,13 @@
                 $('#quality_indicators_received').val('<%= course_process_detail.quality_indicators_received %>');
                 $('#course_comments').val('<%= course_process_detail.comments %>');
                 <% if course_process_detail.t4_received  %> $('#t4_received').attr('checked','checked'); <% end %>
+                <% if course_process_detail.t6_received %> $('#t6_received').attr('checked','checked'); <% end %>
+                <% if course_process_detail.t10_received  %> $('#t10_received').attr('checked','checked'); <% end %>
                 <% if course_process_detail.declaration_form_signed  %> $('#declaration_form').attr('checked','checked'); <% end %>
                 <% if course_process_detail.enrolment_form_signed  %> $('#enrolment_form').attr('checked','checked'); <% end %>
-                <% if course.course_status %>
-                    $('#course_status').val(1);
-                <% else %>
-                    $('#course_status').val(0);
+                <% if course.course_status.present? %>
+                    console.log(<%course.course_status.id%>);
+                    $('#course_status').val(<%= course.course_status.id%>);
                 <% end %>
             <% end %>
         <% end %>
