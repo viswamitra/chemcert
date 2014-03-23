@@ -98,6 +98,7 @@ class CoursesController < ApplicationController
   #post /courses/process
   def course_post_process
     result = CourseProcessDetail.create_process_detail(params[:course])
+    p "-----> #{result}"
       if result[:success]
         redirect_to process_courses_path
       else

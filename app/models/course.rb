@@ -3,13 +3,13 @@ class Course < ActiveRecord::Base
   attr_accessible :location_relation_id, :training_organization_id,:is_correspondence, :course_code,
                   :course_date, :venue_id, :trainer_id, :course_status, :in_house_course, :in_house_course_name
 
-  validates_inclusion_of :course_status, in: [true, false]
   validates_uniqueness_of :course_code
 
   belongs_to :training_organization
   belongs_to :location_relation
   belongs_to :venue
   belongs_to :trainer
+  belongs_to :course_status
   has_many :student_course_details
   has_many :student_course_detail_histories
 

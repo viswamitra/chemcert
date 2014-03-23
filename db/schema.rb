@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140323125558) do
+ActiveRecord::Schema.define(version: 20140323141851) do
 
   create_table "additional_modules", force: true do |t|
     t.string   "type_name"
@@ -41,19 +41,25 @@ ActiveRecord::Schema.define(version: 20140323125558) do
     t.boolean  "t10_received"
   end
 
+  create_table "course_statuses", force: true do |t|
+    t.string   "status"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "courses", force: true do |t|
-    t.integer  "training_organization_id", limit: 8,                 null: false
+    t.integer  "training_organization_id", limit: 8, null: false
     t.boolean  "is_correspondence"
     t.string   "course_code"
     t.date     "course_date"
-    t.integer  "location_relation_id",     limit: 8,                 null: false
-    t.integer  "venue_id",                 limit: 8,                 null: false
-    t.integer  "trainer_id",               limit: 8,                 null: false
+    t.integer  "location_relation_id",     limit: 8, null: false
+    t.integer  "venue_id",                 limit: 8, null: false
+    t.integer  "trainer_id",               limit: 8, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "course_status",                      default: false
     t.string   "in_house_course_name"
     t.boolean  "in_house_course"
+    t.integer  "course_status_id",         limit: 8, null: false
   end
 
   add_index "courses", ["course_code"], name: "index_courses_on_course_code", unique: true, using: :btree

@@ -109,8 +109,9 @@
             <label class="control-label" for="enrolment_center_invoice">Course status</label>
             <div class="controls">
                 <select id="course_status" name="course[status]">
-                    <option value="0">open</option>
-                    <option value="1">closed</option>
+                        <% CourseStatus.all.each do |status| %>
+                            <option value="<%=status.id %>"><%=status.status %></option>
+                        <% end %>
                 </select>
             </div>
         </div>
