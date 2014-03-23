@@ -1,7 +1,7 @@
 class Course < ActiveRecord::Base
 
   attr_accessible :location_relation_id, :training_organization_id,:is_correspondence, :course_code,
-                  :course_date, :venue_id, :trainer_id, :course_status, :in_house_course, :in_house_course_name
+                  :course_date, :venue_id, :trainer_id, :course_status_id, :in_house_course, :in_house_course_name
 
   validates_uniqueness_of :course_code
 
@@ -18,7 +18,7 @@ class Course < ActiveRecord::Base
   scope :by_course_code, lambda{|code| where(:course_code => code) if code.present?}
   scope :by_course_date, lambda {|date| where(:course_date => date) if date.present?}
   #adding only open courses to show as available in that particular town.
-  scope :by_town_id, lambda {|town_id| Course.joins(:location_relation => :town).merge(Town.by_id(town_id)).where(course_status: false) if town_id.present?}
+  scope :by_town_id, lambda {|town_id| Course.joins(:location_relation => :town).merge(Town.by_id(town_id)).where(course_status: 0) if town_id.present?}
 
   scope :by_start_date, lambda {|date| Course.where('course_date >= ?',date) if date.present?}
   scope :by_end_date, lambda {|date| Course.where('course_date <= ?',date) if date.present?}
@@ -39,9 +39,9 @@ class Course < ActiveRecord::Base
 
   def self.by_course_status(status)
      if status == 'open'
-       where(:course_status => false)
+       where(:course_status_id => 0)
      elsif status == 'closed'
-       where(:course_status => true)
+       where(:course_status_id => 1)
      elsif status == 'payment_due'
        joins(:student_course_details).where('student_course_details.paid = ?',false)
      end
@@ -75,7 +75,7 @@ class Course < ActiveRecord::Base
   end
 
   def self.by_open_mode(code)
-    where("course_code like ? and course_status = ?","%#{code}%", false)
+    where("course_code like ? and course_status_id = ?","%#{code}%", 0)
   end
 
   #to include student_course_details also.
