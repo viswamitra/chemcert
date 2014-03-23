@@ -18,7 +18,7 @@ class Course < ActiveRecord::Base
   scope :by_course_code, lambda{|code| where(:course_code => code) if code.present?}
   scope :by_course_date, lambda {|date| where(:course_date => date) if date.present?}
   #adding only open courses to show as available in that particular town.
-  scope :by_town_id, lambda {|town_id| Course.joins(:location_relation => :town).merge(Town.by_id(town_id)).where(:course_status_id =>  0) if town_id.present?}
+  scope :by_town_id, lambda {|town_id| Course.joins(:location_relation => :town).merge(Town.by_id(town_id)).where(:course_status_id =>  1) if town_id.present?}
 
   scope :by_start_date, lambda {|date| Course.where('course_date >= ?',date) if date.present?}
   scope :by_end_date, lambda {|date| Course.where('course_date <= ?',date) if date.present?}

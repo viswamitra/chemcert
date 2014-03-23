@@ -123,7 +123,9 @@ class CoursesController < ApplicationController
       :course_date => params[:course][:course_date],
       :location_relation_id => location_relation_id.id,
       :venue_id => params[:course][:venue],
-      :trainer_id => params[:course][:trainer]
+      :trainer_id => params[:course][:trainer],
+      # creating all default courses with 1 - which is open.
+      :course_status_id => 1
       )
       if @course.save
         redirect_to @course, notice: "rto was succesfully created."

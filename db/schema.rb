@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140323141851) do
+ActiveRecord::Schema.define(version: 20140323173923) do
 
   create_table "additional_modules", force: true do |t|
     t.string   "type_name"
@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 20140323141851) do
     t.datetime "updated_at"
     t.string   "in_house_course_name"
     t.boolean  "in_house_course"
-    t.integer  "course_status_id",         limit: 8, null: false
+    t.integer  "course_status_id",         limit: 8
   end
 
   add_index "courses", ["course_code"], name: "index_courses_on_course_code", unique: true, using: :btree
