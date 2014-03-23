@@ -18,7 +18,7 @@ class Course < ActiveRecord::Base
   scope :by_course_code, lambda{|code| where(:course_code => code) if code.present?}
   scope :by_course_date, lambda {|date| where(:course_date => date) if date.present?}
   #adding only open courses to show as available in that particular town.
-  scope :by_town_id, lambda {|town_id| Course.joins(:location_relation => :town).merge(Town.by_id(town_id)).where(course_status: 0) if town_id.present?}
+  scope :by_town_id, lambda {|town_id| Course.joins(:location_relation => :town).merge(Town.by_id(town_id)).where(:course_status_id =>  0) if town_id.present?}
 
   scope :by_start_date, lambda {|date| Course.where('course_date >= ?',date) if date.present?}
   scope :by_end_date, lambda {|date| Course.where('course_date <= ?',date) if date.present?}
@@ -38,12 +38,10 @@ class Course < ActiveRecord::Base
 
 
   def self.by_course_status(status)
-     if status == 'open'
-       where(:course_status_id => 0)
-     elsif status == 'closed'
-       where(:course_status_id => 1)
-     elsif status == 'payment_due'
+     if status == 7
        joins(:student_course_details).where('student_course_details.paid = ?',false)
+     else
+       where(:course_status_id => status)
      end
   end
 

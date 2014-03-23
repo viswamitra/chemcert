@@ -17,10 +17,10 @@
                     <% else %>
                         <td> </td>
                     <% end %>
-                    <td> <% if course.course_status  %>
-                            Closed
+                    <td> <% if course.course_status.present?  %>
+                            <%= course.course_status.status %>
                          <% else %>
-                            Open
+                            <td> </td>
                         <% end %>
                     </td>
                     <td> <%= link_to "Show", course, :class => 'btn btn-primary btn-mini'%></td>

@@ -24,10 +24,10 @@
             <div class="span3">
                 <%= label_tag :course_status %> </br>
                 <select id="course_status" name="course_status">
-                    <option value=""></option>
-                    <option value="open">open</option>
-                    <option value="closed">closed</option>
-                    <option value="payment_due">payment due</option>
+                    <% CourseStatus.all.each do |status| %>
+                        <option value="<%=status.id %>"><%=status.status %></option>
+                    <% end %>
+                        <option value="7"> Payment Due</option>
                 </select>
             </div>
 
