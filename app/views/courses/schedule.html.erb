@@ -21,7 +21,16 @@
             <div class="span3">
                 <%= label_tag :state %> </br>
                 <% state_array = State.all.map {|state| [state.name, state.id]} %>
-                <%= select_tag :state, options_for_select(state_array) %>
+                <div class="controls">
+                    <select id="state" name="state">
+                        <option value="">All</option>
+                        <% if state_array.present? %>
+                            <% state_array.each do |state| %>
+                                <option value="<%=state[1] %>"><%=state[0] %></option>
+                            <% end %>
+                        <% end %>
+                    </select>
+                </div>
             </div>
 
             <div class="span3">

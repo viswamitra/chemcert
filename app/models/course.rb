@@ -19,9 +19,20 @@ class Course < ActiveRecord::Base
   scope :by_course_date, lambda {|date| where(:course_date => date) if date.present?}
   #adding only open courses to show as available in that particular town.
   scope :by_town_id, lambda {|town_id| Course.joins(:location_relation => :town).merge(Town.by_id(town_id)).where(course_status: false) if town_id.present?}
-  scope :by_state_id, lambda {|state_id| Course.joins(:location_relation => :state).merge(State.by_id(state_id)) if state_id.present?}
+
   scope :by_start_date, lambda {|date| Course.where('course_date >= ?',date) if date.present?}
   scope :by_end_date, lambda {|date| Course.where('course_date <= ?',date) if date.present?}
+
+
+  scope :by_state_id, lambda {|state_id|
+    if state_id.present?
+      Course.joins(:location_relation => :state).merge(State.by_id(state_id))
+    else
+      states = State.all.map {|s| s.id}
+      Course.joins(:location_relation => :state).merge(State.by_id(states))
+    end
+
+  }
 
 
 
@@ -43,7 +54,6 @@ class Course < ActiveRecord::Base
   end
 
   def self.search_by_schedule(start_date, end_date, state_id)
-     return [] unless (start_date.present? || end_date.present? || state_id.present?)
      start_date = Time.parse(start_date).strftime('%Y-%m-%d') if start_date.present?
      end_date = Time.parse(end_date).strftime('%Y-%m-%d') if end_date.present?
      Course.between_dates(start_date, end_date).merge(by_state_id(state_id))
