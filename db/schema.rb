@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131215113458) do
+ActiveRecord::Schema.define(version: 20140323104034) do
 
   create_table "additional_modules", force: true do |t|
     t.string   "type_name"
@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 20131215113458) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "course_status",                      default: false
+    t.string   "in_house_course_name"
+    t.boolean  "in_house_course"
   end
 
   add_index "courses", ["course_code"], name: "index_courses_on_course_code", unique: true, using: :btree

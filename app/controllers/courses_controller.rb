@@ -116,6 +116,8 @@ class CoursesController < ApplicationController
     course_code = params[:course][:course_code]
     @course = Course.new(:training_organization_id => params[:course][:training_organization],
       :is_correspondence => params[:course][:is_correspondence],
+      :in_house_course => params[:course][:in_house_course],
+      :in_house_course_name => params[:course][:in_house_course_name],
       :course_code => course_code,
       :course_date => params[:course][:course_date],
       :location_relation_id => location_relation_id.id,
@@ -141,6 +143,8 @@ class CoursesController < ApplicationController
     respond_to do |format|
       if @course.update(:training_organization_id => params[:course][:training_organization],
                      :is_correspondence => params[:course][:is_correspondence],
+                     :is_correspondence => params[:course][:is_correspondence],
+                     :in_house_course => params[:course][:in_house_course],
                      :course_code => params[:course][:course_code],
                      :course_date => params[:course][:course_date],
                      :location_relation_id => location_relation_id.id,

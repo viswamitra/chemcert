@@ -1,7 +1,7 @@
 class Course < ActiveRecord::Base
 
   attr_accessible :location_relation_id, :training_organization_id,:is_correspondence, :course_code,
-                  :course_date, :venue_id, :trainer_id, :course_status
+                  :course_date, :venue_id, :trainer_id, :course_status, :in_house_course, :in_house_course_name
 
   validates_inclusion_of :course_status, in: [true, false]
   validates_uniqueness_of :course_code
