@@ -1,9 +1,9 @@
 class CourseProcessDetail < ActiveRecord::Base
 
   attr_accessible :performa_received_at, :course_received_at, :course_finish_time,
-                :venue_rating, :t4_received, :declaration_form_signed, :enrolment_form_signed,
-                :inhouse_client, :cash_received, :trainer_invoice_po, :trainer_payment_amount,
-                :enrolment_center_invoice, :course_status, :comments, :course_id
+                :venue_rating, :t4_received,:t6_received,:t10_received, :declaration_form_signed,
+                :enrolment_form_signed,:inhouse_client, :cash_received, :trainer_invoice_po, :trainer_payment_amount,
+                :quality_indicators_received, :course_status, :comments, :course_id
 
   belongs_to :course
 
@@ -19,13 +19,15 @@ class CourseProcessDetail < ActiveRecord::Base
               :course_finish_time => course["course_finish_time"],
           :venue_rating => course["venue_rating"],
           :t4_received => course["t4_received"],
+          :t6_received => course["t6_received"],
+          :t10_received => course["t10_received"],
           :declaration_form_signed => course["declaration_form_signed"],
           :enrolment_form_signed => course["enrolment_form_signed"],
           :inhouse_client => course["inhouse_client_name"],
           :cash_received => course["cash_received"],
           :trainer_invoice_po => course["trainer_invoice"],
           :trainer_payment_amount => course["trainer_payment"],
-          :enrolment_center_invoice => course["enrolment_center_invoice"],
+          :quality_indicators_received => course["quality_indicators_received"],
           :comments => course["comments"])
 
         else
@@ -35,13 +37,15 @@ class CourseProcessDetail < ActiveRecord::Base
                                       :course_finish_time => course["course_finish_time"],
                                       :venue_rating => course["venue_rating"],
                                       :t4_received => course["t4_received"],
+                                      :t6_received => course["t6_received"],
+                                      :t10_received => course["t10_received"],
                                       :declaration_form_signed => course["declaration_form_signed"],
                                       :enrolment_form_signed => course["enrolment_form_signed"],
                                       :inhouse_client => course["inhouse_client_name"],
                                       :cash_received => course["cash_received"],
                                       :trainer_invoice_po => course["trainer_invoice"],
                                       :trainer_payment_amount => course["trainer_payment"],
-                                      :enrolment_center_invoice => course["enrolment_center_invoice"],
+                                      :quality_indicators_received => course["quality_indicators_received"],
                                       :comments => course["comments"])
         end
 

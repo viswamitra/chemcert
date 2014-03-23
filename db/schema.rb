@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140323104034) do
+ActiveRecord::Schema.define(version: 20140323125558) do
 
   create_table "additional_modules", force: true do |t|
     t.string   "type_name"
@@ -31,12 +31,14 @@ ActiveRecord::Schema.define(version: 20140323104034) do
     t.float    "cash_received"
     t.string   "trainer_invoice_po"
     t.float    "trainer_payment_amount"
-    t.string   "enrolment_center_invoice"
+    t.string   "quality_indicators_received"
     t.string   "comments"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "course_id",                limit: 8, null: false
+    t.integer  "course_id",                   limit: 8, null: false
     t.string   "needs_specify"
+    t.boolean  "t6_received"
+    t.boolean  "t10_received"
   end
 
   create_table "courses", force: true do |t|
