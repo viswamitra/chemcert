@@ -74,6 +74,15 @@
         </div>
     </div>
 
+    <!-- This is the venue postal code, and it will populate the venue-->
+    <div class="control-group">
+        <%= f.label :venue_postal_code, :class => 'control-label' %>
+        <div class="controls">
+            <input type="text" id="venue_postal_code" autocomplete="off" placeholder="Enter Venue Postal Code" >
+            <input type="hidden" id="venue_postal_code_hidden" name="course[venue_postal_code]" />
+        </div>
+    </div>
+
     <div class="control-group">
         <%= f.label :venue, :class => 'control-label' %>
         <div class="controls">
@@ -146,6 +155,35 @@
                 }
         );
 
+        $('#venue_postal_code').typeahead(
+                {
+                    minLength: 2,
+                    source : function(query, process) {
+                        map = {};
+                        postal_codes = [];
+                        $.ajax({
+                            url : '/postal_codes/code.json',
+                            type : 'get',
+                            data : 'code='+query,
+                            dataType: 'JSON',
+                            success : function(data) {
+                                $.each(data, function(index, element) {
+                                    postal_codes.push(element.code);
+                                    map[element.code] = element;
+                                });
+                                process(postal_codes);
+                            }
+                        });
+                    },
+                    updater : function(item) {
+                        $('#venue_postal_code_hidden').val(map[item].id);
+                        $('#venue_postal_code').val(map[item].name);
+                        return item;
+                    }
+
+                }
+        );
+
         $('#course_is_correspondence').change(function(){
             if($(this).is(":checked")) {
                 $('#course_course_code').val('CTC');
@@ -174,14 +212,31 @@
             success : function(data) {
                 $('#course_town').empty();
                 $('#course_state').empty();
-                $('#course_venue').empty();
                 $('#course_town').append("<option value="+data[0].town_id+" selected=selected>"+data[0].town+"</option>");
                 $('#course_state').append("<option value="+data[0].state_id+" selected=selected>"+data[0].state+"</option>");
-                $('#course_venue').append("<option value="+data[0].venue_id+" selected=selected>"+data[0].venue+"</option>");
                 data.shift();
                 $.each(data, function(index, element) {
                     $('#course_town').append("<option value="+element.town_id+">"+element.town+"</option>");
                     $('#course_state').append("<option value="+element.state_id+">"+element.state+"</option>");
+                });
+
+            }
+        });
+    });
+
+    $('#venue_postal_code').change(function(){
+        postal_code = $(this).val();
+        console.log(postal_code);
+        $.ajax({
+            url : '/location_relations/postal_code.json',
+            type : 'get',
+            data : 'postal_code='+postal_code,
+            dataType: 'JSON',
+            success : function(data) {
+                $('#course_venue').empty();
+                $('#course_venue').append("<option value="+data[0].venue_id+" selected=selected>"+data[0].venue+"</option>");
+                data.shift();
+                $.each(data, function(index, element) {
                     $('#course_venue').append("<option value="+element.venue_id+">"+element.venue+"</option>");
                 });
 
