@@ -4,14 +4,14 @@
         <tr>
             <th> CT Code </th>
             <th> Date </th>
-            <th> Town </th>
-            <th> State</th>
             <th> Trainer</th>
+            <th> Location </th>
             <th> Initials </th>
             <th> Refreshers </th>
+            <th> AQFII </th>
+            <th> AQFIV </th>
             <th> Weeds </th>
-            <th> Total </th>
-            <th> venue </th>
+
             <th>  </th>
             <th>  </th>
         </tr>
@@ -20,17 +20,19 @@
             <tr>
                 <td> <%= course.course_code %></td>
                 <td> <%= l course.course_date %></td>
-                <td> <%= course.location_relation.town.name %></td>
-                <td> <%= course.location_relation.state.name %></td>
                 <td> <%= course.trainer.name %></td>
+                <td> <%= course.location_relation.town.name %></td>
+
                 <% initials = course.student_course_details.joins(:student_course).where("student_courses.type_name = ?", 'Initial').size %>
                 <% refreshers = course.student_course_details.joins(:student_course).where("student_courses.type_name = ?", 'Refresher').size %>
+                <% aqf2 = course.student_course_details.joins(:student_course).where("student_courses.type_name = ?", 'AFQ II').size %>
+                <% aqf4 = course.student_course_details.joins(:student_course).where("student_courses.type_name = ?", 'AFQ IV').size %>
                 <% weeds = course.student_course_details.joins(:additional_module).where("additional_modules.type_name = ?", 'weeds').size %>
                 <td> <%= initials %></td>
                 <td> <%= refreshers %></td>
+                <td> <%= aqf2 %></td>
+                <td> <%= refreshers %></td>
                 <td> <%= weeds %></td>
-                <td> <%= initials + refreshers + weeds %></td>
-                <td> <%= course.try(:venue).try(:name) %></td>
                 <td> <%= link_to "Show", course, :class => 'btn btn-primary btn-mini'%></td>
                 <td> <%= link_to "Edit", edit_course_path(course), :class => 'btn btn-mini' %></td>
                 </td>

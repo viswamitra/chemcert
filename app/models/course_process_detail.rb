@@ -52,7 +52,8 @@ class CourseProcessDetail < ActiveRecord::Base
 
         # cannot close the course if any of the students are not paid for that course yet.
 
-        if(course["status"] == 1)
+        # 2 is course closed
+        if(course["status"] == 2)
           student_course_details = crs.student_course_details.where(enquiry: 1)
           course_validation(student_course_details)
           update_course_expiry_date(student_course_details)

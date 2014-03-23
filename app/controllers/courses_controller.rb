@@ -86,7 +86,7 @@ class CoursesController < ApplicationController
     @state_selected = @course.location_relation.state
     @town_selected = @course.location_relation.town
     @course_code = @course.course_code
-    @venue_selected = @course.location_relation.try(:venue)
+    @venue_selected = @course.try(:venue)
   end
 
   #get /courses/process

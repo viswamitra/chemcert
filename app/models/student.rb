@@ -21,6 +21,26 @@ class Student < ActiveRecord::Base
   scope :by_state_id, lambda {|state_id| Student.joins(:student_address => :location_relation).where('location_relations.state_id = ?', state_id) if state_id.present?}
 
 
+  scope :by_state_id, lambda {|state_id|
+    if state_id.present?
+      Student.joins(:student_address => :location_relation).where('location_relations.state_id = ?', state_id.to_i)
+    else
+      states = State.all.map {|s| s.id}
+      Student.joins(:student_address => :location_relation).where('location_relations.state_id in (?)', states)
+    end
+
+  }
+
+  scope :by_enquiry, lambda{|enquiry|
+    if enquiry.present?
+      Student.joins(:student_course_detail).where('student_course_details.enquiry = ?',enquiry.to_i)
+    else
+      enquiries = [0,1,2] # { 0 - enquiry, 1- enrolment, 2- completed}
+      Student.joins(:student_course_detail).where('student_course_details.enquiry in (?)',enquiries)
+    end
+  }
+
+
   def self.create_unique_id
     #should modify this to accomodate a true random number.
     sql = ActiveRecord::Base.connection();
@@ -29,7 +49,7 @@ class Student < ActiveRecord::Base
   end
 
   def self.search(first_name, last_name, student_id, enquiry, state_id)
-    return [] unless (first_name.present? || last_name.present? || student_id.present? || enquiry.present? )
+    #return [] unless (first_name.present? || last_name.present? || student_id.present? || enquiry.present? )
     Student.by_first_name(first_name).merge(self.by_last_name(last_name)).merge(self.by_student_id(student_id)).merge(self.by_enquiry(enquiry)).merge(self.by_state_id(state_id))
   end
 
