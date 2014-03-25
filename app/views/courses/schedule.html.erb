@@ -23,7 +23,7 @@
                 <% state_array = State.all.map {|state| [state.name, state.id]} %>
                 <div class="controls">
                     <select id="state" name="state">
-                        <option value="">All</option>
+                        <option value="0">All</option>
                         <% if state_array.present? %>
                             <% state_array.each do |state| %>
                                 <option value="<%=state[1] %>"><%=state[0] %></option>

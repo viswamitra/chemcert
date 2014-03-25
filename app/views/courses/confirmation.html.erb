@@ -1,11 +1,11 @@
 <div class="container">
     <div class="row">
         <div class="span9">
-            <h3> Generate Merge file </h3>
+            <h3> Generate Confirmation Merge File </h3>
         </div>
     </div>
     <div class="row">
-        <%= form_tag merge_courses_path, :method => "get", :class => "form-inline" do %>
+        <%= form_tag confirmation_courses_path, :method => "get", :class => "form-inline" do %>
             <div class="span3">
                 <%= label_tag :course_code%> </br>
                 <input type="text" id="course_code" name="course_code" autocomplete="off" placeholder="Enter Course code" value="<%= params[:course_code] %>">
@@ -21,7 +21,6 @@
                     </select>
                 </div>
             </div>
-
 
             <div class="span3">
                 <div class="control-group">
@@ -42,7 +41,7 @@
         </div>
     </div>
 
-    <%= render 'generate_merge_table_container' %>
+    <%= render 'generate_confirmation_table_container' %>
 </div>
 </div>
 

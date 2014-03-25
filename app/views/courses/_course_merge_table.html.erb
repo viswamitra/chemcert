@@ -13,13 +13,8 @@
             <tr>
                 <td> <%= @course.course_code %></td>
                 <td> <%= l @course.course_date %></td>
-                <td> <% if @course.course_status  %>
-                        Closed
-                    <% else %>
-                        Open
-                    <% end %>
-                </td>
-                <td> <%= link_to "Merge file", merge_course_path(id: @course.id, format: "csv"), :class => 'btn btn-primary btn-mini'%></td>
+                <td> <%= @course.course_status.status  %></td>
+                <td> <%= link_to "Merge file", merge_course_path(id: @course.id, enrolment_type: @enrolment_type, format: "csv"), :class => 'btn btn-primary btn-mini'%></td>
                 </td>
             </tr>
 
