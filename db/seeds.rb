@@ -9,4 +9,4 @@
 
 #create student courses
 student_courses = StudentCourse.create([{type_name: 'Initial'},{type_name: 'Refresher'},{type_name: 'AFQ II'},{type_name: 'AFQ IV'}])
-addition_modules = AdditionalModule.create([{type_name: 'weeds'}])
+addition_modules = AdditionalModule.create([{type_name: 'Weeds'}])

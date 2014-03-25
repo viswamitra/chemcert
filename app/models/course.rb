@@ -134,7 +134,7 @@ class Course < ActiveRecord::Base
       csv << ["Start time","", "Venue Address", self.venue.try(:address)]
       csv << ["Course Finish Time", "","Venue Town", self.venue.location_relation.try(:town).try(:name)]
       csv << ["Course Code", self.course_code, "Venue State", self.venue.location_relation.try(:state).try(:name)]
-      csv << ["Trainer", self.trainer.name, "Venue Contact", self.venue.location_relation.try(:state).try(:name)]
+      csv << ["Trainer", self.trainer.name, "Venue Contact", ""]
       csv << ["Catering Contact", self.venue.catering, "Venue number", ""]
       csv << ["Catering Arrangements",""]
       csv << []

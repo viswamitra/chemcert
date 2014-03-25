@@ -37,7 +37,7 @@ CREATE TABLE `additional_modules` (
 
 LOCK TABLES `additional_modules` WRITE;
 /*!40000 ALTER TABLE `additional_modules` DISABLE KEYS */;
-INSERT INTO `additional_modules` VALUES (1,'weeds','2013-11-25 18:36:52','2013-11-25 18:36:52');
+INSERT INTO `additional_modules` VALUES (1,'Weeds','2013-11-25 18:36:52','2013-11-25 18:36:52');
 /*!40000 ALTER TABLE `additional_modules` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
