@@ -49,5 +49,27 @@
     $(function(){
         $(".datepicker").datepicker({ dateFormat: 'dd/mm/yy' });
     });
+
+    $('#course_code').typeahead(
+            {
+                minLength: 3,
+                source : function(query, process) {
+                    courses = [];
+                    $.ajax({
+                        url : '../courses/code.json',
+                        type : 'get',
+                        data : 'code='+query,
+                        dataType: 'JSON',
+                        success : function(data) {
+
+                            $.each(data, function(index, element) {
+                                courses.push(element.course_code);
+                            });
+                            process(courses);
+                        }
+                    });
+                }
+            }
+    );
 </script>
 
