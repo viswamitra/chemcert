@@ -128,7 +128,7 @@ class Course < ActiveRecord::Base
     end
   end
 
-  def generate_proforma_csv
+  def generate_proforma_csv(proforma_type)
     CSV.generate do |csv|
       csv << ["Course Date", self.course_date, "Venue", self.venue.try(:name)]
       csv << ["Start time","", "Venue Address", self.venue.try(:address)]
@@ -144,7 +144,8 @@ class Course < ActiveRecord::Base
 
       csv << ["Sl.no","Student No","Name","Industry","Control Weeds/learner Needs/Comments","Attendance","Amount Payable","Pay Method","No enrolment Form","No workbook", "NYC/AQFII/AQFIV"]
       id = 1
-      self.student_course_details.where('enquiry = ?',1).each do |student_detail|
+      scd = self.student_course_details.joins(:student_course).where('student_course_details.enquiry = ? and student_courses.type_name = ?',1, proforma_type)
+      scd.each do |student_detail|
         csv << [id, student_detail.student.student_id,
                 student_detail.student.student_biodata.first_name,
                 student_detail.industry,

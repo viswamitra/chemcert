@@ -12,6 +12,16 @@
             </div>
 
             <div class="span3">
+                <%= label_tag :type %> </br>
+                <div class="controls">
+                    <select id="proforma_type" name="proforma_type">
+                        <option value="initial">Initial</option>
+                        <option value="refresher">Refresher</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="span3">
                 <div class="control-group">
                     <%= label :course_date, "Find Date", :class => "invisible" %>
                     <div class="controls">

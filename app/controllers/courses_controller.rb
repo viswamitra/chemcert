@@ -41,12 +41,14 @@ class CoursesController < ApplicationController
   #get /proforma
   def proforma
     @course = Course.where(course_code: params[:course_code]).first
+    @proforma_type = params[:proforma_type]
   end
 
   def print_proforma
     @course = Course.find(params[:id])
+    @proforma_type = params[:proforma_type]
     respond_to do |format|
-      format.csv { send_data @course.generate_proforma_csv, filename: "proforma_#{@course.course_code}.csv"}
+      format.csv { send_data @course.generate_proforma_csv(@proforma_type), filename: "proforma_#{@course.course_code}.csv"}
     end
   end
 
