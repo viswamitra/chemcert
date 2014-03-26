@@ -2,8 +2,8 @@
     <div class="span12">
         <table class="table table-striped">
             <tr>
-                <th> Name </th>
-                <th> DOB </th>
+                <th> First Name </th>
+                <th> Last Name </th>
                 <th> Address </th>
                 <th> Town </th>
                 <th> Postal Code </th>
@@ -15,6 +15,7 @@
             <% @students.each do |student| %>
                 <tr>
                     <td> <%= student.student_biodata.first_name %></td>
+                    <td> <%= student.student_biodata.last_name %></td>
                     <td> <%= student.student_biodata.try(:date_of_birth) ? student.student_biodata.date_of_birth : "-"  %></td>
                     <td> <%= student.student_address.address %></td>
                     <td> <%= student.student_address.location_relation.town.name %></td>
