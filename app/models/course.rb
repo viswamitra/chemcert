@@ -38,12 +38,16 @@ class Course < ActiveRecord::Base
 
 
   def self.by_course_status(status)
+    status = status.to_i
     #hard coding for payment pending which is not a db state. Have to modify this in case of any external additions.
     if status == 7
        joins(:student_course_details).where('student_course_details.paid = ?',false)
-     else
+    elsif status == 0
+      statuses = CourseStatus.all.map {|cs| cs.id }
+      where('course_status_id in (?)',statuses)
+    else
        where(:course_status_id => status)
-     end
+    end
   end
 
   def self.search(course_code, town_id, course_date)
@@ -199,7 +203,7 @@ class Course < ActiveRecord::Base
       scd = self.student_course_details.joins(:student_course).where('student_course_details.enquiry = ? and student_courses.type_name = ?',1, proforma_type)
       scd.each do |student_detail|
         csv << [id, student_detail.student.student_id,
-                student_detail.student.student_biodata.first_name,
+                student_detail.student.student_biodata.first_name+" "+student_detail.student.student_biodata.last_name,
                 student_detail.industry,
                 "",
                 "",

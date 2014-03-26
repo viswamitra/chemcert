@@ -54,7 +54,7 @@ class CourseProcessDetail < ActiveRecord::Base
 
         # 2 is course closed
         course_status = CourseStatus.where(status: "closed")
-        if(course["status"] == course_status.first.id)
+        if(course["status"].to_i == course_status.first.id)
           student_course_details = crs.student_course_details.where(enquiry: 1)
           course_validation(student_course_details)
           update_course_expiry_date(student_course_details)

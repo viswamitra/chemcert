@@ -3,6 +3,7 @@
         <th> First Name</th>
         <th> Last Name </th>
         <th> Course Status </th>
+        <th> Student Status </th>
         <th> </th>
     </tr>
 
@@ -13,6 +14,13 @@
         <td><%= course_detail.student.student_biodata.first_name %></td>
         <td><%= course_detail.student.student_biodata.last_name %></td>
         <td><%= course_detail.paid ? "paid":"not paid" %></td>
+        <% if course_detail.enquiry == 0  %>
+            <td> Enquiry </td>
+        <% elsif course_detail.enquiry == 1  %>
+            <td> Enrolment </td>
+        <% else course_detail.enquiry == 2  %>
+            <td> Completed </td>
+        <% end %>
         <td> <%= link_to "Edit", edit_student_path(student, :from_process => true), :target => "_blank", :class => 'btn btn-mini' %></td>
     </tr>
         <% end %>

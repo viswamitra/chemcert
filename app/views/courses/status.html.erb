@@ -24,6 +24,7 @@
             <div class="span3">
                 <%= label_tag :course_status %> </br>
                 <select id="course_status" name="course_status">
+                        <option value="0">All</option>
                     <% CourseStatus.all.each do |status| %>
                         <option value="<%=status.id %>"><%=status.status %></option>
                     <% end %>
