@@ -50,7 +50,9 @@ class VenuesController < ApplicationController
       :whiteboard_available => params[:venue][:whiteboard_available],
       :catering => params[:venue][:catering],
       :lunch_available => params[:venue][:lunch],
-      :notes => params[:venue][:notes]
+      :notes => params[:venue][:notes],
+      :contact => params[:venue][:contact],
+      :number => params[:venue][:number]
     )
 
     respond_to do |format|
@@ -87,7 +89,9 @@ class VenuesController < ApplicationController
           :whiteboard_available => params[:venue][:whiteboard_available],
           :catering => params[:venue][:catering],
           :lunch_available => params[:venue][:lunch],
-          :notes => params[:venue][:notes]
+          :notes => params[:venue][:notes],
+          :contact => params[:venue][:contact],
+          :number => params[:venue][:number]
       )
         format.html { redirect_to venues_path, notice: 'RTO was successfully updated.' }
         format.json { head :no_content }

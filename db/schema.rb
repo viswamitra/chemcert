@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140323173923) do
+ActiveRecord::Schema.define(version: 20140326111713) do
 
   create_table "additional_modules", force: true do |t|
     t.string   "type_name"
@@ -278,6 +278,8 @@ ActiveRecord::Schema.define(version: 20140323173923) do
     t.string   "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "contact"
+    t.string   "number"
   end
 
 end

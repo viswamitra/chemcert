@@ -14,6 +14,21 @@
                     <input type="text" id="venue_address" name="venue[address]">
                 </div>
             </div>
+
+            <div class="control-group">
+                <%= f.label :contact, :class => 'control-label'%>
+                <div class="controls">
+                    <input type="text" id="venue_contact" name="venue[contact]">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <%= f.label :number, :class => 'control-label'%>
+                <div class="controls">
+                    <input type="text" id="venue_number" name="venue[number]">
+                </div>
+            </div>
+
             <div class="control-group">
                 <%= f.label :postal_code, :class => 'control-label' %>
                 <div class="controls">
@@ -134,6 +149,8 @@
         <% if @venue.catering.present? %> $('#venue_catering').val('<%= @venue.catering %>'); <% end %>
         <% if @venue.lunch_available.present? %> $('#venue_lunch_available').val('<%= @venue.lunch_available %>'); <% end %>
         <% if @venue.notes.present? %> $('#venue_notes').val('<%= @venue.notes %>'); <% end %>
+        <% if @venue.contact.present? %> $('#venue_contact').val('<%= @venue.contact %>'); <% end %>
+        <% if @venue.number.present? %> $('#venue_number').val('<%= @venue.number %>'); <% end %>
 
         <% if @postal_code_selected.present? && @town_selected.present? && @state_selected.present? %>
             $('#venue_postal_code').val('<%=@postal_code_selected.code%>');
