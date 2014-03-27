@@ -92,7 +92,7 @@ class Course < ActiveRecord::Base
       csv << ["Student_No","First_Name","Surname","Address1","Address2","Suburb","State","Postcode","Instructor","RTO","Original_Course_Date",
               "Last_Course_Date","Expiry_Date","Location","SpecialModule1","SpecialModule2","SpecialModule3"]
 
-      scd = self.student_course_details.where('enquiry in ?',enrolment_type)
+      scd = self.student_course_details.where('enquiry in (?)',enrolment_type)
 
       scd.each do |student_detail|
         student_no = student_detail.try(:student).try(:student_id).present? ? student_detail.student.student_id : ""
