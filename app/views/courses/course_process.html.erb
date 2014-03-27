@@ -71,7 +71,7 @@
 
 <script type="text/javascript">
     $(function(){
-        <% if @course.first.present? %>
+        <% if (!@course.first.nil? && @course.first.present?) %>
             <% course = @course.first %>
             <% course_process_detail = course.course_process_detail %>
             <% if course_process_detail.present? %>
