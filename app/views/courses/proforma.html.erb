@@ -13,10 +13,15 @@
 
             <div class="span3">
                 <%= label_tag :type %> </br>
+                <% student_courses = StudentCourse.all.map {|course| [course.name, course.id]} %>
                 <div class="controls">
-                    <select id="proforma_type" name="proforma_type">
-                        <option value="initial">Initial</option>
-                        <option value="refresher">Refresher</option>
+                    <select id="course_type" name="course_type">
+                        <option value="0">All</option>
+                        <% if student_courses.present? %>
+                            <% student_courses.each do |course| %>
+                                <option value="<%=course[1] %>"><%=course[0] %></option>
+                            <% end %>
+                        <% end %>
                     </select>
                 </div>
             </div>

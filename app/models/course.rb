@@ -140,12 +140,17 @@ class Course < ActiveRecord::Base
   end
 
 
-  def generate_confirmation_csv(enrolment_type)
+  def generate_confirmation_csv(course_type)
     CSV.generate do |csv|
       csv << ["Student_No","First_Name","Surname","Address1","Address2","Suburb","State","Postcode","Instructor","RTO","Original_Course_Date",
               "Last_Course_Date","Expiry_Date","Location","SpecialModule1","SpecialModule2","SpecialModule3"]
 
-      scd = self.student_course_details.where('enquiry in ?',enrolment_type)
+      if course_type.to_i == 0
+        course_type = StudentCourse.all.map {|x| x.id }
+      else
+        course_type = course_type.to_i
+      end
+      scd = self.student_course_details.where('student_course_id in (?)', course_type)
 
       scd.each do |student_detail|
         student_no = student_detail.try(:student).try(:student_id).present? ? student_detail.student.student_id : ""
@@ -188,7 +193,7 @@ class Course < ActiveRecord::Base
     end
   end
 
-  def generate_proforma_csv(proforma_type)
+  def generate_proforma_csv(course_type)
     CSV.generate do |csv|
       csv << ["Course Date", self.course_date, "Venue", self.venue.try(:name)]
       csv << ["Start time","", "Venue Address", self.venue.try(:address)]
@@ -204,7 +209,12 @@ class Course < ActiveRecord::Base
 
       csv << ["Sl.no","Student No","Name","Industry","Control Weeds/learner Needs/Comments","Attendance","Amount Payable","Pay Method","No enrolment Form","No workbook", "NYC/AQFII/AQFIV"]
       id = 1
-      scd = self.student_course_details.joins(:student_course).where('student_course_details.enquiry = ? and student_courses.type_name = ?',1, proforma_type)
+      if course_type.to_i == 0
+        course_type = StudentCourse.all.map {|x| x.id }
+      else
+        course_type = course_type.to_i
+      end
+      scd = self.student_course_details.where('student_course_id in (?)', course_type)
       scd.each do |student_detail|
         csv << [id, student_detail.student.student_id,
                 student_detail.student.student_biodata.first_name+" "+student_detail.student.student_biodata.last_name,
