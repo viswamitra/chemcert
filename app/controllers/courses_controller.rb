@@ -54,14 +54,14 @@ class CoursesController < ApplicationController
 
   def merge
     @course = Course.where(course_code: params[:course_code]).first
-    @enrolment_type = params[:enrolment_type]
+    @result_type = params[:result_type]
   end
 
   def generate_merge
     @course = Course.find(params[:id])
-    @enrolment_type = params[:enrolment_type]
+    @result_type = params[:result_type]
     respond_to do |format|
-      format.csv { send_data @course.generate_merge_txt(@enrolment_type), filename: "CHEMMERGE.txt"}
+      format.csv { send_data @course.generate_merge_txt(@result_type), filename: "CHEMMERGE.txt"}
     end
   end
 

@@ -87,12 +87,16 @@ class Course < ActiveRecord::Base
     Course.includes(:student_course_details).where(:course_code => code)
   end
 
-  def generate_merge_txt(enrolment_type)
+  def generate_merge_txt(result)
     CSV.generate do |csv|
       csv << ["Student_No","First_Name","Surname","Address1","Address2","Suburb","State","Postcode","Instructor","RTO","Original_Course_Date",
               "Last_Course_Date","Expiry_Date","Location","SpecialModule1","SpecialModule2","SpecialModule3"]
 
-      scd = self.student_course_details.where('enquiry in (?)',enrolment_type)
+
+      if result == "all"
+        result = ['AQFII','AQFIV','NYC']
+      end
+      scd = self.student_course_details.where('result in (?)',result)
 
       scd.each do |student_detail|
         student_no = student_detail.try(:student).try(:student_id).present? ? student_detail.student.student_id : ""
@@ -205,7 +209,7 @@ class Course < ActiveRecord::Base
         csv << [id, student_detail.student.student_id,
                 student_detail.student.student_biodata.first_name+" "+student_detail.student.student_biodata.last_name,
                 student_detail.industry,
-                "",
+                student_detail.additional_module.type_name,
                 "",
                 student_detail.course_fee,
                 student_detail.payment_method,

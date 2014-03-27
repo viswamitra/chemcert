@@ -16,7 +16,6 @@
                 <tr>
                     <td> <%= student.student_biodata.first_name %></td>
                     <td> <%= student.student_biodata.last_name %></td>
-                    <td> <%= student.student_biodata.try(:date_of_birth) ? student.student_biodata.date_of_birth : "-"  %></td>
                     <td> <%= student.student_address.address %></td>
                     <td> <%= student.student_address.location_relation.town.name %></td>
                     <td> <%= student.student_address.location_relation.postal_code.code %></td>

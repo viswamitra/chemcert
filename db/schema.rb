@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140326111713) do
+ActiveRecord::Schema.define(version: 20140327192337) do
 
   create_table "additional_modules", force: true do |t|
     t.string   "type_name"
@@ -150,7 +150,7 @@ ActiveRecord::Schema.define(version: 20140326111713) do
     t.boolean  "paid"
     t.integer  "enquiry"
     t.string   "current_accreditation"
-    t.datetime "current_expiry_date"
+    t.date     "current_expiry_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "student_course_id",     limit: 8, null: false
@@ -172,7 +172,7 @@ ActiveRecord::Schema.define(version: 20140326111713) do
     t.boolean  "paid"
     t.integer  "enquiry"
     t.string   "current_accreditation"
-    t.datetime "current_expiry_date"
+    t.date     "current_expiry_date"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "student_course_id",     limit: 8, null: false

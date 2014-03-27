@@ -56,7 +56,7 @@ class CourseProcessDetail < ActiveRecord::Base
         course_status = CourseStatus.where(status: "closed")
         if(course["status"].to_i == course_status.first.id)
           student_course_details = crs.student_course_details.where(enquiry: 1)
-          course_validation(student_course_details)
+          #course_validation(student_course_details)
           update_course_expiry_date(student_course_details)
           update_student_course_detail_history(student_course_details)
         end
@@ -108,7 +108,9 @@ class CourseProcessDetail < ActiveRecord::Base
   def self.update_student_course_detail_history(student_course_details)
     begin
       student_course_details.each do |detail|
-        StudentCourseDetailHistory.create!(:student_id => detail.student_id,
+
+        histories = StudentCourseDetailHistory.find_or_initalize_by(student_id: detail.student_id, course_id: detail.course_id)
+        histories.update_attributes!(:student_id => detail.student_id,
                                        :course_id => detail.course_id,
                                        :enrolled_at => detail.enrolled_at,
                                        :result => detail.result,
