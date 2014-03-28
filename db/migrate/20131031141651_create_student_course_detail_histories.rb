@@ -18,4 +18,3 @@ class CreateStudentCourseDetailHistories < ActiveRecord::Migration
     end
   end
 end
-ƒ
