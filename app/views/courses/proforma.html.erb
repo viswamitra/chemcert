@@ -13,7 +13,7 @@
 
             <div class="span3">
                 <%= label_tag :type %> </br>
-                <% student_courses = StudentCourse.all.map {|course| [course.name, course.id]} %>
+                <% student_courses = StudentCourse.all.map {|course| [course.type_name, course.id]} %>
                 <div class="controls">
                     <select id="course_type" name="course_type">
                         <option value="0">All</option>
