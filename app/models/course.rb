@@ -219,7 +219,7 @@ class Course < ActiveRecord::Base
         csv << [id, student_detail.student.student_id,
                 student_detail.student.student_biodata.first_name+" "+student_detail.student.student_biodata.last_name,
                 student_detail.industry,
-                student_detail.additional_module.type_name,
+                student_detail.try(:additional_module).try(:type_name),
                 "",
                 student_detail.course_fee,
                 student_detail.payment_method,
