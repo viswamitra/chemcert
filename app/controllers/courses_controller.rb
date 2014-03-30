@@ -117,7 +117,8 @@ class CoursesController < ApplicationController
     result = CourseProcessDetail.create_process_detail(params[:course])
     p "-----> #{result}"
       if result[:success]
-        redirect_to process_courses_path
+        flash[:notice] = "Course is closed"
+        redirect_to process_courses_path(:course_code => params[:course][:course_code])
       else
         flash[:notice] = result[:error]
         render action: 'course_process'
