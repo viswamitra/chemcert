@@ -69,7 +69,7 @@ class StudentCourseDetail < ActiveRecord::Base
         assign_needs(needs, student)
 
         student_course_detail = StudentCourseDetail.where(student_id: student.id).first
-        student_course_detail.update(
+        student_course_detail.update_attributes!(
                                     :enrolled_at => courses["enrolled_at"],
                                     :course_id => courses["course_id"],
                                     :student_course_id => courses["course_types"],
@@ -88,7 +88,7 @@ class StudentCourseDetail < ActiveRecord::Base
                                     :enquiry => courses["enquiry"]
         )
         student_bio_data = StudentBiodata.where(student_id: student.id).first
-        student_bio_data.update(:first_name => bio["first_name"],
+        student_bio_data.update_attributes!(:first_name => bio["first_name"],
                                :middle_name => bio["middle_name"],
                                :last_name => bio["last_name"],
                                :date_of_birth => bio["date_of_birth"],
@@ -100,14 +100,14 @@ class StudentCourseDetail < ActiveRecord::Base
                                )
 
         student_address = StudentAddress.where(student_id: student.id).first
-        student_address.update(
+        student_address.update_attributes!(
                                :address => address["address"],
                                :location_relation_id => location_relation.try(:id),
                                :home_location_relation_id => home_location_relation.try(:id),
                                :home_address => address["home_address"])
 
         student_demography = StudentDemography.where(student_id: student.id).first
-        student_demography.update(:hear_about_chemcert => demo["feedback"],
+        student_demography.update_attributes!(:hear_about_chemcert => demo["feedback"],
                                   :others_specify => demo["feedback2"],
                                   :country_of_birth => demo["country_of_birth"],
                                   :residency_status => demo["residency_status"],

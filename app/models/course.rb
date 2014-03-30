@@ -79,7 +79,7 @@ class Course < ActiveRecord::Base
   end
 
   def self.by_open_mode(code)
-    where("course_code like ? and course_status_id = ?","%#{code}%", 0)
+    joins(:course_status).where("course_code like ? and course_statuses.status = 'open'","%#{code}%")
   end
 
   #to include student_course_details also.
