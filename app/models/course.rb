@@ -179,7 +179,8 @@ class Course < ActiveRecord::Base
             postal_code,
             course_date,
             course_fee,
-            venue
+            venue,
+            '\n'
         ]
       end
     end
