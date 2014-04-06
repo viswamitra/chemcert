@@ -27,6 +27,16 @@
             </div>
 
             <div class="span3">
+                <%= label_tag :weeds %> </br>
+                <div class="controls">
+                    <select id="additional_module_type" name="additional_module_type">
+                        <option value="0">No Weeds</option>
+                        <option value="1">Weeds</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="span3">
                 <div class="control-group">
                     <%= label :course_date, "Find Date", :class => "invisible" %>
                     <div class="controls">

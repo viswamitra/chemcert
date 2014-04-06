@@ -14,7 +14,7 @@
                 <td> <%= @course.course_code %></td>
                 <td> <%= l @course.course_date %></td>
                 <td> <%= @course.course_status.status  %></td>
-                <td> <%= link_to "Merge file", merge_course_path(id: @course.id, result_type: @result_type, format: "csv"), :class => 'btn btn-primary btn-mini'%></td>
+                <td> <%= link_to "Merge file", merge_course_path(id: @course.id, result_type: @result_type, additional_module_type: @additional_module_type, format: "csv"), :class => 'btn btn-primary btn-mini'%></td>
                 </td>
             </tr>
 

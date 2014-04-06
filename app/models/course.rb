@@ -87,16 +87,18 @@ class Course < ActiveRecord::Base
     Course.includes(:student_course_details).where(:course_code => code)
   end
 
-  def generate_merge_txt(result)
+  def generate_merge_txt(result, additional_module)
     CSV.generate do |csv|
-      csv << ["Student_No","First_Name","Surname","Address1","Address2","Suburb","State","Postcode","Instructor","RTO","Original_Course_Date",
+      csv << ["Student_No","First_Name","Surname","Address1","Address2","Suburb","State","Postcode","Venue","Venue Address", "Venue Town","Venue State", "Venue PostalCode","Instructor","RTO","Original_Course_Date",
               "Last_Course_Date","Expiry_Date","Location","SpecialModule1","SpecialModule2","SpecialModule3"]
 
 
       if result == "all"
         result = ['AQFII','AQFIV','NYC']
       end
-      scd = self.student_course_details.where('result in (?)',result)
+
+      additional_module = additional_module.to_i
+      scd = self.student_course_details.where('result in (?) and additional_module_id = ?',result, additional_module)
 
       scd.each do |student_detail|
         student_no = student_detail.try(:student).try(:student_id).present? ? student_detail.student.student_id : ""
@@ -106,6 +108,11 @@ class Course < ActiveRecord::Base
         suburb = student_detail.try(:student).try(:student_address).try(:location_relation).try(:town).try(:name).present? ? student_detail.student.student_address.location_relation.town.name : ""
         state = student_detail.try(:student).try(:student_address).try(:location_relation).try(:state).try(:name).present? ? student_detail.student.student_address.location_relation.state.name : ""
         postal_code = student_detail.try(:student).try(:student_address).try(:location_relation).try(:postal_code).try(:code).present? ? student_detail.student.student_address.location_relation.postal_code.code : ""
+        venue = student_detail.try(:course).try(:venue).try(:name).present? ? student_detail.course.venue.name : ""
+        venue_address = student_detail.try(:course).try(:venue).try(:address).present ? student_detail.course.venue.address : ""
+        venue_town = student_detail.try(:course).try(:venue).try(:location_relation).try(:town).try(:name).present ? student_detail.course.venue.location_relation.town.name : ""
+        venue_state = student_detail.try(:course).try(:venue).try(:location_relation).try(:state).try(:name).present ? student_detail.course.venue.location_relation.state.name : ""
+        venue_postal_code = student_detail.try(:course).try(:venue).try(:location_relation).try(:postal_code).try(:code).present ? student_detail.course.venue.location_relation.town.name : ""
         instructor = student_detail.try(:course).try(:trainer).try(:name).present? ? student_detail.course.trainer.name : ""
         rto = student_detail.try(:course).try(:training_organization).try(:name).present? ? student_detail.course.training_organization.name : ""
         original_course_date = student_detail.try(:student).try(:student_course_detail_histories).try(:first).try(:course).try(:course_date).present? ? student_detail.student.student_course_detail_histories.first.course.course_date : ""
@@ -125,6 +132,11 @@ class Course < ActiveRecord::Base
             suburb,
             state,
             postal_code,
+            venue,
+            venue_address,
+            venue_town,
+            venue_state,
+            venue_postal_code,
             instructor,
             rto,
             original_course_date,
@@ -140,9 +152,9 @@ class Course < ActiveRecord::Base
   end
 
 
-  def generate_confirmation_csv(course_type)
+  def generate_confirmation_csv(course_type, additional_module)
     CSV.generate do |csv|
-      csv << ["Course Code","First_Name","Last Name","Address1","Suburb","State","Postcode","Course Date","Fee","Venue"]
+      csv << ["Course Code","First_Name","Last Name","Address1","Suburb","State","Postcode","Course Date","Fee","Venue","Venue Address", "Venue Town","Venue State", "Venue PostalCode"]
 
       #csv << ["Student_No","First_Name","Surname","Address1","Address2","Suburb","State","Postcode","Instructor","RTO","Original_Course_Date",
        #       "Last_Course_Date","Expiry_Date","Location","SpecialModule1","SpecialModule2","SpecialModule3"]
@@ -152,7 +164,8 @@ class Course < ActiveRecord::Base
       else
         course_type = course_type.to_i
       end
-      scd = self.student_course_details.where('student_course_id in (?)', course_type)
+      additional_module = additional_module.to_i
+      scd = self.student_course_details.where('student_course_id in (?) and additional_module_id = ?', course_type, additional_module)
 
       scd.each do |student_detail|
         course_code = student_detail.try(:course).try(:course_code).present? ? student_detail.course.course_code : ""
@@ -165,6 +178,10 @@ class Course < ActiveRecord::Base
         course_date  = student_detail.try(:course).try(:course_date).present? ? student_detail.course.course_date : ""
         course_fee  = student_detail.try(:course_fee) ? student_detail.course_fee : ""
         venue = student_detail.try(:course).try(:venue).try(:name).present? ? student_detail.course.venue.name : ""
+        venue_address = student_detail.try(:course).try(:venue).try(:address).present ? student_detail.course.venue.address : ""
+        venue_town = student_detail.try(:course).try(:venue).try(:location_relation).try(:town).try(:name).present ? student_detail.course.venue.location_relation.town.name : ""
+        venue_state = student_detail.try(:course).try(:venue).try(:location_relation).try(:state).try(:name).present ? student_detail.course.venue.location_relation.state.name : ""
+        venue_postal_code = student_detail.try(:course).try(:venue).try(:location_relation).try(:postal_code).try(:code).present ? student_detail.course.venue.location_relation.town.name : ""
 
 
 
@@ -179,7 +196,11 @@ class Course < ActiveRecord::Base
             postal_code,
             course_date,
             course_fee,
-            venue
+            venue,
+            venue_address,
+            venue_town,
+            venue_state,
+            venue_postal_code
         ]
       end
     end
@@ -192,14 +213,14 @@ class Course < ActiveRecord::Base
       csv << ["Course Finish Time", "","Venue Town", self.venue.location_relation.try(:town).try(:name)]
       csv << ["Course Code", self.course_code, "Venue State", self.venue.location_relation.try(:state).try(:name)]
       csv << ["Trainer", self.trainer.name, "Venue Contact", self.venue.try(:contact)]
-      csv << ["Catering Contact", self.venue.catering, "Venue number", self.venue.try(:number)]
-      csv << ["Catering Arrangements",""]
+      csv << ["Catering", self.venue.catering, "Venue number", self.venue.try(:number)]
+      csv << ["Notes",""]
       csv << []
       csv << []
       csv << []
 
 
-      csv << ["Sl.no","Student No","Name","Industry","Control Weeds/learner Needs/Comments","Attendance","Amount Payable","Pay Method","No enrolment Form","No workbook", "NYC/AQFII/AQFIV"]
+      csv << ["Sl.no","Student No","Name","Industry","Control Weeds/learner Needs/Comments","Attendance","Amount Paid","Amount Payable","Pay Method","No enrolment Form","No workbook", "NYC/AQFII/AQFIV"]
       id = 1
       if course_type.to_i == 0
         course_type = StudentCourse.all.map {|x| x.id }
@@ -213,6 +234,7 @@ class Course < ActiveRecord::Base
                 student_detail.industry,
                 student_detail.try(:additional_module).try(:type_name),
                 "",
+                student_detail.try(:paid).present? ? "Paid" : "Not Paid",
                 student_detail.course_fee,
                 student_detail.payment_method,
                 "",

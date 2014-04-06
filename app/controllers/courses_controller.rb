@@ -55,26 +55,30 @@ class CoursesController < ApplicationController
   def merge
     @course = Course.where(course_code: params[:course_code]).first
     @result_type = params[:result_type]
+    @additional_module_type = params[:additional_module_type]
   end
 
   def generate_merge
     @course = Course.find(params[:id])
     @result_type = params[:result_type]
+    @additional_module_type = params[:additional_module_type]
     respond_to do |format|
-      format.csv { send_data @course.generate_merge_txt(@result_type), filename: "CHEMMERGE.txt"}
+      format.csv { send_data @course.generate_merge_txt(@result_type, @additional_module_type), filename: "CHEMMERGE.txt"}
     end
   end
 
   def confirmation
     @course = Course.where(course_code: params[:course_code]).first
     @course_type = params[:course_type]
+    @additional_module_type = params[:additional_module_type]
   end
 
   def generate_confirmation
     @course = Course.find(params[:id])
     @course_type = params[:course_type]
+    @additional_module_type = params[:additional_module_type]
     respond_to do |format|
-      format.csv { send_data @course.generate_confirmation_csv(@course_type), filename: "CHEMCONFIRMATIONMERGE.txt"}
+      format.csv { send_data @course.generate_confirmation_csv(@course_type, @additional_module_type), filename: "CHEMCONFIRMATIONMERGE.txt"}
     end
   end
 

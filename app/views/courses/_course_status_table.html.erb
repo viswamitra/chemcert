@@ -5,6 +5,13 @@
                 <th> CT Code </th>
                 <th> Date </th>
                 <th> Course Status </th>
+                <th> Trainer </th>
+                <th> Town </th>
+                <th> State </th>
+                <th> AQF II </th>
+                <th> AQF III </th>
+                <th> AQF IV </th>
+                <th> NYC </th>
                 <th>  </th>
                 <th>  </th>
             </tr>
@@ -23,6 +30,13 @@
                             <td> </td>
                         <% end %>
                     </td>
+                    <td> <%=course.try(:trainer).try(:name) %></td>
+                    <td> <%=course.try(:location_relation).try(:town).try(:name) %></td>
+                    <td> <%=course.try(:location_relation).try(:state).try(:name) %></td>
+                    <td> <%=course.student_course_details.where(:result => 'AQFII').size %></td>
+                    <td> <%=course.student_course_details.where(:result => 'AQFIII').size %></td>
+                    <td> <%=course.student_course_details.where(:result => 'AQFIV').size %></td>
+                    <td> <%=course.student_course_details.where(:result => 'NYC').size %></td>
                     <td> <%= link_to "Show", course, :class => 'btn btn-primary btn-mini'%></td>
                     <td> <%= link_to "Edit", process_courses_path(course_code: course.course_code), :class => 'btn btn-mini' %></td>
                     </td>
