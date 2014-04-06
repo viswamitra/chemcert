@@ -19,9 +19,9 @@
         <td> <%= course_detail.course.trainer.name %> </td>
         <td> <%= course_detail.course.location_relation.town.name %> </td>
         <td> <%= course_detail.course.location_relation.state.name %> </td>
-        <td> <%= course_detail.result %> </td>
-        <td> <%= course_detail.student_course.type_name %> </td>
-        <td> <%= course_detail.additional_module.type_name %> </td>
+        <td> <%= course_detail.try(:result) %> </td>
+        <td> <%= course_detail.try(:student_course).try(:type_name) %> </td>
+        <td> <%= course_detail.try(:additional_module).try(:type_name) %> </td>
 
     </tr>
 
