@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140330093406) do
+ActiveRecord::Schema.define(version: 20140410113439) do
 
   create_table "additional_modules", force: true do |t|
     t.string   "type_name"
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20140330093406) do
     t.string   "course_code"
     t.date     "course_date"
     t.integer  "location_relation_id",     limit: 8, null: false
-    t.integer  "venue_id",                 limit: 8, null: false
+    t.integer  "venue_id",                 limit: 8
     t.integer  "trainer_id",               limit: 8, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
