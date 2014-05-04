@@ -98,7 +98,10 @@ class Course < ActiveRecord::Base
       end
 
       additional_module = additional_module.to_i
-      scd = self.student_course_details.where('result in (?) and additional_module_id = ?',result, additional_module)
+      scd = self.student_course_details.where('result in (?)',result)
+      unless additional_module == 0
+        scd = self.student_course_details.where('additional_module_id = ?',additional_module)
+      end
 
       scd.each do |student_detail|
         student_no = student_detail.try(:student).try(:student_id).present? ? student_detail.student.student_id : ""
