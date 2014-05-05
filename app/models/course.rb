@@ -94,7 +94,7 @@ class Course < ActiveRecord::Base
 
 
       if result == "all"
-        result = ['AQFII','AQFIV','NYC']
+        result = ['AQFII','AQFIV','NYC', 'AQFIII']
       end
 
       additional_module = additional_module.to_i
