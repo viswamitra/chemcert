@@ -102,7 +102,7 @@ class Course < ActiveRecord::Base
       if additional_module == 0
         scd = scd.where('special_modules is null or special_modules = ""')
       else
-        scd = scd.where('special_modules = ?', additional_module)
+        scd = scd.where('special_modules = ?', 'weeds')
       end
 
       scd.each do |student_detail|
