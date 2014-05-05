@@ -100,7 +100,7 @@ class Course < ActiveRecord::Base
       additional_module = additional_module.to_i
       scd = self.student_course_details.where('result in (?)',result)
       unless additional_module == 0
-        scd = self.student_course_details.where('additional_module_id = ?',additional_module)
+        scd = scd.where('additional_module_id = ?',additional_module)
       end
 
       scd.each do |student_detail|
@@ -168,9 +168,10 @@ class Course < ActiveRecord::Base
         course_type = course_type.to_i
       end
       additional_module = additional_module.to_i
+
       scd = self.student_course_details.where('student_course_id in (?)', course_type)
       unless additional_module == 0
-        scd = self.student_course_details.where('additional_module_id = ?', additional_module)
+        scd = scd.where('additional_module_id = ?', additional_module)
       end
 
       scd.each do |student_detail|
