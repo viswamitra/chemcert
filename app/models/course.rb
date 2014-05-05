@@ -100,7 +100,7 @@ class Course < ActiveRecord::Base
       additional_module = additional_module.to_i
       scd = self.student_course_details.where('result in (?)',result)
       if additional_module == 0
-        scd = scd.where('special_modules is null or ""')
+        scd = scd.where('special_modules is null or special_modules is ""')
       else
         scd = scd.where('special_modules = ?', additional_module)
       end
