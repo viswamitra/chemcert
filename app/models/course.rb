@@ -100,7 +100,7 @@ class Course < ActiveRecord::Base
       additional_module = additional_module.to_i
       scd = self.student_course_details.where('result in (?)',result)
       if additional_module == 0
-        scd = scd.where('additional_module_id = NULL')
+        scd = scd.where('additional_module_id is null')
       else
         scd = scd.where('additional_module_id = ?', additional_module)
       end
@@ -173,7 +173,7 @@ class Course < ActiveRecord::Base
 
       scd = self.student_course_details.where('student_course_id in (?)', course_type)
       if additional_module == 0
-        scd = scd.where('additional_module_id = NULL')
+        scd = scd.where('additional_module_id is null')
       else
         scd = scd.where('additional_module_id = ?', additional_module)
       end
