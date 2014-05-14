@@ -4,6 +4,8 @@ $(function() {
     $(".datepicker").datepicker({
         dateFormat: 'dd/mm/yy',
         changeMonth: true,
+        gotoCurrent: true,
+        yearRange: '1954:',
         changeYear: true });
 });
 

@@ -144,6 +144,9 @@
             $('#employment_status').val('<%= student_demography.employment_status %>');
             $('#highest_education_level').val('<%= student_demography.highest_education_level %>');
             $('#study_reason').val('<%= student_demography.study_reason %>');
+        alert('<%= student_demography.hear_about_chemcert %>');
+            $('#feedback1').val('<%= student_demography.hear_about_chemcert %>');
+            $('#feedback2').val('<%= student_demography.others_specify %>');
         <% end %>
     });
 

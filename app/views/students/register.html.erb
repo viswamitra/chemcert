@@ -19,7 +19,7 @@
 
             <div class="span3">
                 <%= label_tag :available_course_dates %>
-                <select id="course_dates" name="course_dates">
+                <select id="course_dates" name="course_dates" class="datepicker">
                     <option value=""></option>
                 </select>
             </div>
@@ -87,11 +87,11 @@
             dataType: 'JSON',
             success : function(data) {
                 $('#course_dates').empty();
-                $('#course_dates').append("<option value="+data[0].id+" selected=selected>"+data[0].course_date+"</option>");
+                $('#course_dates').append("<option value="+data[0].id+" selected=selected>"+formattedDate(data[0].course_date)+"</option>");
                 $('#course_hidden').val(data[0].id);
                 data.shift();
                 $.each(data, function(index, element) {
-                    $('#course_dates').append("<option value="+element.id+">"+element.course_date+"</option>");
+                    $('#course_dates').append("<option value="+element.id+">"+formattedDate(element.course_date)+"</option>");
                 });
                 getVenuesForCourseDate();
             }
@@ -123,6 +123,18 @@
         $('#course_hidden').val($(this).val());
         console.log($('#course_hidden').val());
     });
+
+    function formattedDate(dat) {
+        console.log(dat);
+        dat = dat.split("-");
+        year = dat[0];
+        month = dat[1];
+        day = dat[2];
+
+        return [day, month, year].join('/');
+    }
+
+
 
 
 
